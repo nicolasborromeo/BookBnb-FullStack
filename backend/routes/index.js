@@ -17,12 +17,12 @@ if (process.env.NODE_ENV === 'production') {
     router.get(/^(?!\/?api).*/, (req, res) => {
       res.cookie('XSRF-TOKEN', req.csrfToken());
       return res.sendFile(
-        path.resolve(__dirname, '../../frontend', 'dist', 'index.html')
+        path.resolve(__dirname, '../../frontend', 'build', 'index.html')
       );
     });
 
-     // Serve the static assets in the frontend's dist folder
-     router.use(express.static(path.resolve("../frontend/dist")));
+     // Serve the static assets in the frontend's build folder
+     router.use(express.static(path.resolve("../frontend/build")));
 
 }
 
