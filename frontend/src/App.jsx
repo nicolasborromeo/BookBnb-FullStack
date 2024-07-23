@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import LoginFormPage from "./components/Login/LoginFormPage";
 import SignupFormPage from "./components/SignUp/SignupFormPage";
+import Navigation from "./components/Navigation/Navigation";
 import * as sessionActions from './store/session'
 
 function Layout() {
@@ -20,6 +21,7 @@ function Layout() {
 
   return (
     <>
+      <Navigation isLoaded={isLoaded} />
       {isLoaded && <Outlet />}
     </>
   )

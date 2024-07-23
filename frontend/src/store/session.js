@@ -11,11 +11,11 @@ const setUser = (user) => {
   };
 };
 
-// const removeUser = () => {
-//   return {
-//     type: REMOVE_USER
-//   };
-// };
+const removeUser = () => {
+  return {
+    type: REMOVE_USER
+  };
+};
 
 ////////////////////////////////////////////////////////
 //ACTIONS
@@ -54,8 +54,17 @@ export const signup = (user) => async (dispatch) => {
     })
   })
   const data = await response.json()
-  console.log(data)
   dispatch(setUser(data.user))
+  return response
+}
+
+export const logout = () => async (dispatch) => {
+  const response = await csrfFetch('api/session', {
+    method: 'DELETE'
+  })
+  const data = await response.json()
+  console.log(data)
+  dispatch(removeUser())
   return response
 }
 
