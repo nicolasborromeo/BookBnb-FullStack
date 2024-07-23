@@ -1,5 +1,6 @@
 import { csrfFetch } from './csrf';
 
+
 const SET_USER = "session/setUser";
 const REMOVE_USER = "session/removeUser";
 
@@ -16,7 +17,8 @@ const setUser = (user) => {
 //   };
 // };
 
-
+////////////////////////////////////////////////////////
+//ACTIONS
 
 export const login = (user) => async (dispatch) => {
   const { credential, password } = user;
@@ -38,6 +40,28 @@ export const restoreUser = () => async (dispatch) => {
     dispatch(setUser(data.user))
     return response;
 }
+
+export const signup = (user) => async (dispatch) => {
+  const {username, firstName, lastName, email, password} = user
+  const response = await csrfFetch('/api/users', {
+    method: "POST",
+    body: JSON.stringify({
+      username,
+      firstName,
+      lastName,
+      email,
+      password
+    })
+  })
+  const data = await response.json()
+  console.log(data)
+  dispatch(setUser(data.user))
+  return response
+}
+
+
+////////////////////////////////////////////////////////
+//REDUCER
 
 const initialState = { user: null };
 
