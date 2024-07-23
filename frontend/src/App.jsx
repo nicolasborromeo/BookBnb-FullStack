@@ -1,17 +1,27 @@
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import LoginFormPage from "./features/session/LoginFormPage";
-import { useRestoreUserQuery } from "./features/session/sessionAPI";
+import { useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
+import * as sessionActions from './store/session'
 
 function Layout() {
-  const { data, isLoading, isSuccess, isError, error } = useRestoreUserQuery()
-  console.log('data on Layout', data)
+  const dispatch = useDispatch()
+  const [isLoaded, setIsLoaded] = useState(false);
 
-  if(isLoading) return (
-    <h1>Loading...</h1>
+  useEffect(()=> {
+    dispatch(sessionActions.restoreUser()).then(()=> {
+      setIsLoaded(true)
+    });
+
+  }, [dispatch])
+
+
+
+  return (
+    <>
+      {isLoaded && <Outlet />}
+    </>
   )
-  if(isSuccess) return <Outlet />
-
-  if(isError) return <h1>Sorry, there&apos been an error, {error}</h1>
 }
 
 const router = createBrowserRouter([
