@@ -45,7 +45,6 @@ export default function LoginFormModal() {
                     <button type='submit'>Log In</button>
                 </div>
             </form>
-
         </div>
     )
 }
