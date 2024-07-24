@@ -1,30 +1,28 @@
 import { useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { Navigate } from 'react-router-dom'
+import { useDispatch } from "react-redux"
+import { useModal } from '../../context/Modal'
 import * as sessionActions from '../../store/session';
 import './login.css'
 
-export default function LoginFormPage() {
+export default function LoginFormModal() {
     const dispatch = useDispatch()
-    const sessionUser = useSelector((state) => state.session.user);
     const [credential, setCredential] = useState('')
     const [password, setPassword] = useState('')
     const [errors, setErrors] = useState({})
-
-    if (sessionUser) return <Navigate to="/" replace={true} />
-
-
+    const {closeModal} = useModal()
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        return dispatch(sessionActions.login({credential, password})).catch(
+        return dispatch(sessionActions.login({ credential, password }))
+        .then(closeModal)
+        .catch(
             async (res) => {
                 const data = await res.json();
-                if(data?.errors) {
+                if (data?.errors) {
                     setErrors(data.errors)
                 }
-                if(data.message === 'Invalid Credentials') {
-                    setErrors({credentials: 'Invalid Credentials'})
+                if (data.message === 'Invalid Credentials') {
+                    setErrors({ credentials: 'Invalid Credentials' })
                 }
             }
         );
