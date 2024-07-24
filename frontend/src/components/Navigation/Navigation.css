@@ -1,3 +1,87 @@
 .hidden {
     display: none
 }
+
+.navigation-container{
+    border-bottom: 1px solid lightgray;
+    width: 100vw;
+}
+
+.navigation-ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px 70px;
+    padding: 0;
+}
+
+.logos-container {
+    margin: 0;
+    padding: 0;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navigation-logo {
+    width: 35px;
+    height: 35px;
+    color: #0a1f26;
+}
+
+.navigation-brand {
+    padding-left: 5px;
+    height: 20px;
+    color: #0a1f26;
+
+}
+
+.navigation-user-button {
+    font-size: xx-large;
+    color: gray;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-evenly;
+    padding: 5px;
+    width: 100px;
+    border-radius: 30px;
+    border: 1px solid lightgray;
+    transition: all 100ms ease-in-out;
+}
+
+.navigation-user-button:hover {
+    box-shadow: 0px 3px 8px lightgray;
+}
+
+.profile-dropdown {
+    position: fixed;
+    right: 42px;
+    top: 68px;
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+    background-color:white;
+    box-shadow: 0px 1px 8px lightgray;
+    border-radius: 10px;
+    padding: 10px;
+    width: 100px;
+    font-size: small;
+}
+
+.profile-dropdown button {
+    border: none !important;
+    outline: none !important;
+    background: none;
+    color: inherit;
+    transition: all 100ms ease-in-out;
+    width: 100%;
+    text-align: left;
+
+}
+
+.profile-dropdown button:hover {
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
+}

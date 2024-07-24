@@ -41,7 +41,7 @@
     background-color: #0056b3;
 }
 
-.error-div {
+.error-div, .error-p{
     color: red;
     margin-top: 5px;
 }
