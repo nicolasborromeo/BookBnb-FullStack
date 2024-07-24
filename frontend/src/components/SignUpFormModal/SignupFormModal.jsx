@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { Navigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import * as sessionActions from '../../store/session'
+import { useModal } from "../../context/Modal";
 
 function SignupFormPage() {
+    const dispatch = useDispatch()
     const [email, setEmail] = useState()
     const [username, setUsername] = useState()
     const [firstName, setFirstName] = useState()
@@ -11,10 +12,7 @@ function SignupFormPage() {
     const [password, setPassword] = useState()
     const [confirmPassword, setConfirmPassword] = useState()
     const [errors, setErrors] = useState()
-    const dispatch = useDispatch()
-    const sessionUser = useSelector((state)=> state.session.user)
-
-    if (sessionUser) return <Navigate to="/" replace={true} />;
+    const {closeModal} = useModal()
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -26,8 +24,10 @@ function SignupFormPage() {
                 email: email,
                 password: password,
             }
-            dispatch(sessionActions.signup(user)).catch(async (res) => {
-                const data = res.json()
+            dispatch(sessionActions.signup(user))
+            .then(closeModal)
+            .catch(async (res) => {
+                const data = await res.json()
                 if(data?.errors) {
                     setErrors(data.errors);
                 }
@@ -54,7 +54,7 @@ function SignupFormPage() {
                         required
                     />
                 </label>
-                {errors?.email && <p>{errors.email}</p>}
+                {errors?.email && <p className="error-p">{errors.email}</p>}
                 <label>
                     Username
                     <input
@@ -64,7 +64,7 @@ function SignupFormPage() {
                         required
                     />
                 </label>
-                {errors?.username && <p>{errors.username}</p>}
+                {errors?.username && <p className="error-p">{errors.username}</p>}
                 <label>
                     First Name
                     <input
@@ -74,7 +74,7 @@ function SignupFormPage() {
                         required
                     />
                 </label>
-                {errors?.firstName && <p>{errors.firstName}</p>}
+                {errors?.firstName && <p className="error-p">{errors.firstName}</p>}
                 <label>
                     Last Name
                     <input
@@ -84,7 +84,7 @@ function SignupFormPage() {
                         required
                     />
                 </label>
-                {errors?.lastName && <p>{errors.lastName}</p>}
+                {errors?.lastName && <p className="error-p">{errors.lastName}</p>}
                 <label>
                     Password
                     <input
@@ -94,7 +94,7 @@ function SignupFormPage() {
                         required
                     />
                 </label>
-                {errors?.password && <p>{errors.password}</p>}
+                {errors?.password && <p className="error-p">{errors.password}</p>}
                 <label>
                     Confirm Password
                     <input
@@ -104,7 +104,7 @@ function SignupFormPage() {
                         required
                     />
                 </label>
-                {errors?.confirmPassword && <p>{errors.confirmPassword}</p>}
+                {errors?.confirmPassword && <p className="error-p">{errors.confirmPassword}</p>}
                 <button type="submit">Sign Up</button>
             </form>
         </>

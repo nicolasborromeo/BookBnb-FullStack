@@ -1,1 +1,18 @@
-/* TODO: Add sitewide styles */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: auto;
+    line-height: 1.5;
+    accent-color: #0a1f26;
+    font-family: "Airbnb Cereal VF", Circular, -apple-system, "system-ui", Roboto, "Helvetica Neue", sans-serif;
+}
+
+ul {
+    list-style-type: none;
+}
+
+img {
+    max-width: 100%;
+}
