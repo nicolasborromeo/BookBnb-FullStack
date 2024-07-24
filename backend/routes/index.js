@@ -14,6 +14,9 @@ if (process.env.NODE_ENV === 'production') {
       );
     });
 
+    // Serve the static assets in the frontend's build folder
+    router.use(express.static(path.resolve("../frontend/dist")));
+    
     // Serve the frontend's index.html file at all other routes NOT starting with /api
     router.get(/^(?!\/?api).*/, (req, res) => {
       res.cookie('XSRF-TOKEN', req.csrfToken());
@@ -22,8 +25,6 @@ if (process.env.NODE_ENV === 'production') {
       );
     });
 
-     // Serve the static assets in the frontend's build folder
-     router.use(express.static(path.resolve("../frontend/dist")));
 
 }
 
