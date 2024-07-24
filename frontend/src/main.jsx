@@ -27,14 +27,14 @@
 
 /////////LEGACY CODE////////////////////////
 
+import './index.css';
+import App from './App';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App';
-import { restoreCSRF, csrfFetch } from './store/csrf'
-import './index.css';
 import { Provider } from 'react-redux';
 import configureStore from './store/store';
 import * as sessionActions from './store/session';
+import { restoreCSRF, csrfFetch } from './store/csrf'
 import { Modal, ModalProvider } from './context/Modal';
 
 const store = configureStore();
@@ -42,8 +42,8 @@ const store = configureStore();
 if (import.meta.env.MODE !== 'production') {
   restoreCSRF();
 
-  window.csrfFetch = csrfFetch;
   window.store = store;
+  window.csrfFetch = csrfFetch;
   window.sessionActions = sessionActions;
 }
 
