@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const apiRouter = require('./api');
+router.use('/api', apiRouter);
 
 // Static routes WHEN IN PRODUCTION
 if (process.env.NODE_ENV === 'production') {
@@ -32,9 +33,9 @@ if (process.env.NODE_ENV !== 'production') {
       res.cookie('XSRF-TOKEN', req.csrfToken());
       return res.json({});
     });
-  }
+}
 
 
-router.use('/api', apiRouter);
+
 
 module.exports = router
