@@ -56,7 +56,7 @@
 
 .profile-dropdown {
     position: fixed;
-    right: 42px;
+    right: 72px;
     top: 68px;
     display: flex;
     flex-direction: column;

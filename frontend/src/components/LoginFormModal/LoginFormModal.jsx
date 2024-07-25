@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useDispatch } from "react-redux"
 import { useModal } from '../../context/Modal'
 import * as sessionActions from '../../store/session';
@@ -10,6 +10,7 @@ export default function LoginFormModal() {
     const [credential, setCredential] = useState('')
     const [password, setPassword] = useState('')
     const [errors, setErrors] = useState({})
+    const [disabled, setDisabled] = useState(true)
     const {closeModal} = useModal()
 
     const handleSubmit = async (e) => {
@@ -23,12 +24,24 @@ export default function LoginFormModal() {
                     setErrors(data.errors)
                 }
                 if (data.message === 'Invalid Credentials') {
-                    setErrors({ credentials: 'Invalid Credentials' })
+                    setErrors({ credentials: "The provided credentials were invalid" })
                 }
             }
         );
     };
 
+    const loginDemoUser = async (e) => {
+        e.preventDefault()
+        return dispatch(sessionActions.login({credential: 'Demo-user', password: 'password'}))
+        .then(closeModal)
+        // .catch( async (res) => {const data = await res.json()})
+    }
+
+    useEffect(()=> {
+        if(password.length >= 6 && credential.length >= 4) {
+            setDisabled(false)
+        }
+    }, [password, credential, disabled])
 
     return (
         <div className="login-form-container">
@@ -44,7 +57,8 @@ export default function LoginFormModal() {
                         {errors?.password && <div className='error-div'>{errors.password}</div>}
                     </div>
                          {errors?.credentials && <div className='error-div' style={{textAlign:'center'}}>{errors.credentials}</div>}
-                    <button type='submit'>Log In</button>
+                    <button type='submit' disabled={disabled}>Log In</button>
+                    <p className="demo-user-login-text" onClick={loginDemoUser}>Log in as Demo User</p>
                 </div>
             </form>
         </div>
