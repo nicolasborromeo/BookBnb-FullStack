@@ -1,0 +1,82 @@
+.landing-page-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 0;
+    margin: 16px 70px;
+    justify-content: space-between;
+}
+
+.lp-li-spot-container {
+    flex: 1 1 calc(25%);
+    max-width: calc(25% - 20px);
+    background-color: white;
+    border-radius: 15px;
+    text-align: left;
+}
+
+.lp-img-container {
+    height: 0px;
+    padding: 50%;
+    overflow: hidden;
+    position: relative;
+}
+
+.landing-page-spot-preview-img {
+    min-height: 95%;
+    min-width: 100%;
+    position: absolute;
+    top:0;
+    left:0;
+    object-fit: cover;
+    border-radius: 15px;
+}
+
+.lp-li-spot-container p {
+    margin: 0;
+    font-size: 14px;
+    color: #333;
+}
+
+
+.lp-li-spot-container:hover {
+    cursor:pointer;
+}
+
+.tooltip-container {
+    position: relative;
+    /* opacity: 0.3; */
+    left: 50%;
+    top: -95%;
+}
+
+.tooltip-text {
+    visibility: hidden;
+    /* width: 120px; */
+    box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.4);
+    background-color: white;
+    color: black;
+    font-size: 12px;
+    text-align: center;
+    padding: 5px 10px;
+    border-radius: 6px;
+    white-space: nowrap;
+    position: absolute;
+    z-index: 2;
+    transform: translate(-50%, -100%);
+  }
+
+.lp-li-spot-container:hover .tooltip-text {
+    visibility: visible;
+  }
+
+  .tooltip-container .tooltip-text::after {
+    content: " ";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: white transparent transparent transparent;
+  }

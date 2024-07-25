@@ -12,8 +12,9 @@ export default function Navigation({ isLoaded }) {
                     <NavLink to='/'><img className='navigation-logo' src="/Logo.png"/></NavLink>
                     <NavLink to='/'><img className='navigation-brand' src="/brand.png"/></NavLink>
                 </li>
-
+                <li className="user-menu-container">
                 {isLoaded &&  <ProfileButton  />}
+                </li>
             </ul>
         </div>
     );
