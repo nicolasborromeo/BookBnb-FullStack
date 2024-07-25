@@ -52,6 +52,7 @@
 
 .navigation-user-button:hover {
     box-shadow: 0px 3px 8px lightgray;
+    cursor:pointer;
 }
 
 .profile-dropdown {

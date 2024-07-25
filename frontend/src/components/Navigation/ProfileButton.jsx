@@ -36,8 +36,9 @@ export default function ProfileButton( ) {
 
     const sessionLinks = sessionUser ? (
         <>
-            <li>{sessionUser.username}</li>
-            <li>{sessionUser.firstName} {sessionUser.lastName}</li>
+            <li>Hello, {sessionUser.firstName} </li>
+            {/* <li>{sessionUser.username}</li>
+            <li>{sessionUser.lastName}</li> */}
             <li>{sessionUser.email}</li>
             <li><NavLink onClick={logout}>Log Out</NavLink></li>
         </>

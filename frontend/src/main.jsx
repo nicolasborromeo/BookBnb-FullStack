@@ -34,6 +34,7 @@ import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import configureStore from './store/store';
 import * as sessionActions from './store/session';
+import * as spotActions from './store/spots'
 import { restoreCSRF, csrfFetch } from './store/csrf'
 import { Modal, ModalProvider } from './context/Modal';
 
@@ -45,6 +46,7 @@ if (import.meta.env.MODE !== 'production') {
   window.store = store;
   window.csrfFetch = csrfFetch;
   window.sessionActions = sessionActions;
+  window.spotActions = spotActions;
 }
 
 
