@@ -36,7 +36,7 @@ export default function ProfileButton( ) {
 
     const sessionLinks = sessionUser ? (
         <>
-            <li>Hello, {sessionUser.firstName} </li>
+            <li>Hello, {sessionUser.firstName} {sessionUser.lastName}</li>
             {/* <li>{sessionUser.username}</li>
             <li>{sessionUser.lastName}</li> */}
             <li>{sessionUser.email}</li>
