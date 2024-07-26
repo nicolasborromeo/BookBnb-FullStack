@@ -20,19 +20,6 @@ const setAllSpots = (spots) => {
 ////////////////////////////////////////////////////////
 //ACTIONS
 
-// export const fetchSpots = () => async (dispatch) => {
-//   const { credential, password } = user;
-//   const response = await csrfFetch("/api/session", {
-//     method: "POST",
-//     body: JSON.stringify({
-//       credential,
-//       password
-//     })
-//   });
-//   const data = await response.json();
-//   dispatch(setUser(data.user));
-//   return response;
-// };
 
 export const fetchSpots = () => async (dispatch) => {
     const response = await csrfFetch("/api/spots")
@@ -43,26 +30,22 @@ export const fetchSpots = () => async (dispatch) => {
 }
 
 
-// export const logout = () => async (dispatch) => {
-//   const response = await csrfFetch('api/session', {
-//     method: 'DELETE'
-//   })
-//   const data = await response.json()
-//   console.log(data)
-//   dispatch(removeUser())
-//   return response
-// }
 
 
 ////////////////////////////////////////////////////////
 //REDUCER
 
-const initialState = [];
+const initialState = {};
 
 const spotsReducer = (state = initialState, action) => {
   switch (action.type) {
-    case SET_ALL_SPOTS:
-      return { ...state, allSpots: action.payload };
+    case SET_ALL_SPOTS:{
+      let newState = {...state};
+      action.payload.forEach(spot => newState[spot.id] = spot)
+      delete newState.spotsArray;
+      newState.spotsArray = Object.values(action.payload)
+      return newState
+    }
     // case DELETE_SPOT:
     //   return { ...state, spots[id]: null };
     default:

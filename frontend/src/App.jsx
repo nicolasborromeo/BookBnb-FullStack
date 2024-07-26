@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import Navigation from '../src/components/Navigation'
 import * as sessionActions from './store/session'
 import LandingPage from "./components/LandingPage";
+import SpotDetails from "./components/SpotDetails"
 
 function Layout() {
   const dispatch = useDispatch()
@@ -31,7 +32,15 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <LandingPage />
+        element: <LandingPage />,
+      },
+      {
+        path: 'spots/:spotId',
+        element: <SpotDetails />
+      },
+      {
+        path: '*',
+        element: <h1>Page Not Found</h1>
       },
     ]
   }

@@ -47,12 +47,11 @@
     position: relative;
     /* opacity: 0.3; */
     left: 50%;
-    top: -95%;
+    top: -85%;
 }
 
 .tooltip-text {
     visibility: hidden;
-    /* width: 120px; */
     box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.4);
     background-color: white;
     color: black;
@@ -80,3 +79,19 @@
     border-style: solid;
     border-color: white transparent transparent transparent;
   }
+
+.lp-spot-location-and-rating-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 15px;
+}
+
+.lp-rating-container{
+    display: flex;
+    align-items: center;
+}
+
+.lp-rating-container span{
+   font-weight: 100;
+}

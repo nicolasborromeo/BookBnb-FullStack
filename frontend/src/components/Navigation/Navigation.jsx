@@ -9,11 +9,11 @@ export default function Navigation({ isLoaded }) {
         <div className="navigation-container">
             <ul className="navigation-ul">
                 <li className="logos-container">
-                    <NavLink to='/'><img className='navigation-logo' src="/Logo.png"/></NavLink>
-                    <NavLink to='/'><img className='navigation-brand' src="/brand.png"/></NavLink>
+                    <NavLink to='/'><img className='navigation-logo' src="/Logo.png" /></NavLink>
+                    <NavLink to='/'><img className='navigation-brand' src="/brand.png" /></NavLink>
                 </li>
                 <li className="user-menu-container">
-                {isLoaded &&  <ProfileButton  />}
+                    {isLoaded && <ProfileButton />}
                 </li>
             </ul>
         </div>
