@@ -66,7 +66,9 @@ export default function ProfileButton( ) {
     return (
         <>
             <div className="navigation-user-button">
-                <IoMenu onClick={toggleDropdown} />
+                <IoMenu
+                    style={{color: 'black', width: '20px'}}
+                    onClick={toggleDropdown} />
                 <FaUserCircle onClick={toggleDropdown} />
             </div>
             {showDropdown && <ul className='profile-dropdown' ref={ulRef}>

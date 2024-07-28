@@ -13,6 +13,7 @@ export default function Navigation({ isLoaded }) {
                     <NavLink to='/'><img className='navigation-brand' src="/brand.png" /></NavLink>
                 </li>
                 <li className="user-menu-container">
+                 <button className="create-new-spot-button">Create a New Spot</button>
                     {isLoaded && <ProfileButton />}
                 </li>
             </ul>
