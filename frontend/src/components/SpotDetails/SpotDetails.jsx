@@ -8,6 +8,8 @@ function SpotDetails() {
     const [spot, setSpot] = useState()
     const [previewImg, setPreviewImg] = useState('')
     const [spotImages, setSpotImages] = useState([])
+    const [numGuests, setNumGuests] = useState(1)
+    const [disabled, setDisabled] = useState(true)
 
     useEffect(() => {
         const fetch = async () => {
@@ -20,7 +22,9 @@ function SpotDetails() {
         fetch()
     }, [spotId])
 
-    console.log(spot)
+    useEffect(()=> {
+        numGuests > 1 ? setDisabled(false) : setDisabled(true)
+    }, [numGuests])
 
     if (spot) {
         return (
@@ -38,9 +42,64 @@ function SpotDetails() {
                         ))}
                     </div>
                 </div>
-                <p>Location: {spot.city}, {spot.state}, {spot.country}</p>
-                <p>{spot.description}</p>
-                <p>Hosted by: {spot.Owner.firstName} {spot.Owner.lastName}</p>
+                <div className="sd-info-callout-section-container">
+                    <div className="sd-info-container">
+                        <p>Location: {spot.city}, {spot.state}, {spot.country}</p>
+                        <p>{spot.description}</p>
+                        <p>Hosted by: {spot.Owner.firstName} {spot.Owner.lastName}</p>
+                    </div>
+                    <div className="sd-callout-box-container">
+                        <div className="sd-callout">
+                            <p className="sd-callout-price">${spot.price}/night</p>
+                            <p className="callout-text-total-before-taxes">Total before taxes</p>
+                            <form className="sd-callout-reservation-form">
+                                <div className="sd-callout-check-in-out-container">
+                                    <button className="sd-callout-check-in">
+                                        {/* onclick open modal with dates */}
+                                        <p>CHECK-IN</p>
+                                        <p className="sd-callout-dates">08/06/2024</p>
+                                        {/* the date should be the value selected from the popup. controlled value */}
+
+                                    </button>
+                                    <button className="sd-callout-check-out">
+                                        {/* onclick open modal with dates */}
+                                        <p>CHECKOUT</p>
+                                        <p className="sd-callout-dates">08/15/2024</p>
+                                        {/* the date should be the value selected from the popup. controlled value */}
+                                    </button>
+                                    <div className="sd-callout-number-guests">
+                                        <p>GUESTS</p>
+                                        <div className="minus-plus-guests-buttons-container">
+
+                                            <button
+                                            disabled={disabled}
+                                            onClick={(e)=> {
+                                                e.preventDefault()
+                                                return setNumGuests(prev => prev -1)}}>-</button>
+
+                                            <p>{numGuests}</p>
+
+                                            <button
+                                            onClick={(e)=> {
+                                                 e.preventDefault()
+                                                 return setNumGuests(prev => prev +1)}}>+</button>
+                                        </div>
+                                    </div >
+                                </div>
+                                <button
+                                    type='submit'
+                                    className="sd-callout-reserve-button"
+                                    onClick={(e)=> {
+                                        e.preventDefault()
+                                        window.alert("Feature coming soon")
+                                    }}
+
+                                >Reserve</button>
+                                <p className="callout-text">You won&apos;t be charged yet</p>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
         )
     }

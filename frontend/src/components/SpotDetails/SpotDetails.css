@@ -18,7 +18,7 @@
     gap: 8px;
     border-radius: 20px;
     overflow: hidden;
-
+    margin-top: 20px;
     /* max-height: 380px; */
 }
 
@@ -46,4 +46,161 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+
+/* BELOW IMAGES */
+
+
+
+/* left info right callout */
+.sd-info-callout-section-container {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.sd-info-container {
+    width: 58%;
+}
+
+.sd-info-container,p {
+    font-weight: 700;
+}
+
+/* callout */
+.sd-callout-box-container{
+    box-sizing: border-box;
+    display: block;
+    width: 34%;
+    padding: 25px;
+    border:1px solid rgb(221, 221, 221);
+    box-shadow:0 6px 20px rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    min-width:min-content;
+}
+
+.sd-callout-price {
+    margin-top: 0px !important;
+    font-size: x-large;
+    margin-bottom:0 ;
+}
+.callout-text-total-before-taxes{
+    position: relative;
+    top: -14px;
+    font-weight: 100;
+}
+
+.sd-callout-check-in-out-container {
+    border-radius: 15px;
+    border:1px solid rgb(68, 64, 64);
+    overflow: hidden;
+    min-width: min-content;
+}
+
+.sd-callout-check-in-out-container p {
+    font-size: 0.625rem;
+    line-height: 0.75rem;
+    flex: 1;
+    white-space: nowrap;
+    padding: 0px;
+    text-align: left;
+    padding-left: 10px;
+}
+
+.sd-callout-check-in-out-container button {
+    width: 50%;
+    border: none;
+    outline: none;
+    margin: 0px;
+    background-color: transparent;
+    /* min-width:min-content; */
+
+}
+
+.minus-plus-guests-buttons-container button {
+    border:1px solid rgb(77, 74, 74);
+}
+
+
+
+
+.sd-callout-check-in {
+    border-bottom:1px solid rgb(77, 74, 74) !important;
+
+}
+.sd-callout-check-out {
+    border-bottom:1px solid rgb(77, 74, 74) !important;
+    border-left:1px solid rgb(77, 74, 74) !important;
+}
+
+.sd-callout-dates {
+    font-size: small !important;
+    font-weight: 100;
+    min-width:min-content;
+}
+
+.sd-callout-number-guests {
+    display: flex;
+    flex-direction: row;
+    border-radius: 100px;
+    border: none;
+    padding: 10px;
+    gap: 10px;
+    justify-content: space-between;
+    text-align: left;
+    padding-left: 15px;
+}
+
+.sd-callout-number-guests>p {
+    min-width: 28%;
+}
+
+.minus-plus-guests-buttons-container {
+    display: flex;
+    width: 50%;
+    gap:10px;
+    align-items: center;
+}
+.sd-callout-number-guests p {
+   padding:0 !important;
+   flex: 0;
+
+}
+
+.sd-callout-number-guests button {
+    padding: 0;
+    margin: 0;
+    width: 2em;
+    min-width: 2em;
+    height: 2em;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sd-callout-reserve-button {
+    margin-top: 20px;
+    width: 100%;
+    padding:15px;
+    background-color: rgb(218,14,99);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
+
+}
+
+.sd-callout-reserve-button:hover {
+  cursor: pointer;
+  background-color: rgb(238, 34, 119);
+}
+
+.callout-text {
+    font-weight: 100;
+    text-align: center;
+    margin-bottom: 5px !important;
+
 }

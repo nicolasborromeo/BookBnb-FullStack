@@ -4,9 +4,10 @@
 
 body {
     margin: auto;
-    line-height: 1.5;
+    line-height: 1.2;
+
     accent-color: #0a1f26;
-    font-family: "Airbnb Cereal VF", Circular, -apple-system, "system-ui", Roboto, "Helvetica Neue", sans-serif;
+    font-family:  -apple-system, BlinkMacSystemFont, "Segoe UI", Circular, -apple-system, "system-ui", Segoe UI, Roboto, "Helvetica Neue", sans-serif;
 }
 
 ul {
