@@ -44,9 +44,9 @@ function SpotDetails() {
                 </div>
                 <div className="sd-info-callout-section-container">
                     <div className="sd-info-container">
-                        <p>Location: {spot.city}, {spot.state}, {spot.country}</p>
-                        <p>{spot.description}</p>
-                        <p>Hosted by: {spot.Owner.firstName} {spot.Owner.lastName}</p>
+                        <p style={{fontWeight: 'bold', fontSize:'x-large' }}>{spot.description}</p>
+                        <p style={{fontWeight: '100'}}>Location: {spot.city}, {spot.state}, {spot.country}</p>
+                        <p style={{fontWeight: '100'}}>Hosted by: {spot.Owner.firstName} {spot.Owner.lastName}</p>
                     </div>
                     <div className="sd-callout-box-container">
                         <div className="sd-callout">

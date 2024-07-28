@@ -1,7 +1,13 @@
+
 .spot-details-container {
     margin: 20px 130px;
     height: 100%;
 }
+
+.spot-details-container div {
+    width: 98%
+}
+
 
 
 .sd-spot-name {
@@ -39,7 +45,7 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(2, 50%);
-    gap: 8px;
+    row-gap: 8px !important;
 }
 
 .sd-spot-image {
@@ -73,7 +79,8 @@
 .sd-callout-box-container{
     box-sizing: border-box;
     display: block;
-    width: 34%;
+    /* width: 34%; */
+    width: 70%!important;
     padding: 25px;
     border:1px solid rgb(221, 221, 221);
     box-shadow:0 6px 20px rgba(0, 0, 0, 0.2);
