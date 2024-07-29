@@ -50,28 +50,38 @@ function CreateSpotForm() {
         return dispatch(spotActions.postNewSpot(newSpot, images))
             .catch(
                 async (res) => {
-                    const data = await res.json()
-                    if (data?.errors) {
-                        let errVals = Object.values(data.errors);
-                        setErrors([...errVals]);
+                    console.log('res', res)
+                    if (!res.ok) {
+                        let err = await res.json()
+                        switch (res.status) {
+                            case 401: window.alert('You must be logged in to create a Spot');
+                            break;
+                            case 400: {
+                                let errVals = Object.values(err.errors);
+                                setErrors([...errVals]);
+                            }
+                            break;
+                            default: setErrors(['Sorry, there was an error creating the Spot']);
+                        }
                     } else {
+                        const data = await res.json()
                         console.log('Spot created successfully:', data);
                         navigate(`/spots/${data.id}`, { replace: true });
                     }
                 }
             )
     };
-
+    console.log(errors)
 
     return (
         <div className="form-side-container">
             <div className="form-container">
-            {errors &&
-                <ul className="cs-errors">{
-                    errors.map((err, i) => (
-                        <li key={i}> - {err}</li>
-                    ))}
-                </ul>}
+                {errors &&
+                    <ul className="cs-errors" style={ errors.length ? {display:'flex'} :{ display: 'none' }}>{
+                        errors.map((err, i) => (
+                            <li key={i}> - {err}</li>
+                        ))}
+                    </ul>}
                 <form className="create-spot-form" onSubmit={handleFormSubmit}>
                     <h3 className="cs-form-header">Create a New Spot</h3>
                     {step === 1 &&
@@ -126,7 +136,7 @@ function CreateSpotForm() {
                                 <h3 className="cs-step-title">Liven up your spot with photos</h3>
                                 <h6 className="cs-step-sub-title" style={{ textDecoration: disabledCreate ? 'underline' : '' }}>Submit a link to at least one photo to publish your spot.</h6>
                                 <div className="cs-inputs-container">
-                                    <input onChange={(e) => handleImages(e)} className="cs-url-input" id='1' type="text" placeholder="Preview Image URL" value={images['1']}/>
+                                    <input onChange={(e) => handleImages(e)} className="cs-url-input" id='1' type="text" placeholder="Preview Image URL" value={images['1']} />
                                     <input onChange={(e) => handleImages(e)} className="cs-url-input" id='2' type="text" placeholder="Image URL" value={images['2']} />
                                     <input onChange={(e) => handleImages(e)} className="cs-url-input" id='3' type="text" placeholder="Image URL" value={images['3']} />
                                     <input onChange={(e) => handleImages(e)} className="cs-url-input" id='4' type="text" placeholder="Image URL" value={images['4']} />

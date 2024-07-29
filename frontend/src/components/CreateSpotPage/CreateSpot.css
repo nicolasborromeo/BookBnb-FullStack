@@ -86,6 +86,7 @@
 
 .form-container{
     display: flex;
+    /* flex-direction: column; */
     justify-content: center;
     align-items: center;
     height: 100%;
@@ -171,7 +172,7 @@
 .cs-errors {
     color: white;
     margin-right: 10px;
-    margin-top: -200px;
+    /* margin-top: -200px; */
     padding: 5px;
     display: flex;
     flex-direction: column;
