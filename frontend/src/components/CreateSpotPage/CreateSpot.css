@@ -1,0 +1,190 @@
+.background-div-image-container {
+    position: relative;
+}
+
+
+.background-div-image-container::before {
+    content: '';
+    position: fixed;
+    z-index: -99; /* Slightly above the image but below other content */
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.3); /* Adjust the opacity for darkness */
+}
+
+.background-div-image-container img{
+    position: fixed;
+    z-index: -100;
+    bottom: 0px;
+    object-fit: cover;
+}
+
+.create-spot-page-container {
+    margin: 0 80px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+}
+
+.create-spot-title-logo-container {
+    color: white;
+    font-size: 1.3em;
+    white-space: wrap;
+    line-height: 0.8;
+}
+
+
+.logo-container {
+    filter:invert(1);
+    width: fit-content;
+    /* min-width: 100%; */
+    /* display: flex; */
+    /* justify-content: flex-end; */
+    /* position: absolute;
+    top: 24%;
+    right: 48%; */
+}
+
+.cs-title-line-break {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+    margin-top: -20px;
+    padding: 0;
+}
+
+.logo-container .navigation-logo {
+    width: auto;
+    height: 60px;
+}
+
+.logo-container .navigation-brand {
+    width: min-content;
+    height: 40px;
+}
+
+.cs-branding-container{
+    min-width: 50%;
+    /* min-width: none; */
+    min-height: 90vh;
+    padding-top: 60px;
+}
+
+.cs-branding-container p{
+    font-size: 1.1em;
+}
+
+/* FORM CONTAINER */
+
+.form-side-container {
+    color: black !important;
+    width: 100%;
+}
+
+.form-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    position: relative;
+    top: -20px;
+    /* left: 50px */
+}
+
+.create-spot-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: black !important;
+    background-color: white;
+    padding: 30px !important;
+    width: 65%;
+    min-width: 300px;
+    height: 70%;
+    min-height: 420px;
+    border-radius: 10px;
+    box-shadow: 0px 2px 3px 1px rgba(255, 255, 255, 0.553);
+    overflow: hidden;
+}
+
+.cs-form-header {
+    margin: 0;
+    border-bottom: 1px solid lightgray;
+    width: 100%;
+   color: rgb(22, 22, 22);
+   font-weight: 800;
+}
+
+.create-spot-form section{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.cs-step-title {
+    font-weight: 400;
+}
+
+.cs-step-sub-title {
+    font-weight: 200;
+    font-size: 0.8em;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.cs-inputs, .cs-section textarea, .cs-section input{
+    width: 100%;
+    border-radius: 12px;
+    border: 0;
+    border-bottom: 1px solid lightgray;
+}
+
+.cs-inputs-container {
+    min-height: 60%;
+    max-height: 60%;
+}
+.cs-section input {
+    margin: 10px 0;
+    padding: 8px 4px;
+}
+.cs-section textarea {
+    margin-top: 10px;
+    min-height: 80%;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.cs-form-buttons-div {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    width: 100%;
+    margin: 0px;
+}
+.cs-url-input {
+    padding: 2px !important;
+}
+
+.cs-errors {
+    color: white;
+    margin-right: 10px;
+    margin-top: -200px;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 5px;
+    border: 1px solid white;
+    border-radius: 5px;
+}
+
+/* .cs-form-buttons-div button{
+    padding: 10px;
+    height: 5%;
+    text-align: center;
+    align-self: center;
+} */

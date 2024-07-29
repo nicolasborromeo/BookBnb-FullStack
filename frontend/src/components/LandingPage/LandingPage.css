@@ -3,13 +3,12 @@
     flex-wrap: wrap;
     gap: 20px;
     padding: 0;
-    margin: 16px 70px;
-    justify-content: space-between;
+    margin: 16px 80px;
 }
 
 .lp-li-spot-container {
     flex: 1 1 calc(25%);
-    max-width: calc(25% - 20px);
+    max-width: calc(25% - 15px);
     background-color: white;
     border-radius: 15px;
     text-align: left;

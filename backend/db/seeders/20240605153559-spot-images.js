@@ -12,7 +12,7 @@ const spotImages = [
   {
     // id: 1,
     spotId: 1,
-    url: 'https://res.cloudinary.com/dklsvbe1v/image/upload/v1721939618/h1ph4_gbb2t8.webp',
+    url: 'https://res.cloudinary.com/dklsvbe1v/image/upload/v1721939615/h1ph3_mqwuky.webp',
     preview: true
   },
   {
@@ -24,13 +24,13 @@ const spotImages = [
   {
     // id: 1,
     spotId: 1,
-    url: 'https://res.cloudinary.com/dklsvbe1v/image/upload/v1721939617/h1ph5_mn7lfc.webp',
+    url: 'https://res.cloudinary.com/dklsvbe1v/image/upload/v1721939616/h1ph2_ohthpe.webp',
     preview: false
   },
   {
     // id: 1,
     spotId: 1,
-    url: 'https://res.cloudinary.com/dklsvbe1v/image/upload/v1721939615/h1ph3_mqwuky.webp',
+    url: 'https://res.cloudinary.com/dklsvbe1v/image/upload/v1721939618/h1ph4_gbb2t8.webp',
     preview: false
   },
   {
@@ -54,7 +54,7 @@ const spotImages = [
   {
     // id: 2,
     spotId: 2,
-    url: 'https://res.cloudinary.com/dklsvbe1v/image/upload/v1721939613/h2ph2_v97g7c.webp',
+    url: 'https://res.cloudinary.com/dklsvbe1v/image/upload/v1721939613/h2ph3_u6a2uk.webp',
     preview: false
   },
   {

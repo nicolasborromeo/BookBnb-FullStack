@@ -295,6 +295,24 @@ router.get('/', validateSpotsQuery, async (req, res, _next) => {
 })
 
 
+//add image to spot based on spot id
+router.post('/:spotId/images',
+    requireAuth,
+    spotAuthentication,
+    async (req, res, next) => {
+        const newImage = await SpotImage.create({
+            spotId: req.params.spotId,
+            url: req.body.url,
+            preview: req.body.preview
+        })
+        imageRes = newImage.toJSON()
+        delete imageRes.createdAt
+        delete imageRes.updatedAt
+        delete imageRes.spotId
+        return res.status(201).json(imageRes)
+    })
+
+
 const validateReview = [
     body('review')
         .exists()
@@ -465,7 +483,7 @@ const validateSpot = [
         .withMessage("Longitude must be within -180 and 180"),
     body("name")
         .exists()
-        .notEmpty()
+        .notEmpty().withMessage('Name is required')
         .custom(value => {
             let name = value.split('')
             if (name.length > 50) {
@@ -480,35 +498,18 @@ const validateSpot = [
         .withMessage("Description is required"),
     body("price")
         .exists()
-        .notEmpty()
-        .isNumeric()
+        .notEmpty().withMessage("Price per day is required")
+        // .isNumeric().withMessage('Price must be a number')
         .custom(value => {
             if (value < 0) {
                 throw new Error()
             }
             return true
         })
-        .withMessage("Price per day is required"),
+        .withMessage("Price must be grater than 0"),
     handleValidationErrors
 ]
 
-//add image to spot based on spot id
-router.post('/:spotId/images',
-    requireAuth,
-    spotAuthentication,
-    async (req, res, next) => {
-
-        const newImage = await SpotImage.create({
-            spotId: req.params.spotId,
-            url: req.body.url,
-            preview: req.body.preview
-        })
-        imageRes = newImage.toJSON()
-        delete imageRes.createdAt
-        delete imageRes.updatedAt
-        delete imageRes.spotId
-        return res.status(201).json(imageRes)
-    })
 
 router.post('/',
     requireAuth,
