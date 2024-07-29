@@ -483,7 +483,7 @@ const validateSpot = [
         .withMessage("Longitude must be within -180 and 180"),
     body("name")
         .exists()
-        .notEmpty()
+        .notEmpty().withMessage('Name is required')
         .custom(value => {
             let name = value.split('')
             if (name.length > 50) {
@@ -498,15 +498,15 @@ const validateSpot = [
         .withMessage("Description is required"),
     body("price")
         .exists()
-        .notEmpty()
-        .isNumeric()
+        .notEmpty().withMessage("Price per day is required")
+        // .isNumeric().withMessage('Price must be a number')
         .custom(value => {
             if (value < 0) {
                 throw new Error()
             }
             return true
         })
-        .withMessage("Price per day is required"),
+        .withMessage("Price must be grater than 0"),
     handleValidationErrors
 ]
 
@@ -515,7 +515,6 @@ router.post('/',
     requireAuth,
     validateSpot,
     async (req, res, next) => {
-        console.log('the spot that made it to the router as req.body', req.body)
         const { address, city, state, country, lat, lng, name, description, price } = req.body
         const ownerId = req.user.id
         let newSpot = await Spot.create({

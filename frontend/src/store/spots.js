@@ -49,7 +49,7 @@ export const postNewSpot = (spot, images) => async () => {
     for (const img in images) {
       let preview = img == 1 ? true : false;
       const body = {
-        url: images[img].url,
+        url: images[img],
         preview: preview,
       };
       // const imageResponse =
