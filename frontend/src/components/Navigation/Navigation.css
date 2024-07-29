@@ -5,17 +5,20 @@
 .navigation-container{
     border-bottom: 1px solid lightgray;
     width: 100vw;
-    /* position: sticky;
-    z-index: 1; */
+    position: sticky;
+    z-index: 100;
+    background-color: white;
+    padding: 10px 0;
 }
+
 
 .navigation-ul {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    margin: 20px 70px;
-    padding: 0;
+    margin: 8px 80px;
+
 }
 
 .logos-container {
@@ -24,19 +27,24 @@
     display:flex;
     justify-content: space-between;
     align-items: center;
+    position:relative;
+    left: -38px;
 }
 
 .navigation-logo {
     width: 35px;
     height: 35px;
     color: #0a1f26;
+    display: flex;
+    align-items: center;
 }
 
 .navigation-brand {
     padding-left: 5px;
     height: 20px;
     color: #0a1f26;
-
+    display: flex;
+    align-items: center;
 }
 
 
@@ -47,16 +55,22 @@
     gap: 20px;
 }
 /* CREATE A NEW SPOT BUTTON */
-
+.create-spot-navlink {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
 .create-new-spot-button {
     border: none;
+    border-radius: 22px;
     outline: none;
     background-color: transparent;
     font-family: Circular, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    padding: 10px 13px;
 
 }
 .create-new-spot-button:hover{
-    text-decoration: underline;
+    background-color: rgb(245, 245, 245);
     cursor: pointer;
 }
 
@@ -75,10 +89,6 @@
     transition: all 100ms ease-in-out;
 }
 
-.navigation-user-button:first-child {
-    color: black !important;
-    width: 10%;
-}
 
 .navigation-user-button:hover {
     box-shadow: 0px 3px 8px lightgray;

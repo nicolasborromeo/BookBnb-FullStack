@@ -295,6 +295,24 @@ router.get('/', validateSpotsQuery, async (req, res, _next) => {
 })
 
 
+//add image to spot based on spot id
+router.post('/:spotId/images',
+    requireAuth,
+    spotAuthentication,
+    async (req, res, next) => {
+        const newImage = await SpotImage.create({
+            spotId: req.params.spotId,
+            url: req.body.url,
+            preview: req.body.preview
+        })
+        imageRes = newImage.toJSON()
+        delete imageRes.createdAt
+        delete imageRes.updatedAt
+        delete imageRes.spotId
+        return res.status(201).json(imageRes)
+    })
+
+
 const validateReview = [
     body('review')
         .exists()
@@ -492,28 +510,12 @@ const validateSpot = [
     handleValidationErrors
 ]
 
-//add image to spot based on spot id
-router.post('/:spotId/images',
-    requireAuth,
-    spotAuthentication,
-    async (req, res, next) => {
-
-        const newImage = await SpotImage.create({
-            spotId: req.params.spotId,
-            url: req.body.url,
-            preview: req.body.preview
-        })
-        imageRes = newImage.toJSON()
-        delete imageRes.createdAt
-        delete imageRes.updatedAt
-        delete imageRes.spotId
-        return res.status(201).json(imageRes)
-    })
 
 router.post('/',
     requireAuth,
     validateSpot,
     async (req, res, next) => {
+        console.log('the spot that made it to the router as req.body', req.body)
         const { address, city, state, country, lat, lng, name, description, price } = req.body
         const ownerId = req.user.id
         let newSpot = await Spot.create({
