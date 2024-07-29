@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react"
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import * as spotActions from '../../store/spots'
 // import { testSpot, testImgs } from "./dummydata";
 import { useNavigate } from "react-router-dom";
 import { validateImages } from "./createSpotValidation";
+import OpenModalButton from "../OpenModalButton";
+import LoginFormModal from "../LoginFormModal";
 
 function CreateSpotForm() {
+    const user = useSelector(state => state.session.user)
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [country, setCountry] = useState('')
@@ -55,12 +58,12 @@ function CreateSpotForm() {
                         let err = await res.json()
                         switch (res.status) {
                             case 401: window.alert('You must be logged in to create a Spot');
-                            break;
+                                break;
                             case 400: {
                                 let errVals = Object.values(err.errors);
                                 setErrors([...errVals]);
                             }
-                            break;
+                                break;
                             default: setErrors(['Sorry, there was an error creating the Spot']);
                         }
                     } else {
@@ -77,7 +80,7 @@ function CreateSpotForm() {
         <div className="form-side-container">
             <div className="form-container">
                 {errors &&
-                    <ul className="cs-errors" style={ errors.length ? {display:'flex'} :{ display: 'none' }}>{
+                    <ul className="cs-errors" style={errors.length ? { display: 'flex' } : { display: 'none' }}>{
                         errors.map((err, i) => (
                             <li key={i}> - {err}</li>
                         ))}
@@ -157,9 +160,17 @@ function CreateSpotForm() {
                             }}
                         >Prev</button>
                         {step === 5 ? (
-                            <button type="submit"
-                                disabled={disabledCreate}
-                            >Create Spot</button>
+                            user ? (
+                                <button type="submit"
+                                    disabled={disabledCreate}
+                                >Create Spot</button>
+                            ) : (
+                                <OpenModalButton
+                                    className='profile-dropdown-buttons'
+                                    buttonText="Create Spot"
+                                    modalComponent={<LoginFormModal />}
+                                />
+                            )
                         ) : (
 
                             <button className="cs-next-button"
