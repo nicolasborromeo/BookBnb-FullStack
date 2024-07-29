@@ -1,0 +1,60 @@
+.manage-spots-title {
+    margin: 0px 80px;
+    padding: 30px;
+    font-size: 1.3em;
+    font-weight: 300;
+    text-align: center;
+    border-bottom: 1px solid lightgray;
+}
+
+
+.update-delete-buttons-container {
+    display: flex;
+    justify-content: space-between;
+    margin: 5px 0;
+    /* position: relative;
+    bottom: 75px; */
+
+}
+
+.update-delete-buttons-container button {
+    border: 0;
+    border-radius: 15px;
+    box-shadow: 1px 1px 1px gray;
+}
+
+.manage-spots-create-spot-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.managespot-create-button button {
+    background-color: aliceblue;
+}
+
+
+
+.loading-container{
+    min-width: 90vw;
+    min-height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loading-icon {
+    width: 70px;
+    height: 70px;
+    animation: rotate 1s linear infinite
+}
+
+@keyframes rotate {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
