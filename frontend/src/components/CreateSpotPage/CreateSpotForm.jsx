@@ -1,16 +1,16 @@
-import { useEffect, useState } from "react"
-import { useDispatch, useSelector } from 'react-redux'
-import * as spotActions from '../../store/spots'
+import { useState, useEffect } from "react"
+import { useSelector } from 'react-redux'
 // import { testSpot, testImgs } from "./dummydata";
 import { useNavigate } from "react-router-dom";
-import { validateImages } from "./createSpotValidation";
 import OpenModalButton from "../OpenModalButton";
 import LoginFormModal from "../LoginFormModal";
+import validator from "validator";
+import { csrfFetch } from "../../store/csrf";
+// import { validateImages } from "./createSpotValidation";
 
 function CreateSpotForm() {
     const user = useSelector(state => state.session.user)
     const navigate = useNavigate();
-    const dispatch = useDispatch();
     const [country, setCountry] = useState('')
     const [address, setAddress] = useState('')
     const [city, setCity] = useState('')
@@ -20,72 +20,139 @@ function CreateSpotForm() {
     const [name, setName] = useState('')
     const [price, setPrice] = useState('')
     const [images, setImages] = useState({})
-    const [errors, setErrors] = useState([])
-    const [disabledNext, setDisabledNext] = useState(true)
+    const [errors, setErrors] = useState({})
     const [disabledPrev, setDisabledPrev] = useState(true)
-    const [disabledCreate, setDisabledCreate] = useState(true)
 
-    useEffect(() => {
-        if (step === 1) setDisabledNext(country && address && city && state ? false : true)
-        if (step === 2) setDisabledNext(description.length >= 30 ? false : true)
-        if (step === 3) setDisabledNext(name ? false : true)
-        if (step === 4) setDisabledNext(Number(price) > 0 ? false : true)
-        if (step === 5) setDisabledCreate(validateImages(images))
-    }, [images, price, name, description, country, address, city, state, step, disabledNext, disabledCreate])
+    // const [disabledNext, setDisabledNext] = useState(false)
+    // const [disabledCreate, setDisabledCreate] = useState(true)
+    // useEffect(() => {
+    //     if (step === 1) setDisabledNext(country && address && city && state ? false : true)
+    //     if (step === 2) setDisabledNext(description.length >= 30 ? false : true)
+    //     if (step === 3) setDisabledNext(name ? false : true)
+    //     if (step === 4) setDisabledNext(Number(price) > 0 ? false : true)
+    //     if (step === 5) setDisabledCreate(validateImages(images))
+    // }, [images, price, name, description, country, address, city, state, step, disabledNext, disabledCreate])
 
     useEffect(() => {
         setDisabledPrev(step === 1 ? true : false)
-    }, [step, disabledNext])
+    }, [step])
 
     const handleImages = (e) => {
         let imgId = e.target.id
         let newImgState = { ...images }
         newImgState[imgId] = e.target.value
+        if (newImgState[imgId] === '') delete newImgState[imgId]
         return setImages(newImgState)
     };
 
     const handleFormSubmit = async (e) => {
-        e.preventDefault();
-        let newSpot = { address, city, state, country, name, description, price };
+        e.preventDefault()
+        const newSpot = { address, city, state, country, name, description, price };
         newSpot.lat = 0;
         newSpot.lng = 0;
 
-        return dispatch(spotActions.postNewSpot(newSpot, images))
-            .catch(
-                async (res) => {
-                    console.log('res', res)
-                    if (!res.ok) {
-                        let err = await res.json()
-                        switch (res.status) {
-                            case 401: window.alert('You must be logged in to create a Spot');
-                                break;
-                            case 400: {
-                                let errVals = Object.values(err.errors);
-                                setErrors([...errVals]);
-                            }
-                                break;
-                            default: setErrors(['Sorry, there was an error creating the Spot']);
-                        }
-                    } else {
-                        const data = await res.json()
-                        console.log('Spot created successfully:', data);
-                        navigate(`/spots/${data.id}`, { replace: true });
+        const fetch = async () => {
+            try {
+                const res = await csrfFetch('/api/spots', {
+                    method: 'POST',
+                    body: JSON.stringify(newSpot),
+                });
+
+                if(!res.ok) throw res
+
+                const data = await res.json()
+
+                const spotId = data.id;
+                console.log('this means the spot was created regardless of the pictures', data)
+
+                const imgArray = Object.values(images)
+                imgArray.forEach(img => {
+                    if (!validator.isURL(img)) throw Error('invalid image url')
+                })
+
+                for (const img in images) {
+                    let isPreview = img == 1 ? true : false;
+                    const body = {
+                        url: images[img],
+                        preview: isPreview,
+                    };
+
+                    const imgResponse = await csrfFetch(`/api/spots/${spotId}/images`, {
+                        method: 'POST',
+                        body: JSON.stringify(body),
+                    });
+                    if(!imgResponse.ok) {
+
+                        const imgError = await imgResponse.json()
+                        throw Error(imgError)
                     }
                 }
-            )
-    };
-    console.log(errors)
 
+                console.log('Spot created successfully:', data);
+                navigate(`/spots/${data.id}`, { replace: true });
+
+            } catch (error) {
+                switch (error.status) {
+                    case 401: window.alert('You must be logged in to create a Spot');
+                        break;
+                    case 400: {
+                        window.alert('Invalid Spot Information, please make sure you complete all the reuired fields')
+                    }
+                        break;
+                    default: setErrors({error:'Sorry, there was an error creating the Spot'});
+                }
+
+            }
+
+        }
+        fetch()
+    };
+
+
+    const validateInputs = (e) => {
+        switch (step) {
+            case 1:
+                setErrors({})
+                if (!country) setErrors((prev) => ({ ...prev, country: 'Country is required' }))
+                if (!address) setErrors((prev) => ({ ...prev, address: 'Address is required' }))
+                if (!city) setErrors((prev) => ({ ...prev, city: 'City is required' }))
+                if (!state) setErrors((prev) => ({ ...prev, state: 'State is required' }))
+                if (country && address && city && state) setStep(2)
+                break;
+            case 2:
+                setErrors({})
+                if (description.length < 30) setErrors((prev) => ({ ...prev, description: 'Description must be at least 30 characters' }))
+                else setStep(3)
+                break
+            case 3:
+                setErrors({})
+                if (!name) setErrors((prev) => ({ ...prev, name: 'A name is required' }))
+                else setStep(4)
+                break
+            case 4:
+                setErrors({})
+                if (!price || Number(price) < 1) setErrors((prev) => ({ ...prev, price: 'Price must be grater than 1' }))
+                else setStep(5)
+                break
+            case 5: {
+                setErrors({})
+                let imgKeys = Object.keys(images)
+                if (!imgKeys.length || !validator.isURL(images['1'])) return setErrors((prev) => ({ ...prev, prevImg: 'A preview url img is required' }))
+                if (images['2']) validator.isURL(images['2']) ? null : setErrors((prev) => ({ ...prev, img2: 'Invalid Url' }))
+                if (images['3']) validator.isURL(images['3']) ? null : setErrors((prev) => ({ ...prev, img3: 'Invalid Url' }))
+                if (images['4']) validator.isURL(images['4']) ? null : setErrors((prev) => ({ ...prev, img4: 'Invalid Url' }))
+                if (images['5']) validator.isURL(images['5']) ? null : setErrors((prev) => ({ ...prev, img5: 'Invalid Url' }))
+                else handleFormSubmit(e)
+                break
+            }
+            default:
+                break;
+        }
+    }
     return (
         <div className="form-side-container">
             <div className="form-container">
-                {errors &&
-                    <ul className="cs-errors" style={errors.length ? { display: 'flex' } : { display: 'none' }}>{
-                        errors.map((err, i) => (
-                            <li key={i}> - {err}</li>
-                        ))}
-                    </ul>}
-                <form className="create-spot-form" onSubmit={handleFormSubmit}>
+                <form className="create-spot-form" onSubmit={(e)=> e.preventDefault()}>
                     <h3 className="cs-form-header">Create a New Spot</h3>
                     {step === 1 &&
 
@@ -94,11 +161,14 @@ function CreateSpotForm() {
                             <h6 className="cs-step-sub-title">Guests will only get your exact address once they booked a reservation.</h6>
                             <div className="cs-inputs-container">
                                 <input required onChange={(e) => setCountry(e.target.value)} type='text' className="cs-inputs" placeholder='Country' value={country} />
+                                {errors?.country && <p className="error-msg">{errors.country}</p>}
                                 <input required onChange={(e) => setAddress(e.target.value)} type='text' className="cs-inputs" placeholder='Street Addres' value={address} />
+                                {errors?.address && <p className="error-msg">{errors.address}</p>}
                                 <input required onChange={(e) => setCity(e.target.value)} type='text' className="cs-inputs" placeholder='City' value={city} />
+                                {errors?.city && <p className="error-msg">{errors.city}</p>}
                                 <input required onChange={(e) => setState(e.target.value)} type='text' className="cs-inputs" placeholder='State' value={state} />
-                                {/* <input type='text' className="cs-inputs" placeholder='Latitude' value={latitude}></input>
-                        <input type='text' className="cs-inputs" placeholder='Longitud' value={longitud}></input> */}
+                                {errors?.state && <p className="error-msg">{errors.state}</p>}
+
                             </div>
                         </section>
                     }
@@ -109,6 +179,7 @@ function CreateSpotForm() {
                             <h6 className="cs-step-sub-title">Mention the best features of your space, any special amentities like fast wifi or parking, and what you love about the neighborhood.</h6>
                             <div className="cs-inputs-container">
                                 <textarea onChange={(e) => setDescription(e.target.value)} className="cs-section2-textarea" placeholder="Please write at least 30 characters..." value={description}></textarea>
+                                {errors?.description && <p className="error-msg">{errors.description}</p>}
                             </div>
                         </section>
                     }
@@ -119,6 +190,7 @@ function CreateSpotForm() {
                             <h6 className="cs-step-sub-title">Catch guests&apos; attention with a spot title that highlights what makes your place special.</h6>
                             <div className="cs-inputs-container">
                                 <input onChange={(e) => setName(e.target.value)} type="text" placeholder="Name of your spot" value={name} />
+                                {errors?.name && <p className="error-msg">{errors.name}</p>}
                             </div>
                         </section>
                     }
@@ -129,6 +201,7 @@ function CreateSpotForm() {
                             <h6 className="cs-step-sub-title">Competitive pricing can help your listing stand out and rank higher in search results.</h6>
                             <div className="cs-inputs-container">
                                 <input onChange={(e) => setPrice(e.target.value)} type="number" placeholder="Price per night (USD)" value={price} />
+                                {errors?.price && <p className="error-msg">{errors.price}</p>}
                             </div>
                         </section>
                     }
@@ -137,13 +210,22 @@ function CreateSpotForm() {
                         <>
                             <section className='cs-section'>
                                 <h3 className="cs-step-title">Liven up your spot with photos</h3>
-                                <h6 className="cs-step-sub-title" style={{ textDecoration: disabledCreate ? 'underline' : '' }}>Submit a link to at least one photo to publish your spot.</h6>
+                                <h6 className="cs-step-sub-title"
+                                // style={{ textDecoration: disabledCreate ? 'underline' : '' }}
+                                >
+                                    Submit a link to at least one photo to publish your spot
+                                </h6>
                                 <div className="cs-inputs-container">
                                     <input onChange={(e) => handleImages(e)} className="cs-url-input" id='1' type="text" placeholder="Preview Image URL" value={images['1']} />
+                                    {errors?.prevImg && <p className="error-msg">{errors.prevImg}</p>}
                                     <input onChange={(e) => handleImages(e)} className="cs-url-input" id='2' type="text" placeholder="Image URL" value={images['2']} />
+                                    {errors?.img2 && <p className="error-msg">{errors.img2}</p>}
                                     <input onChange={(e) => handleImages(e)} className="cs-url-input" id='3' type="text" placeholder="Image URL" value={images['3']} />
+                                    {errors?.img3 && <p className="error-msg">{errors.img3}</p>}
                                     <input onChange={(e) => handleImages(e)} className="cs-url-input" id='4' type="text" placeholder="Image URL" value={images['4']} />
+                                    {errors?.img4 && <p className="error-msg">{errors.img4}</p>}
                                     <input onChange={(e) => handleImages(e)} className="cs-url-input" id='5' type="text" placeholder="Image URL" value={images['5']} />
+                                    {errors?.img5 && <p className="error-msg">{errors.img5}</p>}
                                 </div>
                             </section>
 
@@ -162,22 +244,32 @@ function CreateSpotForm() {
                         {step === 5 ? (
                             user ? (
                                 <button type="submit"
-                                    disabled={disabledCreate}
+                                // disabled={disabledCreate}
+                                onClick={validateInputs}
                                 >Create Spot</button>
                             ) : (
-                                <OpenModalButton
-                                    className='profile-dropdown-buttons'
-                                    buttonText="Create Spot"
-                                    modalComponent={<LoginFormModal />}
-                                />
+                                <button
+                                onClick={(e) =>{
+                                    window.alert('you must be logged in to create a spor')
+                                    e.preventDefault()}
+                                }
+                                style={{border:"none", backgroundColor: 'transparent'}}
+
+                                >
+                                    <OpenModalButton
+                                        className='profile-dropdown-buttons'
+                                        buttonText="Create Spot"
+                                        modalComponent={<LoginFormModal />}
+                                    />
+                                </button>
                             )
                         ) : (
 
                             <button className="cs-next-button"
-                                disabled={disabledNext}
+                                // disabled={disabledNext}
                                 onClick={(e) => {
                                     e.preventDefault()
-                                    setStep(prev => prev + 1)
+                                    validateInputs(e)
                                 }}
                             >Next</button>
                         )

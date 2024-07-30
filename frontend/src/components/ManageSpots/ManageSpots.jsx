@@ -33,9 +33,6 @@ function ManageSpots() {
                                         src={`${spot.previewImage}`}
                                     />
                                 </div>
-                                <div className="tooltip-container">
-                                    <span className="tooltip-text">{spot.name}</span>
-                                </div>
                                 <div className="lp-spot-info-container">
                                     <div className="lp-spot-location-and-rating-container">
                                         <span className="lp-spot-location">{spot.city}, {spot.state}</span>
