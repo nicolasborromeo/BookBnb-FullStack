@@ -1,23 +1,26 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom';
 import * as spotActions from '../../store/spots';
 import { TiStar } from "react-icons/ti";
 import { AiOutlineLoading } from "react-icons/ai";
-
+// import OpenModalButton from '../OpenModalButton'
+// import CreateSpotPage from '../CreateSpotPage'
 import './ManageSpots.css'
 
 function ManageSpots() {
+    const updateRef = useRef()
     const dispatch = useDispatch()
     const userSpots = useSelector(state => state.spots.userSpotsArray)
     const [isLoaded, setIsLoaded] = useState(true)
 
     useEffect(() => {
-        setTimeout(() => {
-            dispatch(spotActions.fetchUserSpots()).then(() => {
-                setIsLoaded(true)
-            })
-        }, 2000)
+        dispatch(spotActions.fetchUserSpots()).then(() => {
+            setIsLoaded(true)
+        })
+        // setTimeout(() => {
+
+        // }, 2000)
     }, [dispatch])
 
     if (isLoaded) return (
@@ -41,13 +44,14 @@ function ManageSpots() {
                                             <span>{spot.avgRating || 'New'}</span>
                                         </span>
                                     </div>
-                                    <div className='update-delete-buttons-container'>
-                                        <button>Update</button>
-                                        <button>Delete</button>
-                                    </div>
-                                    <div className="lp-spot-price">${spot.price} /night</div>
                                 </div>
                             </NavLink>
+                            <div className='update-delete-buttons-container' ref={updateRef}>
+
+                                <NavLink to={`${spot.id}`}>Update</NavLink>
+                                <button onClick={console.log('e')}>Delete</button>
+                            </div>
+                            <div className="lp-spot-price">${spot.price} /night</div>
                         </li>
                     ))}
                 </ul>

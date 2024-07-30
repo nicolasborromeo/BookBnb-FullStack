@@ -3,6 +3,7 @@ import { csrfFetch } from './csrf';
 
 const SET_ALL_SPOTS = "spots/getSpots";
 const SET_USER_SPOTS = "spots/setUserSpots";
+const SET_CURRENT_SPOT = "spots/setCurrentSpot"
 // const DELETE_SPOT = "spots/deleteSpot";
 
 const setAllSpots = (spots) => {
@@ -16,6 +17,13 @@ const setUserSpots = (spots) => {
   return {
     type: SET_USER_SPOTS,
     payload: spots
+  }
+}
+
+const setCurrentSpot = (spot) => {
+  return {
+    type: SET_CURRENT_SPOT,
+    payload: spot
   }
 }
 
@@ -42,42 +50,56 @@ export const fetchSpots = () => async (dispatch) => {
   return response
 }
 
-export const postNewSpot = (spot, images) => async () => {
-  // Create Spot POST /api/spots
-  const response = await csrfFetch('/api/spots', {
-    method: 'POST',
-    body: JSON.stringify(spot),
-    headers: { 'Content-Type': 'application/json' },
-  });
-
-  const data = await response.json();
-  const spotId = data.id;
-
-  // Create spotImages POST /api/spots/:spotId/images
-  for (const img in images) {
-    let preview = img == 1 ? true : false;
-    const body = {
-      url: images[img],
-      preview: preview,
-    };
-    // const imageResponse =
-    await csrfFetch(`/api/spots/${spotId}/images`, {
-      method: 'POST',
-      body: JSON.stringify(body),
-    });
-    // const imgData = await imageResponse.json();
-  }
-
-  return data;
-};
-
-
 export const fetchUserSpots = () => async (dispatch) => {
   const response = await csrfFetch('/api/spots/current')
   const data = await response.json()
   dispatch(setUserSpots(data))
   return response
 }
+
+export const fetchCurrentSpot = (spotId) => async (dispatch) => {
+  const response = await csrfFetch(`/api/spots/${spotId}`)
+  const data = await response.json()
+  dispatch(setCurrentSpot(data))
+  return response
+}
+
+
+
+
+
+
+// export const postNewSpot = (spot, images) => async () => {
+//   // Create Spot POST /api/spots
+//   const response = await csrfFetch('/api/spots', {
+//     method: 'POST',
+//     body: JSON.stringify(spot),
+//     headers: { 'Content-Type': 'application/json' },
+//   });
+
+//   const data = await response.json();
+//   const spotId = data.id;
+
+//   // Create spotImages POST /api/spots/:spotId/images
+//   for (const img in images) {
+//     let preview = img == 1 ? true : false;
+//     const body = {
+//       url: images[img],
+//       preview: preview,
+//     };
+//     // const imageResponse =
+//     await csrfFetch(`/api/spots/${spotId}/images`, {
+//       method: 'POST',
+//       body: JSON.stringify(body),
+//     });
+//     // const imgData = await imageResponse.json();
+//   }
+
+//   return data;
+// };
+
+
+
 
 ////////////////////////////////////////////////////////
 //REDUCER
@@ -99,6 +121,11 @@ const spotsReducer = (state = initialState, action) => {
       let newState = { ...state, userSpots }
       delete newState.userSpotsArray
       newState.userSpotsArray = Object.values(action.payload.Spots)
+      return newState
+    }
+    case SET_CURRENT_SPOT: {
+      let currentSpot = {...action.payload}
+      let newState = {...state, currentSpot}
       return newState
     }
     // case DELETE_SPOT:

@@ -1,37 +1,37 @@
 // import { testSpot, testImgs } from "./dummydata";
 // import { validateImages } from "./createSpotValidation";
 import { useState, useEffect } from "react"
-import { useSelector } from 'react-redux'
-import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from 'react-redux'
+import { useNavigate, useParams } from "react-router-dom";
 import OpenModalButton from "../OpenModalButton";
 import LoginFormModal from "../LoginFormModal";
 import validator from "validator";
 import { csrfFetch } from "../../store/csrf";
+import * as spotActions from '../../store/spots'
 
-function CreateSpotForm() {
+function UpdateSpotForm() {
+    const { spotId } = useParams()
+    // const [spot, setSpot] = useState()
+    const spot = useSelector(state => state.spots.currentSpot)
+    const dispatch = useDispatch()
     const user = useSelector(state => state.session.user)
     const navigate = useNavigate();
-    const [country, setCountry] = useState('')
-    const [address, setAddress] = useState('')
-    const [city, setCity] = useState('')
-    const [state, setState] = useState('')
+    const [country, setCountry] = useState(spot.country)
+    const [address, setAddress] = useState(spot.address)
+    const [city, setCity] = useState(spot.city)
+    const [state, setState] = useState(spot.state)
     const [step, setStep] = useState(1)
-    const [description, setDescription] = useState('')
-    const [name, setName] = useState('')
-    const [price, setPrice] = useState('')
+    const [description, setDescription] = useState(spot.description)
+    const [name, setName] = useState(spot.name)
+    const [price, setPrice] = useState(spot.price)
     const [images, setImages] = useState({})
     const [errors, setErrors] = useState({})
     const [disabledPrev, setDisabledPrev] = useState(true)
+    // const [isLoading, setIsLoading] = useState()
 
-    // const [disabledNext, setDisabledNext] = useState(false)
-    // const [disabledCreate, setDisabledCreate] = useState(true)
-    // useEffect(() => {
-    //     if (step === 1) setDisabledNext(country && address && city && state ? false : true)
-    //     if (step === 2) setDisabledNext(description.length >= 30 ? false : true)
-    //     if (step === 3) setDisabledNext(name ? false : true)
-    //     if (step === 4) setDisabledNext(Number(price) > 0 ? false : true)
-    //     if (step === 5) setDisabledCreate(validateImages(images))
-    // }, [images, price, name, description, country, address, city, state, step, disabledNext, disabledCreate])
+    useEffect(() => {
+        dispatch(spotActions.fetchCurrentSpot(spotId))
+    }, [dispatch, spotId])
 
     useEffect(() => {
         setDisabledPrev(step === 1 ? true : false)
@@ -66,9 +66,13 @@ function CreateSpotForm() {
                     body: JSON.stringify(newSpot),
                 });
 
-                if(!res.ok) throw res;
-                const data = await res.json();
+                if (!res.ok) throw res
+
+                const data = await res.json()
+
                 const spotId = data.id;
+
+
 
                 for (const img in images) {
                     let isPreview = img == 1 ? true : false;
@@ -76,13 +80,15 @@ function CreateSpotForm() {
                         url: images[img],
                         preview: isPreview,
                     };
+
                     const imgResponse = await csrfFetch(`/api/spots/${spotId}/images`, {
                         method: 'POST',
                         body: JSON.stringify(body),
                     });
-                    if(!imgResponse.ok) {
-                        const imgError = await imgResponse.json();
-                        throw Error(imgError);
+                    if (!imgResponse.ok) {
+
+                        const imgError = await imgResponse.json()
+                        throw Error(imgError)
                     }
                 }
 
@@ -93,9 +99,11 @@ function CreateSpotForm() {
                 switch (error.status) {
                     case 401: window.alert('You must be logged in to create a Spot');
                         break;
-                    case 400: window.alert('Invalid Spot Information, please make sure you complete all the reuired fields')
+                    case 400: {
+                        window.alert('Invalid Spot Information, please make sure you complete all the reuired fields')
+                    }
                         break;
-                    default: setErrors({error:'Sorry, there was an error creating the Spot'});
+                    default: setErrors({ error: 'Sorry, there was an error creating the Spot' });
                 }
 
             }
@@ -145,11 +153,17 @@ function CreateSpotForm() {
                 break;
         }
     }
+    // if (isLoading) return (
+    //     <div className='loading-container'>
+    //         <AiOutlineLoading className='loading-icon' />
+    //     </div>
+    // )
+    // else
     return (
         <div className="form-side-container">
             <div className="form-container">
-                <form className="create-spot-form" onSubmit={(e)=> e.preventDefault()}>
-                    <h3 className="cs-form-header">Create a New Spot</h3>
+                <form className="create-spot-form" onSubmit={(e) => e.preventDefault()}>
+                    <h3 className="cs-form-header">Update your Spot</h3>
                     {step === 1 &&
 
                         <section className='cs-section'>
@@ -164,6 +178,7 @@ function CreateSpotForm() {
                                 {errors?.city && <p className="error-msg">{errors.city}</p>}
                                 <input required onChange={(e) => setState(e.target.value)} type='text' className="cs-inputs" placeholder='State' value={state} />
                                 {errors?.state && <p className="error-msg">{errors.state}</p>}
+
                             </div>
                         </section>
                     }
@@ -239,16 +254,17 @@ function CreateSpotForm() {
                         {step === 5 ? (
                             user ? (
                                 <button type="submit"
-                                // disabled={disabledCreate}
-                                onClick={validateInputs}
+                                    // disabled={disabledCreate}
+                                    onClick={validateInputs}
                                 >Create Spot</button>
                             ) : (
                                 <button
-                                onClick={(e) =>{
-                                    window.alert('you must be logged in to create a spor')
-                                    e.preventDefault()}
-                                }
-                                style={{border:"none", backgroundColor: 'transparent'}}
+                                    onClick={(e) => {
+                                        window.alert('you must be logged in to create a spor')
+                                        e.preventDefault()
+                                    }
+                                    }
+                                    style={{ border: "none", backgroundColor: 'transparent' }}
 
                                 >
                                     <OpenModalButton
@@ -269,13 +285,11 @@ function CreateSpotForm() {
                             >Next</button>
                         )
                         }
-
                     </div>
                 </form>
             </div>
-
         </div>
     )
 }
 
-export default CreateSpotForm
+export default UpdateSpotForm
