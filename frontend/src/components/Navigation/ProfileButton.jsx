@@ -9,6 +9,7 @@ import LoginFormModal from "../LoginFormModal"
 import SignupFormModal from '../SignUpFormModal'
 import OpenModalButton from "../OpenModalButton"
 
+
 export default function ProfileButton( ) {
     const dispatch = useDispatch();
     const ulRef = useRef()
@@ -40,6 +41,9 @@ export default function ProfileButton( ) {
             {/* <li>{sessionUser.username}</li>
             <li>{sessionUser.lastName}</li> */}
             <li>{sessionUser.email}</li>
+            <li>
+                <NavLink to='/user/manage-spots'>Manage Spots</NavLink>
+            </li>
             <li><NavLink onClick={logout}>Log Out</NavLink></li>
         </>
 

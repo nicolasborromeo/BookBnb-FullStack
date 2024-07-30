@@ -12,9 +12,9 @@ export const testSpot = {
 }
 
 export const testImgs = {
-    1: { url: 'https://res.cloudinary.com/dklsvbe1v/image/upload/v1721939595/h6ph1_bk8qua.webp' },
-    2: { url: 'https://res.cloudinary.com/dklsvbe1v/image/upload/v1721939594/h6ph5_rujawn.webp' },
-    3: { url: 'https://res.cloudinary.com/dklsvbe1v/image/upload/v1721939593/h6ph4_u8mngb.webp' },
-    4: { url: 'https://res.cloudinary.com/dklsvbe1v/image/upload/v1721939592/h6ph2_ejp3de.webp' },
-    5: { url: 'https://res.cloudinary.com/dklsvbe1v/image/upload/v1721939592/h6ph2_ejp3de.webp' },
+    1: 'https://res.cloudinary.com/dklsvbe1v/image/upload/v1721939595/h6ph1_bk8qua.webp' ,
+    2: 'https://res.cloudinary.com/dklsvbe1v/image/upload/v1721939594/h6ph5_rujawn.webp' ,
+    3: 'https://res.cloudinary.com/dklsvbe1v/image/upload/v1721939593/h6ph4_u8mngb.webp' ,
+    4: 'https://res.cloudinary.com/dklsvbe1v/image/upload/v1721939592/h6ph2_ejp3de.webp' ,
+    5: 'https://res.cloudinary.com/dklsvbe1v/image/upload/v1721939592/h6ph2_ejp3de.webp' ,
 }
