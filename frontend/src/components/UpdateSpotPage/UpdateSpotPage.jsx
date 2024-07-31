@@ -41,7 +41,7 @@ function UpdateSpotPage() {
                     <p>Faster responses get you better reviews</p>
                 </div>
 
-                <UpdateSpotForm />
+                <UpdateSpotForm spot={spot}/>
 
             </div>
         </>

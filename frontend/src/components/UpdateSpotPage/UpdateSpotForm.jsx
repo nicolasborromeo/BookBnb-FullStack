@@ -1,36 +1,45 @@
-// import { testSpot, testImgs } from "./dummydata";
-// import { validateImages } from "./createSpotValidation";
 import { useState, useEffect } from "react"
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate, useParams } from "react-router-dom";
 import OpenModalButton from "../OpenModalButton";
 import LoginFormModal from "../LoginFormModal";
 import validator from "validator";
-import { csrfFetch } from "../../store/csrf";
 import * as spotActions from '../../store/spots'
+import { AiOutlineLoading } from "react-icons/ai";
+import { formatImages } from "./helperFunctions";
 
-function UpdateSpotForm() {
+
+function UpdateSpotForm({ spot }) {
     const { spotId } = useParams()
-    // const [spot, setSpot] = useState()
-    const spot = useSelector(state => state.spots.currentSpot)
     const dispatch = useDispatch()
-    const user = useSelector(state => state.session.user)
     const navigate = useNavigate();
-    const [country, setCountry] = useState(spot.country)
-    const [address, setAddress] = useState(spot.address)
-    const [city, setCity] = useState(spot.city)
-    const [state, setState] = useState(spot.state)
+    const user = useSelector(state => state.session.user)
     const [step, setStep] = useState(1)
-    const [description, setDescription] = useState(spot.description)
+    const [city, setCity] = useState(spot.city)
     const [name, setName] = useState(spot.name)
+    const [state, setState] = useState(spot.state)
     const [price, setPrice] = useState(spot.price)
     const [images, setImages] = useState({})
+    const [country, setCountry] = useState(spot.country)
+    const [address, setAddress] = useState(spot.address)
+    const [description, setDescription] = useState(spot.description)
     const [errors, setErrors] = useState({})
+    const [isLoading, setIsLoading] = useState(true)
     const [disabledPrev, setDisabledPrev] = useState(true)
-    // const [isLoading, setIsLoading] = useState()
 
     useEffect(() => {
-        dispatch(spotActions.fetchCurrentSpot(spotId))
+        dispatch(spotActions.fetchCurrentSpot(spotId)).then((res) => {
+            setCountry(res.country)
+            setAddress(res.address)
+            setCity(res.city)
+            setState(res.state)
+            setDescription(res.description)
+            setName(res.name)
+            setPrice(res.price)
+            const images = formatImages(res.SpotImages)
+            setImages(images)
+
+        }).then(() => setIsLoading(false)).catch((err) => console.log('error', err))
     }, [dispatch, spotId])
 
     useEffect(() => {
@@ -51,65 +60,25 @@ function UpdateSpotForm() {
         newSpot.lat = 0;
         newSpot.lng = 0;
 
-        const imgArray = Object.values(images)
-        imgArray.forEach(img => {
-            if (!validator.isURL(img)) {
-                window.alert('Invalid image url')
-                throw Error('invalid image url')
-            }
-        })
+        // const imgArray = Object.values(images)
+        // imgArray.forEach(img => {
+        //     if (!validator.isURL(img)) {
+        //         window.alert('Invalid image url')
+        //         throw Error('invalid image url')
+        //     }
+        // })
 
-        const fetch = async () => {
-            try {
-                const res = await csrfFetch('/api/spots', {
-                    method: 'POST',
-                    body: JSON.stringify(newSpot),
-                });
-
-                if (!res.ok) throw res
-
-                const data = await res.json()
-
-                const spotId = data.id;
+        dispatch(spotActions.updateSpot(newSpot, spotId))
+            // .then(()=> dispatch(spotActions.updateSpotImages(images))) //UPDATE IMAGES?
+            .then(() => {
+                console.log('succesfully updated spot')
+                navigate(`/spots/${spotId}`)
+            })
+            .catch((err)=> {
+                console.log('theres beeen an error:',err)
+            })
 
 
-
-                for (const img in images) {
-                    let isPreview = img == 1 ? true : false;
-                    const body = {
-                        url: images[img],
-                        preview: isPreview,
-                    };
-
-                    const imgResponse = await csrfFetch(`/api/spots/${spotId}/images`, {
-                        method: 'POST',
-                        body: JSON.stringify(body),
-                    });
-                    if (!imgResponse.ok) {
-
-                        const imgError = await imgResponse.json()
-                        throw Error(imgError)
-                    }
-                }
-
-                console.log('Spot created successfully:', data);
-                navigate(`/spots/${data.id}`, { replace: true });
-
-            } catch (error) {
-                switch (error.status) {
-                    case 401: window.alert('You must be logged in to create a Spot');
-                        break;
-                    case 400: {
-                        window.alert('Invalid Spot Information, please make sure you complete all the reuired fields')
-                    }
-                        break;
-                    default: setErrors({ error: 'Sorry, there was an error creating the Spot' });
-                }
-
-            }
-
-        }
-        fetch()
     };
 
 
@@ -146,20 +115,20 @@ function UpdateSpotForm() {
                 if (images['3']) validator.isURL(images['3']) ? null : setErrors((prev) => ({ ...prev, img3: 'Invalid Url' }))
                 if (images['4']) validator.isURL(images['4']) ? null : setErrors((prev) => ({ ...prev, img4: 'Invalid Url' }))
                 if (images['5']) validator.isURL(images['5']) ? null : setErrors((prev) => ({ ...prev, img5: 'Invalid Url' }))
-                else handleFormSubmit(e)
+                const pass = Object.keys(errors).length === 0
+                if (pass) handleFormSubmit(e)
                 break
             }
             default:
                 break;
         }
     }
-    // if (isLoading) return (
-    //     <div className='loading-container'>
-    //         <AiOutlineLoading className='loading-icon' />
-    //     </div>
-    // )
-    // else
-    return (
+    if (isLoading) return (
+        <div className='loading-container' style={{ position: 'absolute' }}>
+            <AiOutlineLoading className='loading-icon' />
+        </div>
+    )
+    else if (!isLoading) return (
         <div className="form-side-container">
             <div className="form-container">
                 <form className="create-spot-form" onSubmit={(e) => e.preventDefault()}>
@@ -220,11 +189,7 @@ function UpdateSpotForm() {
                         <>
                             <section className='cs-section'>
                                 <h3 className="cs-step-title">Liven up your spot with photos</h3>
-                                <h6 className="cs-step-sub-title"
-                                // style={{ textDecoration: disabledCreate ? 'underline' : '' }}
-                                >
-                                    Submit a link to at least one photo to publish your spot
-                                </h6>
+                                <h6 className="cs-step-sub-title">Submit a link to at least one photo to publish your spot</h6>
                                 <div className="cs-inputs-container">
                                     <input onChange={(e) => handleImages(e)} className="cs-url-input" id='1' type="text" placeholder="Preview Image URL" value={images['1']} />
                                     {errors?.prevImg && <p className="error-msg">{errors.prevImg}</p>}
@@ -255,21 +220,19 @@ function UpdateSpotForm() {
                             user ? (
                                 <button type="submit"
                                     // disabled={disabledCreate}
-                                    onClick={validateInputs}
-                                >Create Spot</button>
+                                    onClick={(e) => validateInputs(e)}
+                                >Update Spot</button>
                             ) : (
                                 <button
                                     onClick={(e) => {
                                         window.alert('you must be logged in to create a spor')
                                         e.preventDefault()
-                                    }
-                                    }
+                                    }}
                                     style={{ border: "none", backgroundColor: 'transparent' }}
-
                                 >
                                     <OpenModalButton
                                         className='profile-dropdown-buttons'
-                                        buttonText="Create Spot"
+                                        buttonText="Update Spot"
                                         modalComponent={<LoginFormModal />}
                                     />
                                 </button>

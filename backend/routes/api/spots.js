@@ -313,6 +313,7 @@ router.post('/:spotId/images',
     })
 
 
+
 const validateReview = [
     body('review')
         .exists()

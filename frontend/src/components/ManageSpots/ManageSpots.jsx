@@ -48,7 +48,7 @@ function ManageSpots() {
                             </NavLink>
                             <div className='update-delete-buttons-container' ref={updateRef}>
 
-                                <NavLink to={`${spot.id}`}>Update</NavLink>
+                                <NavLink to={`/user/manage-spots/${spot.id}`}>Update</NavLink>
                                 <button onClick={console.log('e')}>Delete</button>
                             </div>
                             <div className="lp-spot-price">${spot.price} /night</div>

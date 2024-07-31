@@ -4,6 +4,7 @@ import { csrfFetch } from './csrf';
 const SET_ALL_SPOTS = "spots/getSpots";
 const SET_USER_SPOTS = "spots/setUserSpots";
 const SET_CURRENT_SPOT = "spots/setCurrentSpot"
+const SET_UPDATED_SPOT = "spots/setUpdatedSpot"
 // const DELETE_SPOT = "spots/deleteSpot";
 
 const setAllSpots = (spots) => {
@@ -23,6 +24,13 @@ const setUserSpots = (spots) => {
 const setCurrentSpot = (spot) => {
   return {
     type: SET_CURRENT_SPOT,
+    payload: spot
+  }
+}
+
+const setUpdatedSpot = (spot) => {
+  return {
+    type: SET_UPDATED_SPOT,
     payload: spot
   }
 }
@@ -61,12 +69,24 @@ export const fetchCurrentSpot = (spotId) => async (dispatch) => {
   const response = await csrfFetch(`/api/spots/${spotId}`)
   const data = await response.json()
   dispatch(setCurrentSpot(data))
-  return response
+  return data
 }
 
 
+export const updateSpot = (spot, spotId) => async (dispatch) => {
+  console.log('spot inside action', spot)
+  const response = await csrfFetch(`/api/spots/${spotId}`, {
+    method: 'PUT',
+    body: JSON.stringify(spot)
+  })
+  const data = await response.json()
+  dispatch(setUpdatedSpot(data))
+  return data
+}
 
-
+// export const updateSpotImages = (spot) => async (dispatch) => {
+//   const response = await csrfFetch(``)
+// }
 
 
 // export const postNewSpot = (spot, images) => async () => {
@@ -126,6 +146,15 @@ const spotsReducer = (state = initialState, action) => {
     case SET_CURRENT_SPOT: {
       let currentSpot = {...action.payload}
       let newState = {...state, currentSpot}
+      return newState
+    }
+    case SET_UPDATED_SPOT: {
+      let updatedSpot = {...action.payload} //get spot
+      let newState = {...state} // copy state
+      newState.userSpots[updatedSpot.id] = updatedSpot //update spot in state
+      delete newState.currentSpot //delete  current spot
+      delete newState.userSpotsArray // delete it from the state
+      newState.userSpotsArray = Object.values(newState.userSpots)
       return newState
     }
     // case DELETE_SPOT:
