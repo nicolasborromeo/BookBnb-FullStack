@@ -4,8 +4,8 @@ import { NavLink } from 'react-router-dom';
 import * as spotActions from '../../store/spots';
 import { TiStar } from "react-icons/ti";
 import { AiOutlineLoading } from "react-icons/ai";
-// import OpenModalButton from '../OpenModalButton'
-// import CreateSpotPage from '../CreateSpotPage'
+import OpenModalButton from '../OpenModalButton'
+import DeleteSpotModal from '../DeleteSpotModal';
 import './ManageSpots.css'
 
 function ManageSpots() {
@@ -18,9 +18,6 @@ function ManageSpots() {
         dispatch(spotActions.fetchUserSpots()).then(() => {
             setIsLoaded(true)
         })
-        // setTimeout(() => {
-
-        // }, 2000)
     }, [dispatch])
 
     if (isLoaded) return (
@@ -49,7 +46,10 @@ function ManageSpots() {
                             <div className='update-delete-buttons-container' ref={updateRef}>
 
                                 <NavLink to={`/user/manage-spots/${spot.id}`}>Update</NavLink>
-                                <button onClick={console.log('e')}>Delete</button>
+                                <OpenModalButton
+                                    buttonText={'Delete'}
+                                    modalComponent={<DeleteSpotModal spotId={spot.id}/>}
+                                />
                             </div>
                             <div className="lp-spot-price">${spot.price} /night</div>
                         </li>

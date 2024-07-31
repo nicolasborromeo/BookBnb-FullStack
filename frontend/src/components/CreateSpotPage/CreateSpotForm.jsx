@@ -1,4 +1,4 @@
-// import { testSpot, testImgs } from "./dummydata";
+import { testSpot, testImgs } from "./dummydata";
 // import { validateImages } from "./createSpotValidation";
 import { useState, useEffect } from "react"
 import { useSelector } from 'react-redux'
@@ -15,11 +15,11 @@ function CreateSpotForm() {
     const [address, setAddress] = useState('')
     const [city, setCity] = useState('')
     const [state, setState] = useState('')
-    const [step, setStep] = useState(1)
+    const [step, setStep] = useState(5)
     const [description, setDescription] = useState('')
     const [name, setName] = useState('')
     const [price, setPrice] = useState('')
-    const [images, setImages] = useState({})
+    const [images, setImages] = useState(testImgs)
     const [errors, setErrors] = useState({})
     const [disabledPrev, setDisabledPrev] = useState(true)
 
@@ -46,6 +46,7 @@ function CreateSpotForm() {
     };
 
     const handleFormSubmit = async (e) => {
+        console.log('here')
         e.preventDefault()
         const newSpot = { address, city, state, country, name, description, price };
         newSpot.lat = 0;
@@ -63,7 +64,8 @@ function CreateSpotForm() {
             try {
                 const res = await csrfFetch('/api/spots', {
                     method: 'POST',
-                    body: JSON.stringify(newSpot),
+                    // body: JSON.stringify(newSpot),
+                    body: JSON.stringify(testSpot)
                 });
 
                 if(!res.ok) throw res;
@@ -138,7 +140,8 @@ function CreateSpotForm() {
                 if (images['3']) validator.isURL(images['3']) ? null : setErrors((prev) => ({ ...prev, img3: 'Invalid Url' }))
                 if (images['4']) validator.isURL(images['4']) ? null : setErrors((prev) => ({ ...prev, img4: 'Invalid Url' }))
                 if (images['5']) validator.isURL(images['5']) ? null : setErrors((prev) => ({ ...prev, img5: 'Invalid Url' }))
-                else handleFormSubmit(e)
+                const pass = Object.keys(errors).length === 0
+                if (pass) handleFormSubmit(e)
                 break
             }
             default:

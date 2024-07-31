@@ -5,7 +5,6 @@ import { useSelector, useDispatch } from "react-redux"
 import { useParams } from "react-router-dom"
 import * as spotActions from '../../store/spots'
 import UpdateSpotForm from "./UpdateSpotForm"
-// import Logo from "../Logo"
 
 
 function UpdateSpotPage() {
