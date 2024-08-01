@@ -16,10 +16,7 @@
     border: none;
     box-shadow: 0px 1px 1px 0px gray;
 }
-.manage-spot-create-button:hover{
-    background-color: rgb(245, 245, 245);
-    cursor: pointer;
-}
+
 
 /* .manage-spot-create-button .create-new-spot-button {
     color: white !important;
@@ -37,25 +34,31 @@
 .manage-spot-update-button {
     text-decoration: none;
     color: black;
-    border-radius: 15px;
-    box-shadow: 0px 1px 1px 0px gray;
-    padding: 4px;
-    /* background-color: rgb(101,177,221); */
-    font-size:0.8em;
 }
-
 /* delete button */
 .update-delete-buttons-container button {
     border: 0;
-    border-radius: 15px;
-    box-shadow: 0px 1px 1px 0px gray;
-    position: relative;
-    z-index: 1;
-    /* background-color: rgb(101,177,221); */
-    font-size:0.8em;
-    padding: 4px;
-
 }
+
+
+
+.manage-spot-update-button,
+.update-delete-buttons-container button {
+    background-color: #efefef;
+    box-shadow: 0px 1px 1px 0px gray;
+    border-radius: 10px;
+    font-size: 0.7em;
+    padding: 8px;
+}
+
+.manage-spot-update-button:hover,
+.update-delete-buttons-container button:hover,
+.manage-spot-create-button:hover{
+    background-color: rgb(245, 245, 245);
+    cursor: pointer;
+}
+
+
 
 
 

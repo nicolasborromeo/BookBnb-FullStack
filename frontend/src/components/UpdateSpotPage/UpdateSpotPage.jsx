@@ -13,6 +13,7 @@ function UpdateSpotPage() {
     const spot = useSelector(state => state.spots.currentSpot ? state.spots.currentSpot : undefined)
     const spotImages = useSelector(state => state.spots.currentSpot ? state.spots.currentSpot.SpotImages : undefined)
     const previewImage = spotImages?.filter(img => img.preview)
+    console.log(previewImage)
 
     useEffect(()=> {
         dispatch(spotActions.fetchCurrentSpot(spotId))
@@ -27,7 +28,7 @@ function UpdateSpotPage() {
     return (
         <>
             <div className="background-div-image-container">
-                <img src={`${previewImage[0].url}`} alt='slogan-hero-family-yard' />
+                <img style={{height:'90%', width:'100%', objectFit:'cover'}} src={`${previewImage[0].url}`} alt='your-house-photos' />
             </div>
             <div className="create-spot-page-container">
 

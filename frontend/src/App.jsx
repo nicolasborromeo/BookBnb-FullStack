@@ -1,6 +1,6 @@
-import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, Outlet, RouterProvider, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Navigation from '../src/components/Navigation'
 import * as sessionActions from './store/session'
 import LandingPage from "./components/LandingPage";
@@ -10,8 +10,11 @@ import ManageSpots from "./components/ManageSpots";
 import UpdateSpotPage from "./components/UpdateSpotPage";
 
 function Layout() {
+  const navigate = useNavigate()
   const dispatch = useDispatch()
   const [isLoaded, setIsLoaded] = useState(false);
+  const user = useSelector(state => state.session.user)
+  const [currentUser] = useState(user)
 
   useEffect(()=> {
     dispatch(sessionActions.restoreUser()).then(()=> {
@@ -19,7 +22,9 @@ function Layout() {
     });
   }, [dispatch])
 
-
+  useEffect(()=> {
+    if(user !== currentUser) navigate('/')
+  }, [user, currentUser, navigate])
 
   return (
     <>

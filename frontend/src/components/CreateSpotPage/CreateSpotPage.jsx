@@ -10,7 +10,7 @@ function CreateSpotPage() {
                 <img src="https://res.cloudinary.com/dklsvbe1v/image/upload/v1722208447/VRSloganHero_gnbkxs.webp" alt='slogan-hero-family-yard' />
             </div>
             <div className="create-spot-page-container">
-                
+
                 <div className="cs-branding-container">
                     <div className="create-spot-title-logo-container">
                         <h1>Live in your dream destination</h1>

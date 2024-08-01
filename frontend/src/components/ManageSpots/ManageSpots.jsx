@@ -49,7 +49,7 @@ function ManageSpots() {
                                     </div>
                                 </div>
                             </NavLink>
-                            <div className="lp-spot-price" style={{fontSize: '0.8em'}}>${spot.price} /night</div>
+                            <div className="lp-spot-price" style={{fontSize: '0.9em', fontWeight: '200'}}>${spot.price} /night</div>
                             <div className='update-delete-buttons-container' ref={updateRef}>
                                 <NavLink to={`/user/manage-spots/${spot.id}`} className='manage-spot-update-button'>Update</NavLink>
                                 <OpenModalButton
