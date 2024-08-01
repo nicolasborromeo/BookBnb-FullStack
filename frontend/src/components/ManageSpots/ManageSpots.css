@@ -7,17 +7,14 @@
 }
 
 .manage-spots-title {
-    /* margin: 0px 80px;
-    padding: 20px 0px ; */
     font-size: 1.2em;
     font-weight: 500;
-    /* padding-left: 10px; */
 
 }
 .manage-spot-create-button{
     border-radius: 12px;
     border: none;
-    /* background-color: rgb(28, 117, 186); */
+    box-shadow: 0px 1px 1px 0px gray;
 }
 .manage-spot-create-button:hover{
     background-color: rgb(245, 245, 245);
@@ -31,31 +28,35 @@
 
 .update-delete-buttons-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
+    gap: 10px;
     margin: 5px 0;
-    /* position: relative;
-    bottom: 75px; */
-
 }
 
+/* //update button */
+.manage-spot-update-button {
+    text-decoration: none;
+    color: black;
+    border-radius: 15px;
+    box-shadow: 0px 1px 1px 0px gray;
+    padding: 4px;
+    /* background-color: rgb(101,177,221); */
+    font-size:0.8em;
+}
+
+/* delete button */
 .update-delete-buttons-container button {
     border: 0;
     border-radius: 15px;
-    box-shadow: 1px 1px 1px gray;
+    box-shadow: 0px 1px 1px 0px gray;
     position: relative;
     z-index: 1;
+    /* background-color: rgb(101,177,221); */
+    font-size:0.8em;
+    padding: 4px;
+
 }
 
-.manage-spots-create-spot-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.managespot-create-button button {
-    background-color: aliceblue;
-}
 
 
 

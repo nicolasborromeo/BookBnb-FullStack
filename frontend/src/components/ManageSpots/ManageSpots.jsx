@@ -32,7 +32,7 @@ function ManageSpots() {
             {userSpots &&
                 <ul className="landing-page-container">
                     {userSpots?.map(spot => (
-                        <li key={spot.id} className="lp-li-spot-container">
+                        <li key={spot.id} style={{display: 'flex', flexDirection:'column', gap:'10px'}}className="lp-li-spot-container">
                             <NavLink key={spot.id} to={`/spots/${spot.id}`} style={{ textDecoration: 'none', color: 'black' }}>
                                 <div className="lp-img-container">
                                     <img className='landing-page-spot-preview-img'
@@ -49,15 +49,14 @@ function ManageSpots() {
                                     </div>
                                 </div>
                             </NavLink>
+                            <div className="lp-spot-price" style={{fontSize: '0.8em'}}>${spot.price} /night</div>
                             <div className='update-delete-buttons-container' ref={updateRef}>
-
-                                <NavLink to={`/user/manage-spots/${spot.id}`}>Update</NavLink>
+                                <NavLink to={`/user/manage-spots/${spot.id}`} className='manage-spot-update-button'>Update</NavLink>
                                 <OpenModalButton
                                     buttonText={'Delete'}
                                     modalComponent={<DeleteSpotModal spotId={spot.id} />}
                                 />
                             </div>
-                            <div className="lp-spot-price">${spot.price} /night</div>
                         </li>
                     ))}
                 </ul>
