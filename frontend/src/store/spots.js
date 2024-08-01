@@ -7,6 +7,7 @@ const SET_CURRENT_SPOT = "spots/setCurrentSpot"
 const SET_UPDATED_SPOT = "spots/setUpdatedSpot"
 const REMOVE_SPOT_FROM_STATE = "spots/removeSpotFromState";
 
+
 const setAllSpots = (spots) => {
   return {
     type: SET_ALL_SPOTS,
@@ -35,18 +36,15 @@ const setUpdatedSpot = (spot) => {
   }
 }
 
-// const addSpotToState = (spot) => {
-//   return {
-//     type: CREATE_SPOT,
-//     payload: spot
-//   }
-// }
+
 const removeSpotFromState = (spotId) => {
   return {
     type: REMOVE_SPOT_FROM_STATE,
     payload: spotId
   };
 };
+
+
 
 ////////////////////////////////////////////////////////
 //ACTIONS
@@ -94,6 +92,24 @@ export const deleteSpot = (spotId) => async (dispatch) => {
   return data
 }
 
+export const postReview = (review, spotId) => async (dispatch) => {
+  const response = await csrfFetch(`/api/spots/${spotId}/reviews`, {
+    method: 'POST',
+    body: JSON.stringify(review)
+  })
+  if(!response.ok) {
+    const error = response.json()
+    return error
+  }
+  const newReview = await response.json()
+
+  if(response.ok) {
+    const spotResponse = await csrfFetch(`/api/spots/${spotId}`)
+    const updatedSpot= await spotResponse.json()
+    dispatch(setCurrentSpot(updatedSpot))
+  }
+  return newReview
+}
 // export const updateSpotImages = (spot) => async (dispatch) => {
 //   const response = await csrfFetch(``)
 // }
@@ -143,6 +159,12 @@ const spotsReducer = (state = initialState, action) => {
       newState.userSpotsArray = Object.values(newState.userSpots) //crea a new array
       return newState
     }
+    // case ADD_REVIEW_TO_SPOT: {
+    //   let newState = {...state}
+    //   let newReview = action.payload
+    //   newState.currentSpot.Reviews.push(action.payload)
+    //   return newState
+    // }
     default:
       return state;
   }

@@ -1,4 +1,4 @@
-import { testSpot, testImgs } from "./dummydata";
+// import { testSpot, testSpot2, testImgs, testImgs2 } from "./dummydata";
 // import { validateImages } from "./createSpotValidation";
 import { useState, useEffect } from "react"
 import { useSelector } from 'react-redux'
@@ -19,7 +19,7 @@ function CreateSpotForm() {
     const [description, setDescription] = useState('')
     const [name, setName] = useState('')
     const [price, setPrice] = useState('')
-    const [images, setImages] = useState(testImgs)
+    const [images, setImages] = useState({})
     const [errors, setErrors] = useState({})
     const [disabledPrev, setDisabledPrev] = useState(true)
 
@@ -46,7 +46,6 @@ function CreateSpotForm() {
     };
 
     const handleFormSubmit = async (e) => {
-        console.log('here')
         e.preventDefault()
         const newSpot = { address, city, state, country, name, description, price };
         newSpot.lat = 0;
@@ -64,11 +63,11 @@ function CreateSpotForm() {
             try {
                 const res = await csrfFetch('/api/spots', {
                     method: 'POST',
-                    // body: JSON.stringify(newSpot),
-                    body: JSON.stringify(testSpot)
+                    body: JSON.stringify(newSpot),
+                    // body: JSON.stringify(testSpot2)
                 });
 
-                if(!res.ok) throw res;
+                if (!res.ok) throw res;
                 const data = await res.json();
                 const spotId = data.id;
 
@@ -82,7 +81,7 @@ function CreateSpotForm() {
                         method: 'POST',
                         body: JSON.stringify(body),
                     });
-                    if(!imgResponse.ok) {
+                    if (!imgResponse.ok) {
                         const imgError = await imgResponse.json();
                         throw Error(imgError);
                     }
@@ -97,7 +96,7 @@ function CreateSpotForm() {
                         break;
                     case 400: window.alert('Invalid Spot Information, please make sure you complete all the reuired fields')
                         break;
-                    default: setErrors({error:'Sorry, there was an error creating the Spot'});
+                    default: setErrors({ error: 'Sorry, there was an error creating the Spot' });
                 }
 
             }
@@ -151,7 +150,7 @@ function CreateSpotForm() {
     return (
         <div className="form-side-container">
             <div className="form-container">
-                <form className="create-spot-form" onSubmit={(e)=> e.preventDefault()}>
+                <form className="create-spot-form" onSubmit={(e) => e.preventDefault()}>
                     <h3 className="cs-form-header">Create a New Spot</h3>
                     {step === 1 &&
 
@@ -242,16 +241,17 @@ function CreateSpotForm() {
                         {step === 5 ? (
                             user ? (
                                 <button type="submit"
-                                // disabled={disabledCreate}
-                                onClick={validateInputs}
+                                    // disabled={disabledCreate}
+                                    onClick={validateInputs}
                                 >Create Spot</button>
                             ) : (
                                 <button
-                                onClick={(e) =>{
-                                    window.alert('you must be logged in to create a spor')
-                                    e.preventDefault()}
-                                }
-                                style={{border:"none", backgroundColor: 'transparent'}}
+                                    onClick={(e) => {
+                                        window.alert('you must be logged in to create a spor')
+                                        e.preventDefault()
+                                    }
+                                    }
+                                    style={{ border: "none", backgroundColor: 'transparent' }}
 
                                 >
                                     <OpenModalButton

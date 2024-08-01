@@ -7,7 +7,8 @@ const { handleValidationErrors } = require('../../utils/validation')
 const { check, body, query } = require('express-validator')
 const { Op } = require('sequelize')
 
-
+///////////////////////////////////////////////////////
+//HELPER FUNCTIONS
 const formatter = (spots) => {
     let spotsList = []
     spots.forEach(spot => {
@@ -63,6 +64,191 @@ const _checkDupicate = async (req, res, next) => {
         return next(err)
     } else return next()
 }
+
+
+///////////////////////////////////////////////////////
+//VALIDATIONS
+
+const validateSpotsQuery = [
+    query("minLat")
+        .optional()
+        .custom(value => {
+            let lat = parseFloat(value)
+            if (isNaN(lat) || lat > 90) {
+                throw new Error()
+            }
+            return true
+        })
+        .withMessage("Minimum latitude is invalid"),
+    query("maxLat")
+        .optional()
+        .custom(value => {
+            let lat = parseFloat(value)
+            if (isNaN(lat) || lat < -90) {
+                throw new Error()
+            }
+            return true
+        })
+        .withMessage("Maximum latitude is invalid"),
+    query("minLng")
+        .optional()
+        .custom(value => {
+            let lng = parseFloat(value)
+            if (isNaN(lng) || lng < -180) {
+                throw new Error()
+            }
+            return true
+        })
+        .withMessage("Minimum longitude is invalid"),
+    query("maxLng")
+        .optional()
+        .custom(value => {
+            let lng = parseFloat(value)
+            if (isNaN(lng) || lng > 180) {
+                throw new Error()
+            }
+            return true
+        })
+        .withMessage("Maximum longitude is invalid"),
+    query("page")
+        .optional()
+        .custom(value => {
+            let page = parseInt(value)
+            if (isNaN(page)) page = 1
+            if (page && page < 1) {
+                throw new Error()
+            }
+            return true
+        })
+        .withMessage("Page must be greater than or equal to 1"),
+    query("size")
+        .optional()
+        .custom(value => {
+            let size = parseInt(value)
+            if (isNaN(size)) size = 20
+            if (size && (size < 1 || size > 20)) {
+                throw new Error()
+            }
+            return true
+        })
+        .withMessage("Size must be between 1 and 20"),
+    handleValidationErrors
+];
+
+const validateBooking = [
+    body('startDate')
+        .exists()
+        .notEmpty()
+        .withMessage("Start date cannot be empty"),
+    body('startDate')
+        .custom(val => {
+            if(new Date(val) < new Date()) {
+                throw new Error("startDate cannot be in the past");
+            }
+            return true
+        }),
+    body('endDate')
+        .exists()
+        .notEmpty()
+        .custom((val, { req }) => {
+            if (new Date(val) <= new Date(req.body.startDate)) {
+                throw new Error("endDate cannot be on or before startDate");
+            }
+            return true;
+        }),
+    handleValidationErrors
+];
+
+
+const validateReview = [
+    body('review')
+        .exists()
+        .notEmpty()
+        .withMessage("Review text is required"),
+    body('stars')
+        .exists()
+        .notEmpty()
+        .isInt()
+        .custom(value => {
+            if (value < 1 || value > 5) {
+                throw new Error()
+            }
+            return true
+        })
+        .withMessage("Stars must be an integer from 1 to 5"),
+    handleValidationErrors
+]
+
+const validateSpot = [
+    body("address")
+        .exists()
+        .notEmpty()
+        .withMessage("Street address is required"),
+    body("city")
+        .exists()
+        .notEmpty()
+        .withMessage("City address is required"),
+    body("state")
+        .exists()
+        .notEmpty()
+        .withMessage("State address is required"),
+    body("country")
+        .exists()
+        .notEmpty()
+        .withMessage("Country address is required"),
+    body("lat")
+        .exists()
+        .notEmpty()
+        .custom(value => {
+            let lat = parseFloat(value)
+            if (isNaN(lat) || lat < -90 || lat > 90) {
+                throw new Error()
+            }
+            return true
+        })
+        .withMessage("Latitude must be within -90 and 90"),
+    body("lng")
+        .exists()
+        .notEmpty()
+        .custom(value => {
+            let lng = parseFloat(value)
+            if (isNaN(lng) || lng < -180 || lng > 180) {
+                throw new Error()
+            }
+            return true
+        })
+        .withMessage("Longitude must be within -180 and 180"),
+    body("name")
+        .exists()
+        .notEmpty().withMessage('Name is required')
+        .custom(value => {
+            let name = value.split('')
+            if (name.length > 50) {
+                throw new Error()
+            }
+            return true
+        })
+        .withMessage("Name must be less than 50 characters"),
+    body("description")
+        .exists()
+        .notEmpty()
+        .withMessage("Description is required"),
+    body("price")
+        .exists()
+        .notEmpty().withMessage("Price per day is required")
+        // .isNumeric().withMessage('Price must be a number')
+        .custom(value => {
+            if (value < 0) {
+                throw new Error()
+            }
+            return true
+        })
+        .withMessage("Price must be grater than 0"),
+    handleValidationErrors
+]
+
+///////////////////////////////////////////////////////
+//ROUTES
 
 router.get('/:spotId/reviews',
     _spotExists,
@@ -142,7 +328,9 @@ router.get('/:id', async (req, res, next) => {
     //get the spot
     let spot = await Spot.findByPk(req.params.id, {
         include: [
-            { model: Review },
+            { model: Review,
+                include: [{model: User}]
+             },
             {
                 model: SpotImage,
                 attributes: ['id', 'preview', 'url']
@@ -176,75 +364,10 @@ router.get('/:id', async (req, res, next) => {
         lastName: spot.User.lastName,
     };
     delete spot.User;
-    delete spot.Reviews;
+    // delete spot.Reviews;
     res.status(200).json(spot);
 })
 
-const validateSpotsQuery = [
-    query("minLat")
-        .optional()
-        .custom(value => {
-            let lat = parseFloat(value)
-            if (isNaN(lat) || lat > 90) {
-                throw new Error()
-            }
-            return true
-        })
-        .withMessage("Minimum latitude is invalid"),
-    query("maxLat")
-        .optional()
-        .custom(value => {
-            let lat = parseFloat(value)
-            if (isNaN(lat) || lat < -90) {
-                throw new Error()
-            }
-            return true
-        })
-        .withMessage("Maximum latitude is invalid"),
-    query("minLng")
-        .optional()
-        .custom(value => {
-            let lng = parseFloat(value)
-            if (isNaN(lng) || lng < -180) {
-                throw new Error()
-            }
-            return true
-        })
-        .withMessage("Minimum longitude is invalid"),
-    query("maxLng")
-        .optional()
-        .custom(value => {
-            let lng = parseFloat(value)
-            if (isNaN(lng) || lng > 180) {
-                throw new Error()
-            }
-            return true
-        })
-        .withMessage("Maximum longitude is invalid"),
-    query("page")
-        .optional()
-        .custom(value => {
-            let page = parseInt(value)
-            if (isNaN(page)) page = 1
-            if (page && page < 1) {
-                throw new Error()
-            }
-            return true
-        })
-        .withMessage("Page must be greater than or equal to 1"),
-    query("size")
-        .optional()
-        .custom(value => {
-            let size = parseInt(value)
-            if (isNaN(size)) size = 20
-            if (size && (size < 1 || size > 20)) {
-                throw new Error()
-            }
-            return true
-        })
-        .withMessage("Size must be between 1 and 20"),
-    handleValidationErrors
-]
 //get all spots
 router.get('/', validateSpotsQuery, async (req, res, _next) => {
     const query = req.query
@@ -314,24 +437,6 @@ router.post('/:spotId/images',
 
 
 
-const validateReview = [
-    body('review')
-        .exists()
-        .notEmpty()
-        .withMessage("Review text is required"),
-    body('stars')
-        .exists()
-        .notEmpty()
-        .isInt()
-        .custom(value => {
-            if (value < 1 || value > 5) {
-                throw new Error()
-            }
-            return true
-        })
-        .withMessage("Stars must be an integer from 1 to 5"),
-    handleValidationErrors
-]
 
 router.post('/:spotId/reviews',
     requireAuth,
@@ -352,29 +457,7 @@ router.post('/:spotId/reviews',
         res.status(201).json(newReview)
     });
 
-const validateBooking = [
-    body('startDate')
-        .exists()
-        .notEmpty()
-        .withMessage("Start date cannot be empty"),
-    body('startDate')
-        .custom(val => {
-            if(new Date(val) < new Date()) {
-                throw new Error("startDate cannot be in the past");
-            }
-            return true
-        }),
-    body('endDate')
-        .exists()
-        .notEmpty()
-        .custom((val, { req }) => {
-            if (new Date(val) <= new Date(req.body.startDate)) {
-                throw new Error("endDate cannot be on or before startDate");
-            }
-            return true;
-        }),
-    handleValidationErrors
-]
+
 
 router.post('/:spotId/bookings', requireAuth, validateBooking, async (req, res, next) => {
     const { spotId } = req.params
@@ -443,75 +526,6 @@ router.post('/:spotId/bookings', requireAuth, validateBooking, async (req, res, 
 });
 
 //create a spot
-const validateSpot = [
-    body("address")
-        .exists()
-        .notEmpty()
-        .withMessage("Street address is required"),
-    body("city")
-        .exists()
-        .notEmpty()
-        .withMessage("City address is required"),
-    body("state")
-        .exists()
-        .notEmpty()
-        .withMessage("State address is required"),
-    body("country")
-        .exists()
-        .notEmpty()
-        .withMessage("Country address is required"),
-    body("lat")
-        .exists()
-        .notEmpty()
-        .custom(value => {
-            let lat = parseFloat(value)
-            if (isNaN(lat) || lat < -90 || lat > 90) {
-                throw new Error()
-            }
-            return true
-        })
-        .withMessage("Latitude must be within -90 and 90"),
-    body("lng")
-        .exists()
-        .notEmpty()
-        .custom(value => {
-            let lng = parseFloat(value)
-            if (isNaN(lng) || lng < -180 || lng > 180) {
-                throw new Error()
-            }
-            return true
-        })
-        .withMessage("Longitude must be within -180 and 180"),
-    body("name")
-        .exists()
-        .notEmpty().withMessage('Name is required')
-        .custom(value => {
-            let name = value.split('')
-            if (name.length > 50) {
-                throw new Error()
-            }
-            return true
-        })
-        .withMessage("Name must be less than 50 characters"),
-    body("description")
-        .exists()
-        .notEmpty()
-        .withMessage("Description is required"),
-    body("price")
-        .exists()
-        .notEmpty().withMessage("Price per day is required")
-        // .isNumeric().withMessage('Price must be a number')
-        .custom(value => {
-            if (value < 0) {
-                throw new Error()
-            }
-            return true
-        })
-        .withMessage("Price must be grater than 0"),
-    handleValidationErrors
-]
-
-
 router.post('/',
     requireAuth,
     validateSpot,

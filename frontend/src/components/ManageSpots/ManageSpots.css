@@ -1,11 +1,32 @@
-.manage-spots-title {
+.manage-spots-header {
     margin: 0px 80px;
-    padding: 30px;
-    font-size: 1.3em;
-    font-weight: 300;
-    text-align: center;
+    padding: 20px 0px ;
+    font-weight: 400;
+    text-align: left;
     border-bottom: 1px solid lightgray;
 }
+
+.manage-spots-title {
+    /* margin: 0px 80px;
+    padding: 20px 0px ; */
+    font-size: 1.2em;
+    font-weight: 500;
+    /* padding-left: 10px; */
+
+}
+.manage-spot-create-button{
+    border-radius: 12px;
+    border: none;
+    /* background-color: rgb(28, 117, 186); */
+}
+.manage-spot-create-button:hover{
+    background-color: rgb(245, 245, 245);
+    cursor: pointer;
+}
+
+/* .manage-spot-create-button .create-new-spot-button {
+    color: white !important;
+} */
 
 
 .update-delete-buttons-container {

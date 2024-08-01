@@ -6,6 +6,7 @@ import { TiStar } from "react-icons/ti";
 import { AiOutlineLoading } from "react-icons/ai";
 import OpenModalButton from '../OpenModalButton'
 import DeleteSpotModal from '../DeleteSpotModal';
+import CreateSpotButton from '../CreateSpotButton';
 import './ManageSpots.css'
 
 function ManageSpots() {
@@ -22,7 +23,12 @@ function ManageSpots() {
 
     if (isLoaded) return (
         <>
-            <h1 className='manage-spots-title'>Manage Spots</h1>
+            <div className='manage-spots-header'>
+                <h1 className='manage-spots-title'>Manage Your Spots</h1>
+                <button className='manage-spot-create-button'>
+                <CreateSpotButton />
+                </button>
+            </div>
             {userSpots &&
                 <ul className="landing-page-container">
                     {userSpots?.map(spot => (
@@ -38,7 +44,7 @@ function ManageSpots() {
                                         <span className="lp-spot-location">{spot.city}, {spot.state}</span>
                                         <span className="lp-rating-container">
                                             <TiStar className="lp-rating-star" />
-                                            <span>{spot.avgRating || 'New'}</span>
+                                            <span>{parseFloat(spot.avgRating).toFixed(1) || 'New'}</span>
                                         </span>
                                     </div>
                                 </div>
@@ -48,7 +54,7 @@ function ManageSpots() {
                                 <NavLink to={`/user/manage-spots/${spot.id}`}>Update</NavLink>
                                 <OpenModalButton
                                     buttonText={'Delete'}
-                                    modalComponent={<DeleteSpotModal spotId={spot.id}/>}
+                                    modalComponent={<DeleteSpotModal spotId={spot.id} />}
                                 />
                             </div>
                             <div className="lp-spot-price">${spot.price} /night</div>

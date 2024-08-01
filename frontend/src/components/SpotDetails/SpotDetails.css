@@ -3,6 +3,7 @@
     margin: 20px 130px;
     height: 100%;
     font-size: small;
+    /* max-width: 1000px; */
 }
 
 .sd-spot-name {
@@ -56,10 +57,12 @@
     flex-direction: row;
     justify-content: space-between;
     gap: 10px;
+    margin-bottom: 50px;
 }
 
 .sd-info-container {
     width: 58%;
+
 }
 
 .sd-info-container,p {
@@ -77,9 +80,22 @@
     box-shadow:0 6px 20px rgba(0, 0, 0, 0.2);
     border-radius: 12px;
     min-width:min-content;
-
+    /* background-color: aqua; */
+    max-height: max-content;
 }
 
+.callout-price-reviewinfo-container {
+    display: flex;
+    flex-direction: row;
+    min-width: min-content;
+    white-space: nowrap;
+    gap: 20px;
+}
+
+.callout-price-container {
+    width: 50%;
+    min-width: min-content;
+}
 .sd-callout-price {
     margin-top: 0px !important;
     font-size: large;
@@ -93,6 +109,24 @@
     top: -14px;
     font-weight: 200;
     font-size: 0.855rem;
+}
+
+.sd-callout-review-summary-info {
+    margin: 0;
+    padding: 0;
+    /* position: relative;
+    top: 8px; */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 3px;
+    font-size: 1em;
+    width: 50%;
+}
+
+.sd-callout-num-reviews {
+    font-weight: 100;
 }
 
 .sd-callout-check-in-out-container {
@@ -202,3 +236,5 @@
     font-weight: 200;
     font-size: 0.855rem;
 }
+
+

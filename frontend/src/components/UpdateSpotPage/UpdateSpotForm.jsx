@@ -29,6 +29,7 @@ function UpdateSpotForm({ spot }) {
 
     useEffect(() => {
         dispatch(spotActions.fetchCurrentSpot(spotId)).then((res) => {
+            // if(res.status === 404) {navigate('/page-not-found')}
             setCountry(res.country)
             setAddress(res.address)
             setCity(res.city)
