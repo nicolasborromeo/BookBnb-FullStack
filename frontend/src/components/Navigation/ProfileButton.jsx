@@ -8,9 +8,10 @@ import './Navigation.css'
 import LoginFormModal from "../LoginFormModal"
 import SignupFormModal from '../SignUpFormModal'
 import OpenModalButton from "../OpenModalButton"
-
+import { useNavigate } from "react-router-dom";
 
 export default function ProfileButton( ) {
+    const navigate = useNavigate()
     const dispatch = useDispatch();
     const ulRef = useRef()
     const sessionUser = useSelector(state => state.session.user);
@@ -18,7 +19,9 @@ export default function ProfileButton( ) {
 
     const logout = (e) => {
         e.preventDefault()
+        navigate('/')
         dispatch(sessionActions.logout())
+
     };
 
     const toggleDropdown = (e) => {

@@ -6,6 +6,8 @@ const SET_USER_SPOTS = "spots/setUserSpots";
 const SET_CURRENT_SPOT = "spots/setCurrentSpot"
 const SET_UPDATED_SPOT = "spots/setUpdatedSpot"
 const REMOVE_SPOT_FROM_STATE = "spots/removeSpotFromState";
+const REMOVE_REVIEW_FROM_STATE = "spots/removeReviewFromState";
+
 
 
 const setAllSpots = (spots) => {
@@ -36,7 +38,6 @@ const setUpdatedSpot = (spot) => {
   }
 }
 
-
 const removeSpotFromState = (spotId) => {
   return {
     type: REMOVE_SPOT_FROM_STATE,
@@ -44,6 +45,12 @@ const removeSpotFromState = (spotId) => {
   };
 };
 
+const removeReviewFromState = (reviewId) => {
+  return {
+    type: REMOVE_REVIEW_FROM_STATE,
+    payload: reviewId
+  };
+};
 
 
 ////////////////////////////////////////////////////////
@@ -110,6 +117,16 @@ export const postReview = (review, spotId) => async (dispatch) => {
   }
   return newReview
 }
+
+export const deleteReview = (reviewId) => async (dispatch) => {
+  const response = await csrfFetch(`/api/reviews/${reviewId}`, {
+    method: 'DELETE'
+  })
+  const data = await response.json()
+  dispatch(removeReviewFromState(reviewId))
+  return data
+
+}
 // export const updateSpotImages = (spot) => async (dispatch) => {
 //   const response = await csrfFetch(``)
 // }
@@ -140,7 +157,12 @@ const spotsReducer = (state = initialState, action) => {
     }
     case SET_CURRENT_SPOT: {
       let currentSpot = {...action.payload}
-      let newState = {...state, currentSpot}
+      let spotReviews = {}
+      action.payload.Reviews.forEach(review => {
+        spotReviews[review.id] = review
+      })
+      let spotReviewsArray = Object.values(spotReviews)
+      let newState = {...state, currentSpot, spotReviews, spotReviewsArray}
       return newState
     }
     case SET_UPDATED_SPOT: {
@@ -158,6 +180,15 @@ const spotsReducer = (state = initialState, action) => {
       delete newState.userSpotsArray // delete it from the state
       newState.userSpotsArray = Object.values(newState.userSpots) //crea a new array
       return newState
+    }
+
+    case REMOVE_REVIEW_FROM_STATE: {
+      let reviewId = action.payload
+      let newState= {...state}
+      delete newState.spotReviewsArray
+      delete newState.spotReviews[reviewId]
+      let spotReviewsArray = Object.values(newState.spotReviews)
+      return {...newState, spotReviewsArray}
     }
     // case ADD_REVIEW_TO_SPOT: {
     //   let newState = {...state}

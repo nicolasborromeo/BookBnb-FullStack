@@ -4,6 +4,7 @@ import * as spotSession from '../../store/spots'
 
 function DeleteSpotModal({spotId}) {
     const dispatch = useDispatch()
+    const {setModalContent} = useModal()
 
     const deleteSpot = (spotId) => {
         dispatch(spotSession.deleteSpot(spotId))
@@ -11,7 +12,6 @@ function DeleteSpotModal({spotId}) {
             setModalContent(null)
         })
     }
-    const {setModalContent} = useModal()
 
     return (
         <>

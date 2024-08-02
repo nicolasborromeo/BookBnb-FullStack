@@ -1,13 +1,14 @@
-import { useEffect, useState, useRef } from 'react'
+import './ManageSpots.css'
 import { useDispatch, useSelector } from 'react-redux'
-import { NavLink } from 'react-router-dom';
-import * as spotActions from '../../store/spots';
+import { useEffect, useState, useRef } from 'react'
 import { TiStar } from "react-icons/ti";
+import { NavLink } from 'react-router-dom';
+import { GoDotFill } from "react-icons/go";
 import { AiOutlineLoading } from "react-icons/ai";
 import OpenModalButton from '../OpenModalButton'
-import DeleteSpotModal from '../DeleteSpotModal';
 import CreateSpotButton from '../CreateSpotButton';
-import './ManageSpots.css'
+import ConfirmDeleteModal from '../ConfirmDeleteModal';
+import * as spotActions from '../../store/spots';
 
 function ManageSpots() {
     const updateRef = useRef()
@@ -24,7 +25,7 @@ function ManageSpots() {
     if (isLoaded) return (
         <>
             <div className='manage-spots-header'>
-                <h1 className='manage-spots-title'>Manage Your Spots</h1>
+                <h1 className='manage-spots-title'>Your Listings</h1>
                 <button className='manage-spot-create-button'>
                 <CreateSpotButton />
                 </button>
@@ -34,7 +35,10 @@ function ManageSpots() {
                     {userSpots?.map(spot => (
                         <li key={spot.id} style={{display: 'flex', flexDirection:'column', gap:'10px'}}className="lp-li-spot-container">
                             <NavLink key={spot.id} to={`/spots/${spot.id}`} style={{ textDecoration: 'none', color: 'black' }}>
-                                <div className="lp-img-container">
+                                <label className='manage-spots-spot-status'>
+                                <GoDotFill color={'#008a06'}/> <span>Listed</span>
+                                </label>
+                                <div className="lp-img-container" >
                                     <img className='landing-page-spot-preview-img'
                                         src={`${spot.previewImage}`}
                                     />
@@ -54,7 +58,13 @@ function ManageSpots() {
                                 <NavLink to={`/user/manage-spots/${spot.id}`} className='manage-spot-update-button'>Update</NavLink>
                                 <OpenModalButton
                                     buttonText={'Delete'}
-                                    modalComponent={<DeleteSpotModal spotId={spot.id} />}
+                                    modalComponent={<ConfirmDeleteModal
+                                                        thing={'spot'}
+                                                        action={spotActions.deleteSpot}
+                                                        actionIdentifier={spot.id}
+                                                        spot={spot}
+                                                    />
+                                    }
                                 />
                             </div>
                         </li>

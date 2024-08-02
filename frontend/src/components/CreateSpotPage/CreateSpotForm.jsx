@@ -15,7 +15,7 @@ function CreateSpotForm() {
     const [address, setAddress] = useState('')
     const [city, setCity] = useState('')
     const [state, setState] = useState('')
-    const [step, setStep] = useState(5)
+    const [step, setStep] = useState(1)
     const [description, setDescription] = useState('')
     const [name, setName] = useState('')
     const [price, setPrice] = useState('')

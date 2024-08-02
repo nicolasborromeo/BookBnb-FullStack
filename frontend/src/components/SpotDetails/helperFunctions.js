@@ -1,3 +1,13 @@
+export const reviewInfoFormatter = (spot) => {
+    let parsedReviewInfo
+    if (spot.numReviews) {
+        parsedReviewInfo = spot.numReviews === 1 ? '1 Review' : `${spot.numReviews} Reviews`
+    } else {
+        parsedReviewInfo = '0 Reviews'
+    }
+    return parsedReviewInfo
+}
+
 export const reviewDateFormatter = (date) => {
     let dateArr = date.split('-')
     let year = dateArr[0]

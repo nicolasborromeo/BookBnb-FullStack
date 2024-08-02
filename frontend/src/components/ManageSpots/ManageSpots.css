@@ -3,11 +3,11 @@
     padding: 20px 0px ;
     font-weight: 400;
     text-align: left;
-    border-bottom: 1px solid lightgray;
+    /* border-bottom: 1px solid lightgray; */
 }
 
 .manage-spots-title {
-    font-size: 1.2em;
+    font-size: 1.8em;
     font-weight: 500;
 
 }
@@ -21,11 +21,24 @@
 /* .manage-spot-create-button .create-new-spot-button {
     color: white !important;
 } */
+.manage-spots-spot-status {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    z-index: 1;
+    margin: 15px;
+    background-color: white;
+    padding: 9px 11px;
+    border-radius: 22px;
+    font-size: 0.8em;
+}
 
 
 .update-delete-buttons-container {
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
     gap: 10px;
     margin: 5px 0;
 }
@@ -45,7 +58,7 @@
 .manage-spot-update-button,
 .update-delete-buttons-container button {
     background-color: #efefef;
-    box-shadow: 0px 1px 1px 0px gray;
+    /* box-shadow: 0px 1px 1px 0px gray; */
     border-radius: 10px;
     font-size: 0.7em;
     padding: 8px;

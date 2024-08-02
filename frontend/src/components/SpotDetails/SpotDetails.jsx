@@ -29,17 +29,6 @@ function SpotDetails() {
         numGuests > 1 ? setDisabled(false) : setDisabled(true)
     }, [numGuests])
 
-    const reviewInfoFormatter = () => {
-        let parsedReviewInfo
-        if (spot.numReviews) {
-            parsedReviewInfo = spot.numReviews === 1 ? '1 Review' : `${spot.numReviews} Reviews`
-        } else {
-            parsedReviewInfo = '0 Reviews'
-        }
-        return parsedReviewInfo
-    }
-
-
 
     if (spot) {
         return (
@@ -58,7 +47,6 @@ function SpotDetails() {
                             ))}
                         </div>
                     </div>
-                    {/* <CalloutBox spot={spot} reviewInfoFormatter={reviewInfoFormatter}/> */}
                     <div className="sd-info-callout-section-container">
                         <div className="sd-info-container">
                             <p style={{ fontWeight: '500', fontSize: '1.3em', marginTop: '0' }}>{spot.description}</p>
@@ -73,7 +61,7 @@ function SpotDetails() {
                                         <p className="callout-text-total-before-taxes">Total before taxes</p>
                                     </div>
                                     <div className="sd-callout-review-summary-info">
-                                        <ReviewSummaryInfo spot={spot} reviewInfoFormatter={reviewInfoFormatter} />
+                                        <ReviewSummaryInfo spot={spot} />
                                     </div>
                                 </div>
                                 <form className="sd-callout-reservation-form">
@@ -128,7 +116,7 @@ function SpotDetails() {
                     </div>
                 </div>
                 <div className="sd-reviews-section-container">
-                    <ReviewSection spot={spot} reviewInfoFormatter={reviewInfoFormatter} user={user} />
+                    <ReviewSection spot={spot} user={user} />
 
                 </div>
             </>

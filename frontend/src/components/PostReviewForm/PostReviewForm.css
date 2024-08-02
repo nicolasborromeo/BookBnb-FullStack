@@ -2,21 +2,22 @@
     margin: 0px;
     padding: 0px;
     position: absolute;
-    top: 15px;
-    right: 15px;
+    top: 30px;
+    right: 30px;
     color: lightgray;
 }
 
 .post-review-container {
-    padding: 25px;
+    padding: 35px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap:20px;
-    height: 50vh;
-    width: 35vw;
+    height: 60vh;
+    /* width: 35vw; */
     min-width: min-content;
+    width: 30vw;
 }
 
 .post-review-title {
@@ -25,7 +26,9 @@
     margin: 0;
     padding: 0;
     width: 100%;
-    text-align: center;
+    text-align: left;
+    position: relative;
+    /* bottom: 5px; */
    /* border-bottom: 1px solid lightgray; */
 }
 
@@ -70,9 +73,11 @@
 }
 
 .post-review-submit-button {
+    /* background-color: black; */
     background-color: rgb(217,9,101);
-    border: 0;
     color: white;
+    border: 0;
+    font-size: 16px;
     border-radius: 8px;
     width: 100%;
     padding: 13px 0;

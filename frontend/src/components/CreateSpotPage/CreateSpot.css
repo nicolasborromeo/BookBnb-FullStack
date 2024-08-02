@@ -39,12 +39,6 @@
 .logo-container {
     filter:invert(1);
     width: fit-content;
-    /* min-width: 100%; */
-    /* display: flex; */
-    /* justify-content: flex-end; */
-    /* position: absolute;
-    top: 24%;
-    right: 48%; */
 }
 
 .cs-title-line-break {
@@ -68,7 +62,6 @@
 
 .cs-branding-container{
     min-width: 50%;
-    /* min-width: none; */
     min-height: 90vh;
     padding-top: 60px;
 }
@@ -86,13 +79,11 @@
 
 .form-container{
     display: flex;
-    /* flex-direction: column; */
     justify-content: center;
     align-items: center;
     height: 100%;
     position: relative;
     top: -20px;
-    /* left: 50px */
 }
 
 .create-spot-form{
@@ -116,8 +107,8 @@
     margin: 0;
     border-bottom: 1px solid lightgray;
     width: 100%;
-   color: rgb(22, 22, 22);
-   font-weight: 800;
+    color: rgb(22, 22, 22);
+    font-weight: 800;
 }
 
 .create-spot-form section{
