@@ -39,12 +39,6 @@
 .logo-container {
     filter:invert(1);
     width: fit-content;
-    /* min-width: 100%; */
-    /* display: flex; */
-    /* justify-content: flex-end; */
-    /* position: absolute;
-    top: 24%;
-    right: 48%; */
 }
 
 .cs-title-line-break {
@@ -68,7 +62,6 @@
 
 .cs-branding-container{
     min-width: 50%;
-    /* min-width: none; */
     min-height: 90vh;
     padding-top: 60px;
 }
@@ -86,13 +79,11 @@
 
 .form-container{
     display: flex;
-    /* flex-direction: column; */
     justify-content: center;
     align-items: center;
     height: 100%;
     position: relative;
     top: -20px;
-    /* left: 50px */
 }
 
 .create-spot-form{
@@ -116,8 +107,8 @@
     margin: 0;
     border-bottom: 1px solid lightgray;
     width: 100%;
-   color: rgb(22, 22, 22);
-   font-weight: 800;
+    color: rgb(22, 22, 22);
+    font-weight: 800;
 }
 
 .create-spot-form section{
@@ -160,11 +151,32 @@
 
 .cs-form-buttons-div {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     flex-direction: row;
     width: 100%;
     margin: 0px;
+    padding-top: 30px;
 }
+
+.cs-form-buttons-div .cs-prev-button{
+    border: 0;
+    background-color: transparent;
+    text-decoration: underline;
+    font-size: 16px;
+ }
+
+ .cs-form-buttons-div .cs-next-button{
+    border: 0;
+    background-color: black;
+    color: white;
+    font-size: 16px;
+    padding: 10px 20px;
+    border-radius: 8px;
+ }
+ .cs-form-buttons-div .cs-next-button:hover{
+    cursor: pointer;
+ }
+
 .cs-url-input {
     padding: 2px !important;
 }
@@ -183,12 +195,7 @@
     border-radius: 5px;
 }
 
-/* .cs-form-buttons-div button{
-    padding: 10px;
-    height: 5%;
-    text-align: center;
-    align-self: center;
-} */
+
 
 .error-msg {
     font-size: 0.7em;
@@ -198,4 +205,5 @@
     margin: 0;
     position: relative;
     bottom: 5px;
+    line-height: 0;
 }

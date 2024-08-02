@@ -18,3 +18,25 @@ export const testImgs = {
     4: 'https://res.cloudinary.com/dklsvbe1v/image/upload/v1721939592/h6ph2_ejp3de.webp' ,
     5: 'https://res.cloudinary.com/dklsvbe1v/image/upload/v1721939592/h6ph2_ejp3de.webp' ,
 }
+
+
+export const testSpot2 = {
+    ownerId: 2,
+    address: '789 Lakeside Drive',
+    city: 'Lake Tahoe',
+    state: 'CA',
+    country: 'USA',
+    lat: 39.0968,
+    lng: -120.0324,
+    name: 'Serene Lakeview Retreat',
+    description: 'A serene and tranquil retreat with stunning views of Lake Tahoe. Perfect for a peaceful getaway.',
+    price: 300.00
+  }
+
+  export const testImgs2 = {
+    1: 'https://res.cloudinary.com/dklsvbe1v/image/upload/v1722464098/h8ph1_t6rpr9.webp' ,
+    2: 'https://res.cloudinary.com/dklsvbe1v/image/upload/v1722464098/h8ph5_ym6ez7.webp' ,
+    3: 'https://res.cloudinary.com/dklsvbe1v/image/upload/v1722464098/h8ph3_k79yxi.webp' ,
+    4: 'https://res.cloudinary.com/dklsvbe1v/image/upload/v1722464098/h8ph2_opwv96.webp' ,
+    5: 'https://res.cloudinary.com/dklsvbe1v/image/upload/v1722464098/h8ph4_nlaycw.webp' ,
+}

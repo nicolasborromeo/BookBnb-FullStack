@@ -170,10 +170,10 @@ router.delete('/:reviewId',
         res.status(200).json({message: "Successfully deleted"})
     })
 
-    router.get('/', async (req, res, next)=> {
-        let reviews = await Review.findAll({})
-        res.json(reviews)
-    })
+router.get('/', async (req, res, next)=> {
+    let reviews = await Review.findAll({})
+    res.json(reviews)
+})
 
 
 

@@ -32,14 +32,14 @@ const reviews = [
   {
     // id: 4,
     spotId: 4,
-    userId: 1,
+    userId: 2,
     review: 'Beautiful house, enjoyed our stay very much.',
     stars: 5
   },
   {
     // id: 5,
     spotId: 5,
-    userId: 1,
+    userId: 3,
     review: 'Good value for money, would stay again.',
     stars: 4
   },
@@ -67,7 +67,7 @@ const reviews = [
   {
     // id: 9,
     spotId: 4,
-    userId: 1,
+    userId: 3,
     review: 'Spacious and modern, perfect for a family vacation.',
     stars: 4
   },

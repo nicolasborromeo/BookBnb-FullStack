@@ -10,7 +10,6 @@ function LandingPage() {
     const dispatch = useDispatch();
     const [isLoaded, setIsLoaded] = useState(false);
     const spots = useSelector(state => state.spots.spotsArray);
-    console.log('allspots', spots)
 
     useEffect(() => {
         dispatch(spotActions.fetchSpots()).then(() => {
@@ -38,7 +37,7 @@ function LandingPage() {
                                     <span className="lp-spot-location">{spot.city}, {spot.state}</span>
                                     <span className="lp-rating-container">
                                         <TiStar className="lp-rating-star" />
-                                        <span>{spot.avgRating || 'New'}</span>
+                                        <span>{spot.avgRating ? parseFloat(spot.avgRating).toFixed(1) : 'New'}</span>
                                     </span>
                                 </div>
                                 <div className="lp-spot-price">${spot.price} /night</div>

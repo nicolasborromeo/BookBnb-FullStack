@@ -1,38 +1,47 @@
-// import { testSpot, testSpot2, testImgs, testImgs2 } from "./dummydata";
-// import { validateImages } from "./createSpotValidation";
-
 import { useState, useEffect } from "react"
-import { useSelector } from 'react-redux'
-import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from 'react-redux'
+import { useNavigate, useParams } from "react-router-dom";
 import OpenModalButton from "../OpenModalButton";
 import LoginFormModal from "../LoginFormModal";
 import validator from "validator";
-import { csrfFetch } from "../../store/csrf";
+import * as spotActions from '../../store/spots'
+import { AiOutlineLoading } from "react-icons/ai";
+import { formatImages } from "./helperFunctions";
 
-function CreateSpotForm() {
-    const user = useSelector(state => state.session.user)
+
+function UpdateSpotForm({ spot }) {
+    const { spotId } = useParams()
+    const dispatch = useDispatch()
     const navigate = useNavigate();
-    const [country, setCountry] = useState('')
-    const [address, setAddress] = useState('')
-    const [city, setCity] = useState('')
-    const [state, setState] = useState('')
+    const user = useSelector(state => state.session.user)
     const [step, setStep] = useState(1)
-    const [description, setDescription] = useState('')
-    const [name, setName] = useState('')
-    const [price, setPrice] = useState('')
+    const [city, setCity] = useState(spot.city)
+    const [name, setName] = useState(spot.name)
+    const [state, setState] = useState(spot.state)
+    const [price, setPrice] = useState(spot.price)
     const [images, setImages] = useState({})
+    const [country, setCountry] = useState(spot.country)
+    const [address, setAddress] = useState(spot.address)
+    const [description, setDescription] = useState(spot.description)
     const [errors, setErrors] = useState({})
+    const [isLoading, setIsLoading] = useState(true)
     const [disabledPrev, setDisabledPrev] = useState(true)
 
-    // const [disabledNext, setDisabledNext] = useState(false)
-    // const [disabledCreate, setDisabledCreate] = useState(true)
-    // useEffect(() => {
-    //     if (step === 1) setDisabledNext(country && address && city && state ? false : true)
-    //     if (step === 2) setDisabledNext(description.length >= 30 ? false : true)
-    //     if (step === 3) setDisabledNext(name ? false : true)
-    //     if (step === 4) setDisabledNext(Number(price) > 0 ? false : true)
-    //     if (step === 5) setDisabledCreate(validateImages(images))
-    // }, [images, price, name, description, country, address, city, state, step, disabledNext, disabledCreate])
+    useEffect(() => {
+        dispatch(spotActions.fetchCurrentSpot(spotId)).then((res) => {
+            // if(res.status === 404) {navigate('/page-not-found')}
+            setCountry(res.country)
+            setAddress(res.address)
+            setCity(res.city)
+            setState(res.state)
+            setDescription(res.description)
+            setName(res.name)
+            setPrice(res.price)
+            const images = formatImages(res.SpotImages)
+            setImages(images)
+
+        }).then(() => setIsLoading(false)).catch((err) => console.log('error', err))
+    }, [dispatch, spotId])
 
     useEffect(() => {
         setDisabledPrev(step === 1 ? true : false)
@@ -52,58 +61,25 @@ function CreateSpotForm() {
         newSpot.lat = 0;
         newSpot.lng = 0;
 
-        const imgArray = Object.values(images)
-        imgArray.forEach(img => {
-            if (!validator.isURL(img)) {
-                window.alert('Invalid image url')
-                throw Error('invalid image url')
-            }
-        })
+        // const imgArray = Object.values(images)
+        // imgArray.forEach(img => {
+        //     if (!validator.isURL(img)) {
+        //         window.alert('Invalid image url')
+        //         throw Error('invalid image url')
+        //     }
+        // })
 
-        const fetch = async () => {
-            try {
-                const res = await csrfFetch('/api/spots', {
-                    method: 'POST',
-                    body: JSON.stringify(newSpot),
-                    // body: JSON.stringify(testSpot2)
-                });
+        dispatch(spotActions.updateSpot(newSpot, spotId))
+            // .then(()=> dispatch(spotActions.updateSpotImages(images))) //UPDATE IMAGES?
+            .then(() => {
+                console.log('succesfully updated spot')
+                navigate(`/spots/${spotId}`)
+            })
+            .catch((err)=> {
+                console.log('theres beeen an error:',err)
+            })
 
-                if (!res.ok) throw res;
-                const data = await res.json();
-                const spotId = data.id;
 
-                for (const img in images) {
-                    let isPreview = img == 1 ? true : false;
-                    const body = {
-                        url: images[img],
-                        preview: isPreview,
-                    };
-                    const imgResponse = await csrfFetch(`/api/spots/${spotId}/images`, {
-                        method: 'POST',
-                        body: JSON.stringify(body),
-                    });
-                    if (!imgResponse.ok) {
-                        const imgError = await imgResponse.json();
-                        throw Error(imgError);
-                    }
-                }
-
-                console.log('Spot created successfully:', data);
-                navigate(`/spots/${data.id}`, { replace: true });
-
-            } catch (error) {
-                switch (error.status) {
-                    case 401: window.alert('You must be logged in to create a Spot');
-                        break;
-                    case 400: window.alert('Invalid Spot Information, please make sure you complete all the reuired fields')
-                        break;
-                    default: setErrors({ error: 'Sorry, there was an error creating the Spot' });
-                }
-
-            }
-
-        }
-        fetch()
     };
 
 
@@ -148,18 +124,23 @@ function CreateSpotForm() {
                 break;
         }
     }
-    return (
+    if (isLoading) return (
+        <div className='loading-container' style={{ position: 'absolute' }}>
+            <AiOutlineLoading className='loading-icon' />
+        </div>
+    )
+    else if (!isLoading) return (
         <div className="form-side-container">
             <div className="form-container">
                 <form className="create-spot-form" onSubmit={(e) => e.preventDefault()}>
-                    <h3 className="cs-form-header">Create a New Spot</h3>
+                    <h3 className="cs-form-header">Update your Spot</h3>
                     {step === 1 &&
 
                         <section className='cs-section'>
                             <h3 className="cs-step-title">Where&apos;s your place located?</h3>
                             <h6 className="cs-step-sub-title">Guests will only get your exact address once they booked a reservation.</h6>
                             <div className="cs-inputs-container">
-                                <input required onChange={(e) => setCountry(stringUppercaser(e.target.value))} type='text' className="cs-inputs" placeholder='Country' value={country} />
+                                <input required onChange={(e) => setCountry(e.target.value)} type='text' className="cs-inputs" placeholder='Country' value={country} />
                                 {errors?.country && <p className="error-msg">{errors.country}</p>}
                                 <input required onChange={(e) => setAddress(e.target.value)} type='text' className="cs-inputs" placeholder='Street Addres' value={address} />
                                 {errors?.address && <p className="error-msg">{errors.address}</p>}
@@ -167,6 +148,7 @@ function CreateSpotForm() {
                                 {errors?.city && <p className="error-msg">{errors.city}</p>}
                                 <input required onChange={(e) => setState(e.target.value)} type='text' className="cs-inputs" placeholder='State' value={state} />
                                 {errors?.state && <p className="error-msg">{errors.state}</p>}
+
                             </div>
                         </section>
                     }
@@ -208,11 +190,7 @@ function CreateSpotForm() {
                         <>
                             <section className='cs-section'>
                                 <h3 className="cs-step-title">Liven up your spot with photos</h3>
-                                <h6 className="cs-step-sub-title"
-                                // style={{ textDecoration: disabledCreate ? 'underline' : '' }}
-                                >
-                                    Submit a link to at least one photo to publish your spot
-                                </h6>
+                                <h6 className="cs-step-sub-title">Submit a link to at least one photo to publish your spot</h6>
                                 <div className="cs-inputs-container">
                                     <input onChange={(e) => handleImages(e)} className="cs-url-input" id='1' type="text" placeholder="Preview Image URL" value={images['1']} />
                                     {errors?.prevImg && <p className="error-msg">{errors.prevImg}</p>}
@@ -243,8 +221,8 @@ function CreateSpotForm() {
                             user ? (
                                 <button type="submit"
                                     // disabled={disabledCreate}
-                                    onClick={validateInputs}
-                                >Create Spot</button>
+                                    onClick={(e) => validateInputs(e)}
+                                >Update Spot</button>
                             ) : (
                                 <button
                                     onClick={(e) => {
@@ -255,7 +233,7 @@ function CreateSpotForm() {
                                 >
                                     <OpenModalButton
                                         className='profile-dropdown-buttons'
-                                        buttonText="Create Spot"
+                                        buttonText="Update Spot"
                                         modalComponent={<LoginFormModal />}
                                     />
                                 </button>
@@ -271,24 +249,11 @@ function CreateSpotForm() {
                             >Next</button>
                         )
                         }
-
                     </div>
                 </form>
             </div>
-
         </div>
     )
 }
 
-export default CreateSpotForm
-
-
-const stringUppercaser = (word) => {
-    if (word) {
-        let stringWord = word.toString().toLowerCase()
-        let firstLetter = stringWord[0]
-        let rest = stringWord.slice(1)
-        return firstLetter.toUpperCase() + rest
-    } else return ''
-}
-
+export default UpdateSpotForm

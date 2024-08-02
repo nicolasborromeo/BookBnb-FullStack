@@ -1,0 +1,102 @@
+/* REVIEW SUMMARY INFO */
+.summary-info-container {
+    display: flex;
+    min-width: min-content;
+    flex: 0;
+    gap: 6px;
+    white-space: nowrap;
+}
+
+/* REVIEWS SECTION */
+
+.sd-reviews-section-container {
+    border-top: 1px solid lightgray;
+    margin: 20px 130px;
+}
+
+.sd-reviews-header {
+    font-size: 1.2em;
+    font-weight: bold !important;
+    padding: 40px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    /* border-bottom: 1px solid lightgray; */
+
+}
+
+.sd-review-list {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+.sd-individual-review {
+    /* border-bottom: 1px solid lightgray; */
+    width: 50%;
+    margin: 10px 0;
+    padding: 0 5px;
+    padding-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.review-user-logo-name-container{
+    display: flex;
+    flex-direction: row;
+    gap:6px;
+    align-items: flex-end;
+}
+.review-user-logo-icon {
+    position: relative;
+    bottom:3px;
+}
+
+.sd-individual-review p {
+    font-weight: 200;
+    margin: 0;
+}
+.post-your-review-button{
+    white-space: nowrap;
+    width:fit-content;
+}
+.post-your-review-button:hover{
+   cursor: pointer;
+   position: relative;
+   z-index: 2;
+}
+
+/* REVIEW LIST */
+
+.sd-individual-review .review-date {
+    font-size: 0.85em;
+    font-weight: 600;
+}
+
+.review-stars-and-date-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+}
+
+.review-star-rating-stars{
+    display: inherit;
+
+}
+
+
+/* EMPTY REVIES LIST MESSAGE  */
+.review-section-empty-reviews-message {
+    font-weight: 300;
+    font-size: 0.9em;
+    text-align: center;
+    margin: 0;
+    position: relative;
+    top: -10px;
+    padding-bottom: 20px;
+}
