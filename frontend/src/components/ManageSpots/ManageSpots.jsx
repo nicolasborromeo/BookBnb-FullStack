@@ -35,9 +35,9 @@ function ManageSpots() {
                     {userSpots?.map(spot => (
                         <li key={spot.id} style={{display: 'flex', flexDirection:'column', gap:'10px'}}className="lp-li-spot-container">
                             <NavLink key={spot.id} to={`/spots/${spot.id}`} style={{ textDecoration: 'none', color: 'black' }}>
-                                <label className='manage-spots-spot-status'>
-                                <GoDotFill color={'#008a06'}/> <span>Listed</span>
-                                </label>
+
+                                <span className='manage-spots-spot-status'><GoDotFill color={'#008a06'}/>Listed</span>
+
                                 <div className="lp-img-container" >
                                     <img className='landing-page-spot-preview-img'
                                         src={`${spot.previewImage}`}
@@ -47,8 +47,8 @@ function ManageSpots() {
                                     <div className="lp-spot-location-and-rating-container">
                                         <span className="lp-spot-location">{spot.city}, {spot.state}</span>
                                         <span className="lp-rating-container">
-                                            <TiStar className="lp-rating-star" />
-                                            <span>{parseFloat(spot.avgRating).toFixed(1) || 'New'}</span>
+                                             <TiStar className="lp-rating-star" />
+                                            <span>{spot.avgRating ? parseFloat(spot.avgRating).toFixed(1) : 'New'}</span>
                                         </span>
                                     </div>
                                 </div>

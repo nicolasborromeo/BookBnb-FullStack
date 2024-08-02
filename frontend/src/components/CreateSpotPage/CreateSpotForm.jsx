@@ -1,5 +1,6 @@
 // import { testSpot, testSpot2, testImgs, testImgs2 } from "./dummydata";
 // import { validateImages } from "./createSpotValidation";
+
 import { useState, useEffect } from "react"
 import { useSelector } from 'react-redux'
 import { useNavigate } from "react-router-dom";
@@ -158,7 +159,7 @@ function CreateSpotForm() {
                             <h3 className="cs-step-title">Where&apos;s your place located?</h3>
                             <h6 className="cs-step-sub-title">Guests will only get your exact address once they booked a reservation.</h6>
                             <div className="cs-inputs-container">
-                                <input required onChange={(e) => setCountry(e.target.value)} type='text' className="cs-inputs" placeholder='Country' value={country} />
+                                <input required onChange={(e) => setCountry(stringUppercaser(e.target.value))} type='text' className="cs-inputs" placeholder='Country' value={country} />
                                 {errors?.country && <p className="error-msg">{errors.country}</p>}
                                 <input required onChange={(e) => setAddress(e.target.value)} type='text' className="cs-inputs" placeholder='Street Addres' value={address} />
                                 {errors?.address && <p className="error-msg">{errors.address}</p>}
@@ -249,10 +250,8 @@ function CreateSpotForm() {
                                     onClick={(e) => {
                                         window.alert('you must be logged in to create a spor')
                                         e.preventDefault()
-                                    }
-                                    }
+                                    }}
                                     style={{ border: "none", backgroundColor: 'transparent' }}
-
                                 >
                                     <OpenModalButton
                                         className='profile-dropdown-buttons'
@@ -282,3 +281,14 @@ function CreateSpotForm() {
 }
 
 export default CreateSpotForm
+
+
+const stringUppercaser = (word) => {
+    if (word) {
+        let stringWord = word.toString().toLowerCase()
+        let firstLetter = stringWord[0]
+        let rest = stringWord.slice(1)
+        return firstLetter.toUpperCase() + rest
+    } else return ''
+}
+

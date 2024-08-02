@@ -151,11 +151,32 @@
 
 .cs-form-buttons-div {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     flex-direction: row;
     width: 100%;
     margin: 0px;
+    padding-top: 30px;
 }
+
+.cs-form-buttons-div .cs-prev-button{
+    border: 0;
+    background-color: transparent;
+    text-decoration: underline;
+    font-size: 16px;
+ }
+
+ .cs-form-buttons-div .cs-next-button{
+    border: 0;
+    background-color: black;
+    color: white;
+    font-size: 16px;
+    padding: 10px 20px;
+    border-radius: 8px;
+ }
+ .cs-form-buttons-div .cs-next-button:hover{
+    cursor: pointer;
+ }
+
 .cs-url-input {
     padding: 2px !important;
 }
@@ -174,12 +195,7 @@
     border-radius: 5px;
 }
 
-/* .cs-form-buttons-div button{
-    padding: 10px;
-    height: 5%;
-    text-align: center;
-    align-self: center;
-} */
+
 
 .error-msg {
     font-size: 0.7em;
@@ -189,4 +205,5 @@
     margin: 0;
     position: relative;
     bottom: 5px;
+    line-height: 0;
 }
