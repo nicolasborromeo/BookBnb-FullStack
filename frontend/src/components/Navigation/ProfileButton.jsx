@@ -52,7 +52,9 @@ export default function ProfileButton( ) {
 
     ) : (
         <>
-            <li className="profile-dropdown-login-logout" >
+            <li className="profile-dropdown-login-logout"
+                // onClick={(e)=> toggleDropdown}
+            >
                 <OpenModalButton
                     style={{fontWeight: '600'}}
                     className='profile-dropdown-buttons'

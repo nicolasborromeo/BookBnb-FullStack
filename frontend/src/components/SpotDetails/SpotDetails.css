@@ -25,6 +25,7 @@
 .sd-preview-img-container {
     flex: 1;
     max-width: 50%;
+    max-height: 443px;
 }
 
 .sd-preview-img-container img {

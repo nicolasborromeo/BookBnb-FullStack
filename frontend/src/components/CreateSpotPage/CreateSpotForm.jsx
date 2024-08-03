@@ -292,3 +292,14 @@ const stringUppercaser = (word) => {
     } else return ''
 }
 
+// const stringParser = (string) => {
+//     let parsedSentence = []
+//     if (string.includes(' ')) {
+//         let stringArr = string.split(' ')
+//             let mappedString = stringArr.map(word => stringUppercaser(word))
+//             parsedSentence.push(mappedString)
+//     } else {
+//             return stringUppercaser(string[0])
+//     }
+
+// }
