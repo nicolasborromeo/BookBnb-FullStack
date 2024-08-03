@@ -78,7 +78,7 @@
 }
 
 .profile-dropdown {
-    position: fixed;
+    position: absolute;
     z-index: 3;
     right: 72px;
     top: 68px;
