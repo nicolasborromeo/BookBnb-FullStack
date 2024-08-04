@@ -26,8 +26,7 @@ const ReviewSection = ({ spot, user }) => {
     }, [spot, user, Reviews])
 
     useEffect(() => {
-        if (spot.ownerId === user?.id) return setIsOwner(true)
-        else return setIsOwner(false)
+        if(user) spot.ownerId === user?.id ?  setIsOwner(true) :  setIsOwner(false)
     }, [spot, user])
 
     return (
@@ -35,7 +34,7 @@ const ReviewSection = ({ spot, user }) => {
             <div className="sd-reviews-header">
                 <div className="review-summary-header">
                     <ReviewSummaryInfo />
-                    {(user.id === spot.Owner.id && !Reviews.length) && <h3 className='review-section-empty-reviews-message'>Your stay doesn&apos;t have any reviews yet</h3>}
+                    {(user?.id === spot.Owner.id && !Reviews.length) && <h3 className='review-section-empty-reviews-message'>Your stay doesn&apos;t have any reviews yet</h3>}
                 </div>
                 {user && !hasReviewed && !isOwner &&
                     <div className="post-your-review-button">
@@ -55,6 +54,7 @@ const ReviewSection = ({ spot, user }) => {
 
 const ReviewsList = ({ spot }) => {
     const Reviews = useSelector(state => state.spots.spotReviewsArray)
+    console.log(Reviews)
     const user = useSelector(state => state.session.user)
 
     if (Reviews) return (
