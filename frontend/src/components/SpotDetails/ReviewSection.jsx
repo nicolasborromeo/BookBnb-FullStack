@@ -54,7 +54,6 @@ const ReviewSection = ({ spot, user }) => {
 
 const ReviewsList = ({ spot }) => {
     const Reviews = useSelector(state => state.spots.spotReviewsArray)
-    console.log(Reviews)
     const user = useSelector(state => state.session.user)
 
     if (Reviews) return (
@@ -107,7 +106,7 @@ const ReviewsList = ({ spot }) => {
 
             </ul>
             {
-                (user && !Reviews.length && spot.Owner.id !== user.id
+                (user && !Reviews.length && spot.Owner.id !== user?.id
                 ) && (
                     <h3 className='review-section-empty-reviews-message'>
                         Be the first to post a review!
