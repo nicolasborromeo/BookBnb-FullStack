@@ -40,7 +40,7 @@ function SpotDetails() {
                             <img src={`${previewImg.url}`} />
                         </div>
                         <div className="sd-small-images-container">
-                            {spotImages.map(img => (
+                            {spotImages?.map(img => (
                                 <div key={img.id} className="sd-spot-images-container">
                                     <img className='sd-spot-image' key={img.id} src={img.url} />
                                 </div>
