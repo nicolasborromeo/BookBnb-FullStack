@@ -28,7 +28,7 @@ function UpdateSpotPage() {
     return (
         <>
             <div className="background-div-image-container">
-                <img style={{height:'90%', width:'100%', objectFit:'cover'}} src={`${previewImage[0].url}`} alt='your-house-photos' />
+                <img style={{height:'100%', width:'100%', objectFit:'cover'}} src={`${previewImage[0].url}`} alt='your-stay-main-img' />
             </div>
             <div className="create-spot-page-container">
 

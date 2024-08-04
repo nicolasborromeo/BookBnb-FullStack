@@ -93,20 +93,22 @@
     overflow: hidden;
 }
 
+
+
 .profile-dropdown button {
     border: none !important;
     background: none;
     color: inherit;
     transition: all 100ms ease-in-out;
     width: 100%;
+    height: 100%;
     text-align: left;
-    padding: 0px 0;
+    /* padding: 0px 0;  */
+    padding: 15px 15px;
+
 }
 
-.profile-dropdown button:hover {
-    color: black;
-    cursor: pointer;
-}
+
 .profile-dropdown .dropdown-text {
     display: flex;
     flex-direction: row;
@@ -118,7 +120,6 @@
 /* dropdown: user NOT loggedin */
 .profile-dropdown .profile-dropdown-login-logout {
     min-width: 100%!important;
-    padding: 15px 15px;
     border-top: 1px solid rgb(235,235,235);
     font-weight: 250;
     position: relative;
@@ -142,6 +143,11 @@
  }
 
 .profile-dropdown li:hover {
+    background-color: rgba(240, 240, 240, 0.786);
+    cursor: pointer
+}
+
+.profile-dropdown button:hover {
     background-color: rgba(240, 240, 240, 0.786);
     cursor: pointer
 }
