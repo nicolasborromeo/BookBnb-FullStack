@@ -2,9 +2,10 @@
     margin: 0;
     display: block;
     max-width: 30vw;
-    min-height: 45vh;
-    width: 25vw;
-    height: 45vh;
+    /* min-height: 30vh; */
+    width: min-content;
+    /* height: 45vh; */
+    max-height: min-content;
 }
 
 .confirm-delete-text-container {
@@ -13,9 +14,11 @@
     justify-content: center;
     align-items: center;
     padding: 30px 10px;
-    /* height: 30vh;
-    width: 25vw; */
-    min-height: 70% !important;
+    /* height: 30vh; */
+    min-width: 20vw;
+    max-width: 20vh;
+    min-height: 30vh !important;
+    max-height: 30vh !important;
     gap: 3px;
     position: relative;
     top: 10px;
