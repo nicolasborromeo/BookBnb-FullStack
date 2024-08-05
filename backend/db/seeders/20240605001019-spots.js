@@ -78,14 +78,14 @@ const spots = [
   {
     ownerId: 3,
     address: '62209 Verbena Rd',
-    city: 'Joshua Tree',
+    city: 'Felton',
     state: 'CA',
     country: 'USA',
     lat: 30.2672,
     lng: -97.7431,
-    name: 'Invisible House Joshua Tree | Modern Masterpiece',
-    description: 'Entire home in Joshua Tree, California',
-    price: 3945.00
+    name: 'Artsy Cabin in Half-acre Serene Redwoods',
+    description: 'Entire cabin in Felton, California',
+    price: 450.00
   },
   {
     ownerId: 5,

@@ -162,7 +162,7 @@ const spotImages = [
   {
     // id: 5,
     spotId: 6,
-    url: 'https://res.cloudinary.com/dklsvbe1v/image/upload/v1722895092/h7ph1_mpmwhe.webp',
+    url: 'https://res.cloudinary.com/dklsvbe1v/image/upload/v1722895087/h7ph4_y9nrak.webp',
     preview: true
   },
   {
@@ -180,7 +180,7 @@ const spotImages = [
   {
     // id: 5,
     spotId: 6,
-    url: 'https://res.cloudinary.com/dklsvbe1v/image/upload/v1722895087/h7ph4_y9nrak.webp',
+    url: 'https://res.cloudinary.com/dklsvbe1v/image/upload/v1722895092/h7ph1_mpmwhe.webp',
     preview: false
   },
   {
@@ -192,27 +192,27 @@ const spotImages = [
   ////
   {
     spotId: 7,
-    url: 'https://res.cloudinary.com/dklsvbe1v/image/upload/v1722894737/h6ph1_c72fsg.webp',
+    url: 'https://res.cloudinary.com/dklsvbe1v/image/upload/v1722895842/ph1_w1dxdd.webp',
     preview: true
   },
   {
     spotId: 7,
-    url: 'https://res.cloudinary.com/dklsvbe1v/image/upload/v1722894735/h6ph2_qyda2j.webp',
+    url: 'https://res.cloudinary.com/dklsvbe1v/image/upload/v1722895838/phh2_aowrto.webp',
     preview: false
   },
   {
     spotId: 7,
-    url: 'https://res.cloudinary.com/dklsvbe1v/image/upload/v1722894733/h6ph3_dmdgv3.webp',
+    url: 'https://res.cloudinary.com/dklsvbe1v/image/upload/v1722895835/ph3_il9duz.webp',
     preview: false
   },
   {
     spotId: 7,
-    url: 'https://res.cloudinary.com/dklsvbe1v/image/upload/v1722894732/h6ph4_y2dtym.webp',
+    url: 'https://res.cloudinary.com/dklsvbe1v/image/upload/v1722895836/ph4_aidoo5.webp',
     preview: false
   },
   {
     spotId: 7,
-    url: 'https://res.cloudinary.com/dklsvbe1v/image/upload/v1722894735/h6ph5_x1n08b.webp',
+    url: 'https://res.cloudinary.com/dklsvbe1v/image/upload/v1722895840/ph5_k593q2.webp',
     preview: false
   },
   /////
