@@ -41,8 +41,7 @@ function PostReviewForm() {
     }
 
     useEffect(()=> {
-        console.log(review.length)
-        setDisabled(review.length > 10 ? false : true)
+        setDisabled(review.length > 10 && rating ? false : true)
     }, [review])
 
     return (
@@ -58,6 +57,7 @@ function PostReviewForm() {
                 <button
                     className="post-review-submit-button"
                     disabled={disabled}
+                    style={disabled ? {backgroundColor: 'gray', cursor:'not-allowed'} : {}}
                     type="submit">
                         Submit Review
                 </button>

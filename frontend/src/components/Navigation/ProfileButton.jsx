@@ -40,7 +40,8 @@ export default function ProfileButton( ) {
     const sessionLinks = sessionUser ? (
         <>
             <div className="dropdown-text">
-                Hello, {sessionUser.firstName} {sessionUser.lastName}
+                Hello, {sessionUser.firstName}
+                {/* {sessionUser.lastName} */}
                 <br/>
                 <br/>
                 {sessionUser.email}

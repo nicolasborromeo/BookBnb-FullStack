@@ -6,7 +6,6 @@ import { reviewInfoFormatter } from "./helperFunctions";
 const ReviewSummaryInfo = () => {
     const spot = useSelector(state=> state.spots.currentSpot)
     const spotReviews = useSelector(state=> state.spots.spotReviewsArray)
-    console.log('spotreviews', spotReviews)
     return (
         <div className="summary-info-container">
             <TiStar className="lp-rating-star" />
