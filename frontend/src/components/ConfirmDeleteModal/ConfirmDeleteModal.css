@@ -6,6 +6,7 @@
     width: min-content;
     /* height: 45vh; */
     max-height: min-content;
+    min-width: 265px;
 }
 
 .confirm-delete-text-container {
@@ -15,7 +16,7 @@
     align-items: center;
     padding: 30px 10px;
     /* height: 30vh; */
-    min-width: 20vw;
+    min-width: 265px;
     max-width: 20vh;
     min-height: 30vh !important;
     max-height: 30vh !important;
@@ -57,6 +58,7 @@
     width: 100%;
     flex: 0;
     /* height: 40%; */
+    min-width: 265px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;

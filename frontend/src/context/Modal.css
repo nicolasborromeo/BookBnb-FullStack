@@ -24,4 +24,5 @@
     border-radius: 10px;
     position: absolute;
     background-color: white;
+    min-width: 265px;
   }
