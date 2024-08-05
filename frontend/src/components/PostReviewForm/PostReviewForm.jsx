@@ -42,7 +42,7 @@ function PostReviewForm() {
 
     useEffect(()=> {
         setDisabled(review.length > 10 && rating ? false : true)
-    }, [review])
+    }, [review, rating])
 
     return (
         <>
