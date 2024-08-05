@@ -55,6 +55,7 @@ const ReviewSection = ({ spot, user }) => {
 const ReviewsList = ({ spot }) => {
     const Reviews = useSelector(state => state.spots.spotReviewsArray)
     const user = useSelector(state => state.session.user)
+    let sortedReviews = Reviews.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
     if (Reviews) return (
         <div className="sd-reviews-container">
@@ -63,7 +64,7 @@ const ReviewsList = ({ spot }) => {
                     Reviews.length >= 1
                     &&
                     (
-                        Reviews.slice().reverse().map(review => {
+                        sortedReviews.map(review => {
                             return (
                                 <>
                                     <li key={review.id} className="sd-individual-review">

@@ -100,3 +100,10 @@
 .lp-rating-container span{
    font-weight: 100;
 }
+
+.lp-spot-price{
+    margin-top: 2px;
+    font-size: 0.9em;
+    font-weight: 300;
+    text-decoration: underline;
+}
