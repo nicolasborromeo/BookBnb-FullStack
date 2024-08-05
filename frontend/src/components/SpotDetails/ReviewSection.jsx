@@ -9,7 +9,8 @@ import PostReviewForm from '../PostReviewForm'
 import OpenModalButton from '../OpenModalButton'
 import ReviewSummaryInfo from "./ReviewSummaryInfo"
 import ConfirmDeleteModal from "../ConfirmDeleteModal"
-
+import { IoClose } from "react-icons/io5";
+import { useModal } from '../../context/Modal'
 
 const ReviewSection = ({ spot, user }) => {
     const [hasReviewed, setHasReviewed] = useState(false)
@@ -46,16 +47,18 @@ const ReviewSection = ({ spot, user }) => {
                     </div>
                 }
             </div>
-            <ReviewsList spot={spot} />
+            <ReviewsPreview  spot={spot}/>
+
+            {/* <ReviewsList spot={spot} /> */}
         </>
     )
 }
 
-
-const ReviewsList = ({ spot }) => {
+const ReviewsPreview = ({spot}) => {
     const Reviews = useSelector(state => state.spots.spotReviewsArray)
     const user = useSelector(state => state.session.user)
     let sortedReviews = Reviews.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+    let fourReviews = sortedReviews.slice(0,4)
 
     if (Reviews) return (
         <div className="sd-reviews-container">
@@ -64,13 +67,92 @@ const ReviewsList = ({ spot }) => {
                     Reviews.length >= 1
                     &&
                     (
-                        sortedReviews.map(review => {
+                        fourReviews.map(review => {
                             return (
                                 <>
                                     <li key={review.id} className="sd-individual-review">
 
                                         <div className="review-user-logo-name-container">
                                             <FaRegUser className='review-user-logo-icon' size={15} />
+                                            <p className="review-user" style={{ fontWeight: '600', fontSize: '1em' }}>{review.User.firstName}</p>
+                                        </div>
+
+                                        <div className="review-stars-and-date-container">
+                                            <ReviewStarRating review={review} />
+                                            <span>·</span>
+                                            <p className="review-date">{reviewDateFormatter(review.createdAt)}</p>
+                                        </div>
+
+                                        <p className="review-text">{review.review}</p>
+
+                                        {user?.id === review.User.id
+                                            &&
+                                            <div className="reviews-list-delete-button">
+                                                <OpenModalButton
+                                                    style={{ backgroundColor: 'black', color: 'white', borderRadius: '8px', padding: ' 9px 15px', border: '0', marginTop: '10px' }}
+                                                    buttonText={'Delete'}
+                                                    modalComponent={
+                                                        <ConfirmDeleteModal
+                                                            thing={'review'}
+                                                            action={spotSession.deleteReview}
+                                                            actionIdentifier={review.id}
+                                                        />
+                                                    }
+                                                />
+                                            </div>
+                                        }
+                                    </li>
+                                </>
+                            )
+                        })
+                    )
+                }
+
+            </ul>
+            {
+                Reviews.length > 4
+                &&
+                <OpenModalButton
+                    style={{border:'1px solid black', backgroundColor:'transparent', color: 'black', padding:'13px 23px', fontSize:'16px', borderRadius:'8px', cursor:'pointer', marginTop:'10px'}}
+                    buttonText={`Show all ${Reviews.length} reviews`}
+                    modalComponent={<ReviewsList />}
+                />
+            }
+            {
+                (user && !Reviews.length && spot.Owner.id !== user?.id
+                ) && (
+                    <h3 className='review-section-empty-reviews-message'>
+                        Be the first to post a review!
+                    </h3>
+                )
+            }
+
+        </div>
+    )
+}
+
+const ReviewsList = ({ spot }) => {
+    const { setModalContent } = useModal()
+    const Reviews = useSelector(state => state.spots.spotReviewsArray)
+    const user = useSelector(state => state.session.user)
+    let sortedReviews = Reviews.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+    if (Reviews) return (
+        <div className="sd-reviews-modal-container">
+            <span className='confirm-delete-x' onClick={() => setModalContent(null)}><IoClose size={20} color='gray'/></span>
+            <h2 style={{fontWeight: '500'}}><ReviewSummaryInfo /> </h2>
+            <ul className="sd-review-modal-list">
+                {
+                    Reviews.length >= 1
+                    &&
+                    (
+                        sortedReviews.map(review => {
+                            return (
+                                <>
+                                    <li key={review.id} className="sd-individual-review-modal">
+
+                                        <div className="review-user-logo-name-container">
+                                            <FaRegUser className='review-user-logo-icon' size={25} />
                                             <p className="review-user" style={{ fontWeight: '600', fontSize: '1em' }}>{review.User.firstName}</p>
                                         </div>
 

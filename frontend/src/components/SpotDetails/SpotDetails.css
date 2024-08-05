@@ -6,6 +6,15 @@
     /* max-width: 1000px; */
 }
 
+@media screen and (width < 1260px) {
+    .spot-details-container {
+        margin: 20px 30px;
+        height: 100%;
+        font-size: small;
+        /* max-width: 1000px; */
+    }
+}
+
 .sd-spot-name {
     font-size: 1.7em;
     margin: 8px 6px;
