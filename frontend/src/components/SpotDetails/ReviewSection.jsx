@@ -119,7 +119,6 @@ const ReviewsList = ({ spot }) => {
 }
 
 const ReviewStarRating = ({ review }) => {
-    console.log('review in str raing', review)
     let { stars } = review
     return (
         <div className="review-star-rating-stars">

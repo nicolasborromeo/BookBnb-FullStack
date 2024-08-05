@@ -220,6 +220,7 @@ function UpdateSpotForm({ spot }) {
                         {step === 5 ? (
                             user ? (
                                 <button type="submit"
+                                    className="profile-dropdown-final-form-button"
                                     // disabled={disabledCreate}
                                     onClick={(e) => validateInputs(e)}
                                 >Update Spot</button>

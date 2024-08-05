@@ -177,7 +177,7 @@ function CreateSpotForm() {
                             <h6 className="cs-step-sub-title">Mention the best features of your space, any special amentities like fast wifi or parking, and what you love about the neighborhood.</h6>
                             <div className="cs-inputs-container">
                                 <textarea onChange={(e) => setDescription(e.target.value)} className="cs-section2-textarea" placeholder="Please write at least 30 characters..." value={description}></textarea>
-                                {errors?.description && <p className="error-msg">{errors.description}</p>}
+                                {errors?.description && <p className="error-msg description-error">{errors.description}</p>}
                             </div>
                         </section>
                     }
@@ -244,6 +244,8 @@ function CreateSpotForm() {
                                 <button type="submit"
                                     // disabled={disabledCreate}
                                     onClick={validateInputs}
+                                    className='profile-dropdown-final-form-button'
+
                                 >Create Spot</button>
                             ) : (
                                 <button
@@ -254,7 +256,7 @@ function CreateSpotForm() {
                                     style={{ border: "none", backgroundColor: 'transparent' }}
                                 >
                                     <OpenModalButton
-                                        className='profile-dropdown-buttons'
+                                        style={{border:'0', backgroundColor:'rgb(217,9,101)', color:'white', fontSize:'16px', padding:'10px 20px', borderRadius:'8px' }}
                                         buttonText="Create Spot"
                                         modalComponent={<LoginFormModal />}
                                     />

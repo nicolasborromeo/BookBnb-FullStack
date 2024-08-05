@@ -13,7 +13,6 @@ function UpdateSpotPage() {
     const spot = useSelector(state => state.spots.currentSpot ? state.spots.currentSpot : undefined)
     const spotImages = useSelector(state => state.spots.currentSpot ? state.spots.currentSpot.SpotImages : undefined)
     const previewImage = spotImages?.filter(img => img.preview)
-    console.log(previewImage)
 
     useEffect(()=> {
         dispatch(spotActions.fetchCurrentSpot(spotId))

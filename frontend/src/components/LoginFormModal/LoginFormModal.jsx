@@ -40,7 +40,7 @@ export default function LoginFormModal() {
     useEffect(()=> {
         if(password.length >= 6 && credential.length >= 4) {
             setDisabled(false)
-        }
+        } else setDisabled(true)
     }, [password, credential, disabled])
 
     return (
@@ -57,7 +57,7 @@ export default function LoginFormModal() {
                         {errors?.password && <div className='error-div'>{errors.password}</div>}
                     </div>
                          {errors?.credentials && <div className='error-div' style={{textAlign:'center'}}>{errors.credentials}</div>}
-                    <button type='submit' disabled={disabled}>Log In</button>
+                    <button type='submit' disabled={disabled} style={disabled ? {backgroundColor:'gray', cursor:'not-allowed'} : {}}>Log In</button>
                     <p className="demo-user-login-text" onClick={loginDemoUser}>Log in as Demo User</p>
                 </div>
             </form>
