@@ -102,31 +102,31 @@ const spotImages = [
   {
     // id: 4,
     spotId: 4,
-    url: 'https://res.cloudinary.com/dklsvbe1v/image/upload/v1721939603/h4ph1_p862qz.webp',
+    url: 'https://res.cloudinary.com/dklsvbe1v/image/upload/v1722894375/h4ph1_ygdn5s.webp',
     preview: true
   },
   {
     // id: 4,
     spotId: 4,
-    url: 'https://res.cloudinary.com/dklsvbe1v/image/upload/v1721939602/h4ph2_tn97oj.webp',
+    url: 'https://res.cloudinary.com/dklsvbe1v/image/upload/v1722894373/h4ph2_ldrlse.webp',
     preview: false
   },
   {
     // id: 4,
     spotId: 4,
-    url: 'https://res.cloudinary.com/dklsvbe1v/image/upload/v1721939604/h4ph3_yw6otp.webp',
+    url: 'https://res.cloudinary.com/dklsvbe1v/image/upload/v1722894374/h4ph3_ybrrkx.webp',
     preview: false
   },
   {
     // id: 4,
     spotId: 4,
-    url: 'https://res.cloudinary.com/dklsvbe1v/image/upload/v1721939601/h4ph4_ixvdnx.webp',
+    url: 'https://res.cloudinary.com/dklsvbe1v/image/upload/v1722894374/h4ph4_zol9fy.webp',
     preview: false
   },
   {
     // id: 4,
     spotId: 4,
-    url: 'https://res.cloudinary.com/dklsvbe1v/image/upload/v1721939600/h4ph5_cykt28.webp',
+    url: 'https://res.cloudinary.com/dklsvbe1v/image/upload/v1722894373/h4ph5_wy9sms.webp',
     preview: false
   },
   {
@@ -159,6 +159,141 @@ const spotImages = [
     url: 'https://res.cloudinary.com/dklsvbe1v/image/upload/v1721939596/h5ph5_etgfig.webp',
     preview: false
   },
+  {
+    // id: 5,
+    spotId: 6,
+    url: 'https://res.cloudinary.com/dklsvbe1v/image/upload/v1722895087/h7ph4_y9nrak.webp',
+    preview: true
+  },
+  {
+    // id: 5,
+    spotId: 6,
+    url: 'https://res.cloudinary.com/dklsvbe1v/image/upload/v1722895090/h7ph2_q4a7oy.webp',
+    preview: false
+  },
+  {
+    // id: 5,
+    spotId: 6,
+    url: 'https://res.cloudinary.com/dklsvbe1v/image/upload/v1722895088/h7ph3_obz1k4.webp',
+    preview: false
+  },
+  {
+    // id: 5,
+    spotId: 6,
+    url: 'https://res.cloudinary.com/dklsvbe1v/image/upload/v1722895092/h7ph1_mpmwhe.webp',
+    preview: false
+  },
+  {
+    // id: 5,
+    spotId: 6,
+    url: 'https://res.cloudinary.com/dklsvbe1v/image/upload/v1722895086/h7ph5_igouow.webp',
+    preview: false
+  },
+  ////
+  {
+    spotId: 7,
+    url: 'https://res.cloudinary.com/dklsvbe1v/image/upload/v1722895842/ph1_w1dxdd.webp',
+    preview: true
+  },
+  {
+    spotId: 7,
+    url: 'https://res.cloudinary.com/dklsvbe1v/image/upload/v1722895838/phh2_aowrto.webp',
+    preview: false
+  },
+  {
+    spotId: 7,
+    url: 'https://res.cloudinary.com/dklsvbe1v/image/upload/v1722895835/ph3_il9duz.webp',
+    preview: false
+  },
+  {
+    spotId: 7,
+    url: 'https://res.cloudinary.com/dklsvbe1v/image/upload/v1722895836/ph4_aidoo5.webp',
+    preview: false
+  },
+  {
+    spotId: 7,
+    url: 'https://res.cloudinary.com/dklsvbe1v/image/upload/v1722895840/ph5_k593q2.webp',
+    preview: false
+  },
+  /////
+  {
+    spotId: 8,
+    url: 'https://res.cloudinary.com/dklsvbe1v/image/upload/v1722464098/h8ph1_t6rpr9.webp',
+    preview: true
+  },
+  {
+    spotId: 8,
+    url: 'https://res.cloudinary.com/dklsvbe1v/image/upload/v1722464098/h8ph2_opwv96.webp',
+    preview: false
+  },
+  {
+    spotId: 8,
+    url: 'https://res.cloudinary.com/dklsvbe1v/image/upload/v1722464098/h8ph3_k79yxi.webp',
+    preview: false
+  },
+  {
+    spotId: 8,
+    url: 'https://res.cloudinary.com/dklsvbe1v/image/upload/v1722464098/h8ph4_nlaycw.webp',
+    preview: false
+  },
+  {
+    spotId: 8,
+    url: 'https://res.cloudinary.com/dklsvbe1v/image/upload/v1722464098/h8ph5_ym6ez7.webp',
+    preview: false
+  },
+  ///
+  {
+    spotId: 9,
+    url: 'https://res.cloudinary.com/dklsvbe1v/image/upload/v1721939595/h6ph1_bk8qua.webp',
+    preview: true
+  },
+  {
+    spotId: 9,
+    url: 'https://res.cloudinary.com/dklsvbe1v/image/upload/v1721939592/h6ph2_ejp3de.webp',
+    preview: false
+  },
+  {
+    spotId: 9,
+    url: 'https://res.cloudinary.com/dklsvbe1v/image/upload/v1721939591/h6ph3_ievp8z.webp',
+    preview: false
+  },
+  {
+    spotId: 9,
+    url: 'https://res.cloudinary.com/dklsvbe1v/image/upload/v1721939593/h6ph4_u8mngb.webp',
+    preview: false
+  },
+  {
+    spotId: 9,
+    url: 'https://res.cloudinary.com/dklsvbe1v/image/upload/v1721939594/h6ph5_rujawn.webp',
+    preview: false
+  },
+  ///
+  {
+    spotId: 10,
+    url: 'https://res.cloudinary.com/dklsvbe1v/image/upload/v1722894875/h10ph1_vuh5cg.webp',
+    preview: true
+  },
+  {
+    spotId: 10,
+    url: 'https://res.cloudinary.com/dklsvbe1v/image/upload/v1722894872/h10ph2_ddwazn.webp',
+    preview: false
+  },
+  {
+    spotId: 10,
+    url: 'https://res.cloudinary.com/dklsvbe1v/image/upload/v1722894872/h10ph2_ddwazn.webp',
+    preview: false
+  },
+  {
+    spotId: 10,
+    url: 'https://res.cloudinary.com/dklsvbe1v/image/upload/v1722894871/h10ph4_jj4vr6.webp',
+    preview: false
+  },
+  {
+    spotId: 10,
+    url: 'https://res.cloudinary.com/dklsvbe1v/image/upload/v1722894869/h10ph5_tvoflf.webp',
+    preview: false
+  },
+  ///
 
 
 ]
@@ -173,17 +308,6 @@ module.exports = {
     options.tableName = 'SpotImages'
 
     const { Op } = require('sequelize')
-    await queryInterface.bulkDelete(options, {
-      url: {
-        [Op.in]: [
-          'https://drive.google.com/file/d/15dAa19f6cFrFKPS5r2Q19Knjxy9vODLF/view?usp=sharing',
-          'https://drive.google.com/file/d/1iBh44ExwBHLbC3gMMWrRaQ10-iVSRDdZ/view?usp=sharing',
-          'https://drive.google.com/file/d/1HXrRxQUs73m_TJkBh9rBdgjhtlHTvonL/view?usp=sharing',
-          'https://drive.google.com/file/d/1qJGgdsCBKD1HwH7PUnjevUxRWpDZpirK/view?usp=sharing',
-          'https://drive.google.com/file/d/1mIx4ayCu2TcMl6P3QfVJEn3pMNLE4rRM/view?usp=sharing',
-          'https://drive.google.com/file/d/1jpzQxFg0Da9JQiO2aN3qyOGQ1I9tMChW/view?usp=sharing'
-        ]
-      }
-    }, {});
+    await queryInterface.bulkDelete(options, {}, {});
   }
 };

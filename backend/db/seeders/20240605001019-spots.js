@@ -4,7 +4,6 @@ const { Spot } = require('../models')
 
 const spots = [
   {
-    // id: 1,
     ownerId: 1,
     address: '123 Main St',
     city: 'San Francisco',
@@ -12,12 +11,11 @@ const spots = [
     country: 'USA',
     lat: 37.7749,
     lng: -122.4194,
-    name: 'Cozy Apartment in SF',
-    description: 'A cozy and modern apartment in the heart of San Francisco.',
+    name: 'Walk to the Beach from this Ocean Front Home',
+    description: 'Entire home in Moss Beach, California',
     price: 150.00
   },
   {
-    // id: 2,
     ownerId: 2,
     address: '456 Elm St',
     city: 'Los Angeles',
@@ -25,25 +23,23 @@ const spots = [
     country: 'USA',
     lat: 34.0522,
     lng: -118.2437,
-    name: 'Luxury Condo in LA',
-    description: 'A luxurious condo with a beautiful view of Los Angeles.',
+    name: 'Gem by the sea none-obstructive ocean view',
+    description: 'A luxurious home with a beautiful view of Los Angeles.',
     price: 250.00
   },
   {
-    // id: 3,
     ownerId: 3,
     address: '789 Maple Ave',
-    city: 'New York',
-    state: 'NY',
+    city: 'Felton',
+    state: 'CA',
     country: 'USA',
     lat: 40.7128,
     lng: -74.0060,
-    name: 'Modern Loft in NYC',
-    description: 'A modern loft in the vibrant city of New York.',
+    name: "Whiskey Hollow A-Frame: As feat'd in Condé Nast!",
+    description: 'Entire cabin in Felton, California',
     price: 300.00
   },
   {
-    // id: 4,
     ownerId: 1,
     address: '101 Pine St',
     city: 'Seattle',
@@ -51,23 +47,83 @@ const spots = [
     country: 'USA',
     lat: 47.6062,
     lng: -122.3321,
-    name: 'Charming House in Seattle',
-    description: 'A charming house located in the beautiful city of Seattle.',
-    price: 200.00
+    name: 'The Malibu Dream Resort',
+    description: 'Entire villa in Malibu, California',
+    price: 1254.00
   },
   {
-    // id: 5,
     ownerId: 2,
     address: '202 Oak St',
-    city: 'Austin',
-    state: 'TX',
+    city: 'Beverly Hills',
+    state: 'CA',
     country: 'USA',
     lat: 30.2672,
     lng: -97.7431,
-    name: 'Spacious Villa in Austin',
-    description: 'A spacious villa with a pool in Austin, Texas.',
-    price: 180.00
+    name: 'Chateau de Laurel',
+    description: 'Entire villa in Beverly Hills, California',
+    price: 2480.00
+  },
+  {
+    ownerId: 3,
+    address: '202 Hollywood Hills Drive',
+    city: 'Los Angeles',
+    state: 'CA',
+    country: 'USA',
+    lat: 30.2672,
+    lng: -97.7431,
+    name: 'Luxurious 6-BR Villa: Pool, and Stunning Views',
+    description: 'Entire villa in Los Angeles, California',
+    price: 1345.00
+  },
+  {
+    ownerId: 3,
+    address: '62209 Verbena Rd',
+    city: 'Felton',
+    state: 'CA',
+    country: 'USA',
+    lat: 30.2672,
+    lng: -97.7431,
+    name: 'Artsy Cabin in Half-acre Serene Redwoods',
+    description: 'Entire cabin in Felton, California',
+    price: 450.00
+  },
+  {
+    ownerId: 5,
+    address: '62209 Verbena Rd',
+    city: 'Lake Tahoe',
+    state: 'CA',
+    country: 'USA',
+    lat: 30.2672,
+    lng: -97.7431,
+    name: 'Lakefront house with private beach',
+    description: 'Stunning lake house in Tahoe',
+    price: 845.00
+  },
+  {
+    ownerId: 5,
+    address: '62209 Verbena Rd',
+    city: 'Stateline',
+    state: 'NV',
+    country: 'USA',
+    lat: 30.2672,
+    lng: -97.7431,
+    name: 'Huge Ski In/Out with Best Heavenly Views',
+    description: 'Entire home in Stateline, Nevada',
+    price: 1145.00
+  },
+  {
+    ownerId: 8,
+    address: '62209 Verbena Rd',
+    city: 'Clackmannanshihre',
+    state: 'North Carolina',
+    country: 'USA',
+    lat: 30.2672,
+    lng: -97.7431,
+    name: 'Clakmanshire Castle | Luxury 3 bed rental',
+    description: 'The Tower apartment at the unique & historic Dollarbeg Castle',
+    price: 2145.00
   }
+
 ];
 
 let options = {}
