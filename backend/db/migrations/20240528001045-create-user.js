@@ -29,7 +29,7 @@ module.exports = {
         unique: true
       },
       email: {
-        type: Sequelize.STRING(26),
+        type: Sequelize.STRING(50),
         allowNull: false,
         unique: true
       },

@@ -37,7 +37,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       unique: true,
       validate: {
-        len: [4, 30],
+        len: [4, 50],
         isNotEmail(value) {
           if (Validator.isEmail(value)) {
             throw new Error('username cannot be an email')
