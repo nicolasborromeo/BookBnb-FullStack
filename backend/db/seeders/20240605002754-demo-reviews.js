@@ -28,7 +28,7 @@ const reviews = [
     // id: 1,
     spotId: 1,
     userId: 4,
-    review: 'We had a great time at this home! We were surprised at how nice the private cove was, especially to explore at low tide, since the listing didn’t highlight this feature. The home itself is quirky, but it was very comfortable and well furnished. The hot tub was a nice amenity, as well. It had everything we needed for our baby, including a pack n play and high chair. There are so many beautiful places to walk to from the home and the neighborhood was very quiet. A gem!',
+    review: 'We had a great time at this home! We were surprised at how nice the private cove was, especially to explore at low tide, since the listing didn’t highlight this feature. A gem!',
     stars: 5,
     createdAt: '2021-02-16 01:51:17'
   },
@@ -84,7 +84,7 @@ const reviews = [
     // id: 2,
     spotId: 2,
     userId: 5,
-    review: 'A house book should be created! I prefer not to have to speak with the owners. On say 2 she text me to remind me not to any parties. I wasn’t having a party. This trip was about pure relaxation. The door bell doesn’t work. If you are downstairs you can’t hear knocking at the door.',
+    review: 'A house book should be created! I prefer not to have to speak with the owners. On say 2 she text me to remind me not to any parties. I wasn’t having a party. This trip was about pure relaxation.',
     stars: 2,
     createdAt: '2024-09-04 07:03:41'
   },
@@ -204,7 +204,7 @@ const reviews = [
     // id: 7,
     spotId: 6,
     userId: 6,
-    review: 'Pretty amazing in all honesty. The only down for us was the pool was just too cold to go in, which was a big reason we chose the location. It stayed at 70 the whole time we were there and as we were checking out it had got up to 74. Aside from that, there’s plenty to marvel at, plenty of comfort to be found, and joshua tree is always an amazing place to wander.',
+    review: 'Pretty amazing in all honesty. The only down for us was the pool was just too cold to go in, which was a big reason we chose the location.',
     stars: 3,
     createdAt: '2022-05-14 12:02:01'
   },
@@ -212,7 +212,7 @@ const reviews = [
     // id: 7,
     spotId: 6,
     userId: 7,
-    review: 'The invisible house is just a marvel of architecture & engineering. Simply an amazing experience! The location was private yet close enough to the park, could an entrance from inside the house. Host was quick to respond to any questions we had. Thank you!',
+    review: 'The invisible house is just a marvel of architecture & engineering. Simply an amazing experience! The location was private yet close enough to the park, could an entrance from inside the house. Thank you!',
     stars: 5,
     createdAt: '2021-11-08 11:57:34'
   },
@@ -268,7 +268,7 @@ const reviews = [
     // id: 10,
     spotId: 10,
     userId: 5,
-    review: 'We absolutely loved our stay! It was better than described. Gorgeous surroundings, wonderful accommodations. Very easy to communicate with Toni, the property manager. The trails and grounds were so peaceful and beautiful. We totally enjoyed the rooftop deck at the top of the tower. I really cannot say anything but wonderful things.',
+    review: 'We absolutely loved our stay! It was better than described. Gorgeous surroundings, wonderful accommodations.',
     stars: 5,
     createdAt: '2024-10-23 02:36:17'
   },
