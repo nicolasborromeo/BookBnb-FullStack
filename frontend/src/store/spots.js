@@ -186,6 +186,7 @@ const spotsReducer = (state = initialState, action) => {
       let reviewId = action.payload
       let newState= {...state}
       let currentSpotCopy = {...newState.currentSpot}
+      currentSpotCopy.numReviews = currentSpotCopy.numReviews - 1
       delete newState.currentSpot
       let Reviews = currentSpotCopy.Reviews.filter(rev => rev.id !== action.payload)
       delete currentSpotCopy.Reviews

@@ -12,7 +12,8 @@ import ConfirmDeleteModal from "../ConfirmDeleteModal"
 import { IoClose } from "react-icons/io5";
 import { useModal } from '../../context/Modal'
 
-const ReviewSection = ({ spot, user }) => {
+const ReviewSection = ({user }) => {
+    const spot = useSelector(state => state.spots.currentSpot)
     const [hasReviewed, setHasReviewed] = useState(false)
     const [isOwner, setIsOwner] = useState(false)
     const Reviews = useSelector(state => state.spots.spotReviewsArray)
@@ -95,7 +96,7 @@ const ReviewsPreview = ({spot}) => {
                                                         <ConfirmDeleteModal
                                                             thing={'review'}
                                                             action={spotSession.deleteReview}
-                                                            actionIdentifier={review.id}
+                                                            actionIdentifier={(review.id)}
 
                                                         />
                                                     }
@@ -175,7 +176,7 @@ const ReviewsList = ({ spot }) => {
                                                         <ConfirmDeleteModal
                                                             thing={'review'}
                                                             action={spotSession.deleteReview}
-                                                            actionIdentifier={review.id}
+                                                            actionIdentifier={(review.id)}
                                                         />
                                                     }
                                                 />
