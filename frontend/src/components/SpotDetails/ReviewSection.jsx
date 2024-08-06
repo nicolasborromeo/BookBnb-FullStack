@@ -96,6 +96,7 @@ const ReviewsPreview = ({spot}) => {
                                                             thing={'review'}
                                                             action={spotSession.deleteReview}
                                                             actionIdentifier={review.id}
+
                                                         />
                                                     }
                                                 />

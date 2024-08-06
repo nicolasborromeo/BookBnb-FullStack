@@ -185,10 +185,15 @@ const spotsReducer = (state = initialState, action) => {
     case REMOVE_REVIEW_FROM_STATE: {
       let reviewId = action.payload
       let newState= {...state}
+      let currentSpotCopy = {...newState.currentSpot}
+      delete newState.currentSpot
+      let Reviews = currentSpotCopy.Reviews.filter(rev => rev.id !== action.payload)
+      delete currentSpotCopy.Reviews
+      let currentSpot = {...currentSpotCopy, Reviews}
       delete newState.spotReviewsArray
       delete newState.spotReviews[reviewId]
       let spotReviewsArray = Object.values(newState.spotReviews)
-      return {...newState, spotReviewsArray}
+      return {...newState, currentSpot, spotReviewsArray}
     }
     // case ADD_REVIEW_TO_SPOT: {
     //   let newState = {...state}
