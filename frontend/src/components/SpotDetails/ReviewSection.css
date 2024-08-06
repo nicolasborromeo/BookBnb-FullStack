@@ -9,9 +9,32 @@
 
 /* REVIEWS SECTION */
 
+
+
 .sd-reviews-section-container {
     border-top: 1px solid lightgray;
     margin: 20px 130px;
+}
+
+@media screen and (width < 1260px) {
+
+    .sd-reviews-section-container {
+        border-top: 1px solid lightgray;
+        margin: 20px 30px;
+    }
+}
+
+@media screen and (width < 1070px) {
+
+    .sd-reviews-section-container {
+        border-top: 1px solid lightgray;
+        margin: 20px 10px;
+    }
+    .sd-individual-review {
+        /* border-bottom: 1px solid lightgray; */
+        width: 40%;
+        margin-right: 60px!important;
+    }
 }
 
 .sd-reviews-header {
@@ -100,4 +123,73 @@
     position: relative;
     top: -10px;
     padding-bottom: 20px;
+}
+
+
+/* REVIEWS MODAL */
+
+.sd-reviews-modal-container {
+    padding: 30px 60px;
+    max-width: 60vw;
+    max-height: 90vh;
+    overflow: scroll;
+}
+
+.sd-reviews-modal-container h2 {
+    border-bottom: 1px solid lightgray;
+}
+
+.sd-review-modal-list {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+.sd-individual-review-modal {
+    /* border-bottom: 1px solid lightgray; */
+    width: 100%;
+    margin: 10px 0;
+    padding: 0 5px;
+    padding-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    /* margin-right: 100px; */
+}
+
+.sd-individual-review-modal .review-date {
+    font-size: 0.85em;
+    font-weight: 600;
+}
+
+.sd-individual-review-modal .review-user-logo-name-container{
+    display: flex;
+    flex-direction: row;
+    gap:6px;
+    align-items: center;
+}
+.sd-individual-review-modal .review-user-logo-icon {
+    position: relative;
+    bottom:3px;
+}
+
+.sd-individual-review-modal .review-stars-and-date-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+}
+
+.sd-individual-review-modal .review-star-rating-stars{
+    display: inherit;
+
+}
+
+.sd-individual-review-modal p {
+    font-weight: 200;
+    margin: 0;
 }

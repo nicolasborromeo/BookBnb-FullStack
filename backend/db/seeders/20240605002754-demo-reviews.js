@@ -84,7 +84,7 @@ const reviews = [
     // id: 2,
     spotId: 2,
     userId: 5,
-    review: 'A house book should be created! I prefer not to have to speak with the owners. On say 2 she text me to remind me not to any parties. I wasn’t having a party. This trip was about pure relaxation. The door bell doesn’t work. If you are downstairs you can’t hear knocking at the door. The internet goes out and you have to wait in the owner to reset. The garage door stopped working. The hot water went out. The owner has do send out a handy man. There is a pin required to access the tv, which wasn’t provided. The master toilet leaked. I was sent instructions on how to fix it. This could be a great rental but the owner needs to work out the kinks!',
+    review: 'A house book should be created! I prefer not to have to speak with the owners. On say 2 she text me to remind me not to any parties. I wasn’t having a party. This trip was about pure relaxation. The door bell doesn’t work. If you are downstairs you can’t hear knocking at the door.',
     stars: 2,
     createdAt: '2024-09-04 07:03:41'
   },
@@ -251,7 +251,7 @@ const reviews = [
   {
     // id: 10,
     spotId: 10,
-    userId: 1,
+    userId: 2,
     review: 'We had a couple of issues, but overall our experience was incredible. Highly recommend!!',
     stars: 4,
     createdAt: '2022-11-12 04:36:13'
@@ -259,7 +259,7 @@ const reviews = [
   {
     // id: 10,
     spotId: 10,
-    userId: 1,
+    userId: 8,
     review: 'Absolutely magical fairytale location. Even better in person. We never wanted to leave.',
     stars: 5,
     createdAt: '2021-08-05 14:59:47'
@@ -267,7 +267,7 @@ const reviews = [
   {
     // id: 10,
     spotId: 10,
-    userId: 1,
+    userId: 5,
     review: 'We absolutely loved our stay! It was better than described. Gorgeous surroundings, wonderful accommodations. Very easy to communicate with Toni, the property manager. The trails and grounds were so peaceful and beautiful. We totally enjoyed the rooftop deck at the top of the tower. I really cannot say anything but wonderful things.',
     stars: 5,
     createdAt: '2024-10-23 02:36:17'
