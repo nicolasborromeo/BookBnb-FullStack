@@ -1,6 +1,64 @@
 # BookBNB
 
+# STAYS
 
+Welcome to **Stays**, your go-to platform for booking unique stays, managing your properties, and sharing your experiences through reviews.  Stays offers a seamless experience for both hosts and guests.
+
+## Features
+
+### 1. Create and Update Your Stays
+- **Host your place**: Easily list your property with a simple and intuitive interface.
+- **Update listings**: Modify your stay details anytime to keep your listings up-to-date.
+
+### 2. Book Stays
+- **Discover stays**: Browse a wide range of stays, from cozy apartments to luxurious villas.
+
+### 3. Post Reviews
+- **Share experiences**: Leave reviews for the stays you've visited.
+- **Read reviews**: Get insights from other guests to make informed booking decisions.
+
+## Future Enhancements
+
+In upcoming updates, we plan to introduce several new features:
+
+- **Improved Search**: Enhanced search filters to help you find the perfect stay.
+- **Host Dashboard**: Advanced tools for hosts to manage bookings, earnings, and guest interactions.
+- **Bookings**: Find and book the perfect stay for your next trip.
+
+Join us on this journey as we make Stays the ultimate platform for unique stays and unforgettable experiences.
+
+## Getting Started
+
+1. **Sign up**: Create an account to start using Stays.
+2. **Explore**: Browse through available stays and read reviews.
+3. **Host**: List your property and manage your listings.
+
+# Frontend Tech
+JS, React, Redux, HTML, CSS.
+
+# Backend Tech
+SQLite, Sequelize, Express, PostgreSQL
+
+
+## Landing Page
+
+![stays-landing-page](https://res.cloudinary.com/dklsvbe1v/image/upload/v1722811845/Stays-landingpage_nvrhi2.png)
+
+## Spot Details
+
+![stays-spot-details](https://res.cloudinary.com/dklsvbe1v/image/upload/v1722811841/Stays-spotdetails_trs4ho.png)
+
+## Review Section
+
+![stays-review-section](https://res.cloudinary.com/dklsvbe1v/image/upload/v1722811843/Stays-reviewsection_omypna.png)
+
+## Create Spot
+
+![stays-create-spot](https://res.cloudinary.com/dklsvbe1v/image/upload/v1722812297/Stays-createspot_s0okvz.png)
+
+## Manage Spots
+
+![stays-managelistings](https://res.cloudinary.com/dklsvbe1v/image/upload/v1722811847/Stays-managelistings_oljihf.png)
 
 ## Database Schema Design
 
