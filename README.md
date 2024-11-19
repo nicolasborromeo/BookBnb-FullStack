@@ -1,5 +1,3 @@
-# BookBNB
-
 # STAYS
 
 Welcome to **Stays**, your go-to platform for booking unique stays, managing your properties, and sharing your experiences through reviews.  Stays offers a seamless experience for both hosts and guests.
