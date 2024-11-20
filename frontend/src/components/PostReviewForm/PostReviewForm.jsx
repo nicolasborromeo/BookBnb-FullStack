@@ -6,6 +6,7 @@ import { IoClose } from "react-icons/io5";
 import * as spotActions from '../../store/spots'
 import { useDispatch, useSelector } from "react-redux";
 
+//TODO - find a way to limit the amount of characters in the textarea of the review so that I don't have iisues with the database . Max 256
 
 function PostReviewForm() {
     const spot = useSelector(state => state.spots.currentSpot)
