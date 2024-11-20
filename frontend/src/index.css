@@ -5,7 +5,8 @@
 body {
     margin: auto;
     line-height: 1.2;
-
+    width: 100vw;
+    overflow-x: hidden;
     accent-color: #0a1f26;
     font-family:  "system-ui", Segoe UI, Roboto, "Helvetica Neue", sans-serif;
 }

@@ -2,9 +2,8 @@
     margin: 0;
     display: block;
     max-width: 30vw;
-    /* min-height: 30vh; */
     width: min-content;
-    /* height: 45vh; */
+    /* min-width: 400px !important; */
     max-height: min-content;
     min-width: 265px;
 }
@@ -16,7 +15,7 @@
     align-items: center;
     padding: 30px 10px;
     /* height: 30vh; */
-    min-width: 265px;
+    min-width: 335px;
     max-width: 20vh;
     min-height: 30vh !important;
     max-height: 30vh !important;
@@ -34,7 +33,7 @@
 
 .confirm-delete-heading{
     margin: 0;
-    width: 50%;
+    width: 80%;
     text-align: center;
     font-size: 1.1em;
     font-weight: 500;
@@ -47,7 +46,7 @@
     font-size: 1.1em;
     font-weight: 100;
     white-space: wrap;
-    width: 60%;
+    width: 80%;
     text-align: center;
 }
 

@@ -51,6 +51,7 @@
 .tooltip-container {
     position: relative;
     /* opacity: 0.3; */
+    width: min-content;
     left: 50%;
     top: -85%;
 }
