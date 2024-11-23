@@ -1,4 +1,6 @@
-*, *::before, *::after {
+*,
+*::before,
+*::after {
     box-sizing: border-box;
 }
 
@@ -8,7 +10,7 @@ body {
     width: 100vw;
     overflow-x: hidden;
     accent-color: #0a1f26;
-    font-family:  "system-ui", Segoe UI, Roboto, "Helvetica Neue", sans-serif;
+    font-family: "system-ui", Segoe UI, Roboto, "Helvetica Neue", sans-serif;
 }
 
 ul {
@@ -17,4 +19,36 @@ ul {
 
 img {
     max-width: 100%;
+}
+
+* {
+    scrollbar-width: thin;
+
+    scrollbar-color: auto transparent;
+
+}
+
+*::-webkit-scrollbar {
+    width: 8px;
+
+    height: 8px;
+
+}
+
+*::-webkit-scrollbar-track {
+    background: #f0f0f0;
+
+}
+
+*::-webkit-scrollbar-thumb {
+    background: #888;
+
+    border-radius: 8px;
+
+}
+
+
+*::-webkit-scrollbar-thumb:hover {
+    background: #555;
+
 }
