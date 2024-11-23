@@ -132,7 +132,7 @@
     padding: 30px 60px;
     max-width: 60vw;
     max-height: 90vh;
-    overflow: scroll;
+    overflow-y: scroll;
 }
 
 .sd-reviews-modal-container h2 {
